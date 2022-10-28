@@ -4,6 +4,18 @@ import styles from './burger-Ingredients.module.css'
 import IngredientsList from './ingredients-list/ingredients-list'
 import Tabs from './tabs/tabs'
 
+const BurgerIngredientsPropTypes = PropTypes.shape({
+  _id: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+})
+
+BurgerIngredients.prototype = {
+  daingredientsa: BurgerIngredientsPropTypes,
+}
+
 export default function BurgerIngredients({ ingredients }) {
 
   return (

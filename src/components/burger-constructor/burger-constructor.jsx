@@ -1,6 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css'
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+
+const BurgerConstructorPropTypes = PropTypes.shape({
+  _id: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+})
+
+BurgerConstructor.prototype = {
+  daingredientsa: BurgerConstructorPropTypes,
+}
 
 export default function BurgerConstructor({ ingredients }) {
   return (
