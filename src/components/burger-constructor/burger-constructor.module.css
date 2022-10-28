@@ -1,0 +1,16 @@
+.constructor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.constructor_element {
+  display: flex;
+  align-items: center;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
