@@ -2,69 +2,42 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css'
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-
-const BurgerConstructorPropTypes = PropTypes.shape({
-  _id: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-})
-
-BurgerConstructor.prototype = {
-  daingredientsa: BurgerConstructorPropTypes,
-}
+import ingredientPropTypes from '../../utils/prop-types';
 
 export default function BurgerConstructor({ ingredients }) {
-  return (
-    <div className={`${styles.constructor} pt-25 pl-4 pr-4 pb-10`}>
+  const buns = ingredients.filter(item => item.type === 'bun');
+  const otherIngredients = ingredients.filter(item => item.type !== 'bun');
 
-      <article className={`${styles.constructor_element} pl-8`}>
+  return (
+    <section className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}>
+      <article className={`${styles.bun} pl-8`}>
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={ingredients[0].name}
-          price={ingredients[0].price}
-          thumbnail={ingredients[0].image}
+          text={`${buns[0].name} (верх)`}
+          price={buns[0].price}
+          thumbnail={buns[0].image}
         />
       </article>
-      <article className={styles.constructor_element}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-          text={ingredients[1].name}
-          price={ingredients[1].price}
-          thumbnail={ingredients[1].image}
-        />
-      </article>
-      <article className={styles.constructor_element}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-          text={ingredients[1].name}
-          price={ingredients[1].price}
-          thumbnail={ingredients[1].image}
-        />
-      </article>
-      <article className={styles.constructor_element}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-          text={ingredients[1].name}
-          price={ingredients[1].price}
-          thumbnail={ingredients[1].image}
-        />
-      </article>
-      <article className={styles.constructor_element}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-          text={ingredients[1].name}
-          price={ingredients[1].price}
-          thumbnail={ingredients[1].image}
-        />
-      </article>
-      <article className={`${styles.constructor_element} pl-8`}>
+
+      <ul className={styles.ingredients}>
+        {otherIngredients.map((item) => (
+          <li className={`${styles.ingredient} pb-4 pr-2`} key={item._id}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text={item.name}
+              price={item.price}
+              thumbnail={item.image}
+            />
+          </li>
+        ))}
+      </ul>
+
+      <article className={`${styles.bun} pl-8`}>
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={ingredients[0].name}
+          text={`${ingredients[0].name} (низ)`}
           price={ingredients[0].price}
           thumbnail={ingredients[0].image}
         />
@@ -76,6 +49,10 @@ export default function BurgerConstructor({ ingredients }) {
           Оформить заказ
         </Button>
       </div>
-    </div>
+    </section>
   )
+}
+
+BurgerConstructor.prototype = {
+  ingredients: PropTypes.arrayOf(ingredientPropTypes()).isRequired
 }
