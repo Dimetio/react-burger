@@ -6,7 +6,7 @@ import BurgerIngredients from '../burger-ingredients/burger-Ingredients';
 // styles
 import styles from './app.module.css';
 // utils
-import ingredients from '../../utils/data';
+import data from '../../utils/data';
 
 
 function App() {
@@ -14,8 +14,8 @@ function App() {
     <div className="App">
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients ingredients={ingredients} />
-        <BurgerConstructor ingredients={ingredients}/>
+        <BurgerIngredients ingredients={data} />
+        <BurgerConstructor ingredients={data}/>
       </main>
     </div>
   );
