@@ -1,0 +1,44 @@
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredients {
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 464px;
+}
+
+.ingredients::-webkit-scrollbar-track {
+  background-color: #2F2F37;
+}
+
+.ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredients::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.bun {
+  display: flex;
+  align-items: center;
+}
+
+.ingredient {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.ingredient:last-child {
+  padding-bottom: 0;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
