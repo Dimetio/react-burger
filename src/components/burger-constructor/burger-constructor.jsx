@@ -6,6 +6,8 @@ import ingredientPropTypes from '../../utils/prop-types';
 
 export default function BurgerConstructor({ ingredients }) {
   const buns = ingredients.filter(item => item.type === 'bun');
+  // временный хак для получание одной булки
+  const bun = buns[Math.floor(Math.random() * buns.length)];
   const otherIngredients = ingredients.filter(item => item.type !== 'bun');
 
   return (
@@ -14,9 +16,9 @@ export default function BurgerConstructor({ ingredients }) {
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={`${buns[0].name} (верх)`}
-          price={buns[0].price}
-          thumbnail={buns[0].image}
+          text={`${bun?.name} (верх)`}
+          price={bun?.price}
+          thumbnail={bun?.image}
         />
       </article>
 
@@ -37,9 +39,9 @@ export default function BurgerConstructor({ ingredients }) {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`${ingredients[0].name} (низ)`}
-          price={ingredients[0].price}
-          thumbnail={ingredients[0].image}
+          text={`${bun?.name} (низ)`}
+          price={bun?.price}
+          thumbnail={bun?.image}
         />
       </article>
 
