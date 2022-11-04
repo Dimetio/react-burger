@@ -1,0 +1,36 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: auto;
+}
+
+.content {
+  position: relative;
+  place-self: center;
+  background: #1C1C21;
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.button_close {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  background-color: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  width: 640px;
+}
