@@ -1,14 +1,29 @@
-import React from 'react'
+import { useState } from 'react'
 import styles from './burger-Ingredients.module.css'
 import IngredientsList from '../ingredients-list/ingredients-list'
 import Tabs from '../tabs/tabs'
 import PropTypes from 'prop-types';
 import ingredientPropTypes from '../../utils/prop-types';
+import IngredientDetails from '../ingredient-details/ingredient-details'
+
 
 export default function BurgerIngredients({ ingredients }) {
   const buns = ingredients.filter(item => item.type === 'bun')
   const mains = ingredients.filter(item => item.type === 'main')
   const sauces = ingredients.filter(item => item.type === 'sauce')
+
+  // popup
+  const [isVisible, setIsVisible] = useState(false);
+  const [cardIngredient, setCardIngredient] = useState(null);
+
+  function handleOpenModal(ingredient) {
+    setIsVisible(true)
+    setCardIngredient(ingredient)
+  }
+
+  function handleCloseModal() {
+    setIsVisible(false)
+  }
 
   return (
     <section className={`${styles.section} mr-10 pt-10 pb-10`}>
@@ -19,11 +34,18 @@ export default function BurgerIngredients({ ingredients }) {
       <Tabs />
 
       <div className={styles.ingredients}>
-        <IngredientsList title="Булки" ingredients={buns} />
-        <IngredientsList title="Соусы" ingredients={sauces} />
-        <IngredientsList title="Начинки" ingredients={mains} />
+        <IngredientsList title="Булки" ingredients={buns} openModal={handleOpenModal} />
+        <IngredientsList title="Соусы" ingredients={sauces} openModal={handleOpenModal} />
+        <IngredientsList title="Начинки" ingredients={mains} openModal={handleOpenModal} />
       </div>
 
+      {isVisible && (
+        <IngredientDetails
+          closeModal={handleCloseModal}
+          isOpened={isVisible}
+          ingredient={cardIngredient}
+        />
+      )}
     </section>
   )
 }
