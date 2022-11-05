@@ -70,12 +70,15 @@ export default function BurgerConstructor({ ingredients }) {
         </Button>
       </div>
 
-      <Modal
-        closeModal={handleCloseModal}
-        isOpened={isVisible}
-      >
-        <OrderDetails />
-      </Modal>
+      {isVisible && (
+        <Modal
+          closeModal={handleCloseModal}
+          isOpened={isVisible}
+        >
+          <OrderDetails />
+        </Modal>
+      )}
+
     </section>
   )
 }

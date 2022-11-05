@@ -14,11 +14,11 @@ export default function BurgerIngredients({ ingredients }) {
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
-  const [cardIngredient, setCardIngredient] = useState(null);
+  const [currentIngredient, setCurrentIngredient] = useState(null);
 
   function handleOpenModal(ingredient) {
+    setCurrentIngredient(ingredient)
     setIsVisible(true)
-    setCardIngredient(ingredient)
   }
 
   function handleCloseModal() {
@@ -39,13 +39,16 @@ export default function BurgerIngredients({ ingredients }) {
         <IngredientsList title="Начинки" ingredients={mains} openModal={handleOpenModal} />
       </div>
 
-      <Modal
-        title={'Детали ингредиента'}
-        closeModal={handleCloseModal}
-        isOpened={isVisible}
-      >
-        <IngredientDetails ingredient={cardIngredient} />
-      </Modal>
+      {isVisible && (
+        <Modal
+          title={'Детали ингредиента'}
+          closeModal={handleCloseModal}
+          isOpened={isVisible}
+        >
+          <IngredientDetails ingredient={currentIngredient} />
+        </Modal>
+      )}
+
     </section>
   )
 }
