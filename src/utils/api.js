@@ -11,7 +11,10 @@ function checkResponse(res) {
     });
 };
 
+function request(url, options) {
+  return fetch(url, options).then(checkResponse)
+} 
+
 export const getBurgers = () => {
-  return fetch(`${BASE_URL}`)
-    .then(checkResponse)
+  return request(`${BASE_URL}`)
 };
