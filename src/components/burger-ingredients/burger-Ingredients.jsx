@@ -5,7 +5,7 @@ import Tabs from '../tabs/tabs'
 import PropTypes from 'prop-types';
 import ingredientPropTypes from '../../utils/prop-types';
 import IngredientDetails from '../ingredient-details/ingredient-details'
-
+import Modal from '../modal/modal';
 
 export default function BurgerIngredients({ ingredients }) {
   const buns = ingredients.filter(item => item.type === 'bun')
@@ -39,13 +39,13 @@ export default function BurgerIngredients({ ingredients }) {
         <IngredientsList title="Начинки" ingredients={mains} openModal={handleOpenModal} />
       </div>
 
-      {isVisible && (
-        <IngredientDetails
-          closeModal={handleCloseModal}
-          isOpened={isVisible}
-          ingredient={cardIngredient}
-        />
-      )}
+      <Modal
+        title={'Детали ингредиента'}
+        closeModal={handleCloseModal}
+        isOpened={isVisible}
+      >
+        <IngredientDetails ingredient={cardIngredient} />
+      </Modal>
     </section>
   )
 }

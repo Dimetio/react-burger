@@ -4,6 +4,7 @@ import styles from './burger-constructor.module.css'
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientPropTypes from '../../utils/prop-types';
 import OrderDetails from '../order-details/order-details';
+import Modal from '../modal/modal';
 
 export default function BurgerConstructor({ ingredients }) {
   const buns = ingredients.filter(item => item.type === 'bun');
@@ -67,12 +68,14 @@ export default function BurgerConstructor({ ingredients }) {
         >
           Оформить заказ
         </Button>
-      </div> 
+      </div>
 
-      <OrderDetails
+      <Modal
         closeModal={handleCloseModal}
         isOpened={isVisible}
-      />
+      >
+        <OrderDetails />
+      </Modal>
     </section>
   )
 }
