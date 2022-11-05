@@ -6,20 +6,18 @@ import ingredientPropTypes from '../../utils/prop-types';
 
 export default function IngredientsList({ title, ingredients, openModal }) {
   return (
-    <>
-      <article>
-        <h2 className="text text_type_main-medium">{title}</h2>
-        <ul className={`${styles.ingredients_list} pt-6 pl-4 pr-4 pb-10`}>
-          {ingredients.map(item => (
-            <IngredientCard
-              ingredient={item}
-              key={item._id}
-              openModal={openModal}
-            />
-          ))}
-        </ul>
-      </article>
-    </>
+    <article>
+      <h2 className="text text_type_main-medium">{title}</h2>
+      <ul className={`${styles.ingredients_list} pt-6 pl-4 pr-4 pb-10`}>
+        {ingredients.map(item => (
+          <IngredientCard
+            ingredient={item}
+            key={item._id}
+            openModal={openModal}
+          />
+        ))}
+      </ul>
+    </article>
   )
 }
 
