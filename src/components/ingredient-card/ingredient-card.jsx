@@ -34,7 +34,7 @@ export default function IngredientCard({ ingredient, count = 0, openModal }) {
 }
 
 IngredientCard.propTypes = {
-  ingredient: ingredientPropTypes(),
+  ingredient: ingredientPropTypes().isRequired,
   count: PropTypes.number,
   openModal: PropTypes.func.isRequired,
 }
