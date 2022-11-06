@@ -1,0 +1,25 @@
+.wrap {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 520px;
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+  width: 100%;
+}
+
+.list_item {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.image {
+  min-height: 240px;
+}

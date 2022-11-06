@@ -1,12 +1,27 @@
-import React from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css'
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientPropTypes from '../../utils/prop-types';
+import OrderDetails from '../order-details/order-details';
+import Modal from '../modal/modal';
 
 export default function BurgerConstructor({ ingredients }) {
   const buns = ingredients.filter(item => item.type === 'bun');
+  // временный хак для получание одной булки
+  const bun = buns[Math.floor(Math.random() * buns.length)];
   const otherIngredients = ingredients.filter(item => item.type !== 'bun');
+
+  // popup
+  const [isVisible, setIsVisible] = useState(false);
+
+  function handleOpenModal() {
+    setIsVisible(true)
+  }
+
+  function handleCloseModal() {
+    setIsVisible(false)
+  }
 
   return (
     <section className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}>
@@ -14,9 +29,9 @@ export default function BurgerConstructor({ ingredients }) {
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={`${buns[0].name} (верх)`}
-          price={buns[0].price}
-          thumbnail={buns[0].image}
+          text={`${bun?.name} (верх)`}
+          price={bun?.price}
+          thumbnail={bun?.image}
         />
       </article>
 
@@ -37,18 +52,33 @@ export default function BurgerConstructor({ ingredients }) {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`${ingredients[0].name} (низ)`}
-          price={ingredients[0].price}
-          thumbnail={ingredients[0].image}
+          text={`${bun?.name} (низ)`}
+          price={bun?.price}
+          thumbnail={bun?.image}
         />
       </article>
 
       <div className={`${styles.total} pt-10`}>
         <p className="text text_type_digits-medium mr-10">610 <CurrencyIcon type="primary" /></p>
-        <Button htmlType="button" type="primary" size="large">
+        <Button
+          htmlType="button"
+          type="primary"
+          size="large"
+          onClick={handleOpenModal}
+        >
           Оформить заказ
         </Button>
       </div>
+
+      {isVisible && (
+        <Modal
+          closeModal={handleCloseModal}
+          isOpened={isVisible}
+        >
+          <OrderDetails />
+        </Modal>
+      )}
+
     </section>
   )
 }
