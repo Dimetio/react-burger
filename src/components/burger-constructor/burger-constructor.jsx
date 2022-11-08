@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css'
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientPropTypes from '../../utils/prop-types';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
+import { IngredientsContext } from '../services/context';
 
-export default function BurgerConstructor({ ingredients }) {
+export default function BurgerConstructor() {
+  const ingredients = useContext(IngredientsContext)
+
   const buns = ingredients.filter(item => item.type === 'bun');
   // временный хак для получание одной булки
   const bun = buns[Math.floor(Math.random() * buns.length)];
@@ -84,5 +87,4 @@ export default function BurgerConstructor({ ingredients }) {
 }
 
 BurgerConstructor.prototype = {
-  ingredients: PropTypes.arrayOf(ingredientPropTypes()).isRequired
 }

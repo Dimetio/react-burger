@@ -7,6 +7,8 @@ import BurgerIngredients from '../burger-ingredients/burger-Ingredients';
 import styles from './app.module.css';
 // utils
 import * as api from '../../utils/api'
+// context
+import { IngredientsContext } from '../services/context'
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -29,7 +31,9 @@ function App() {
           ingredients ? (
             <>
               <BurgerIngredients ingredients={ingredients} />
-              <BurgerConstructor ingredients={ingredients} />
+              <IngredientsContext.Provider value={ingredients}>
+                <BurgerConstructor />
+              </IngredientsContext.Provider>
             </>
           ) : null
         }
