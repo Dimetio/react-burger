@@ -1,11 +1,28 @@
-import { useState, useContext } from 'react'
-import PropTypes from 'prop-types';
+import { useState, useContext, useEffect, useReducer } from 'react'
+// styles
 import styles from './burger-constructor.module.css'
+// ui components
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import ingredientPropTypes from '../../utils/prop-types';
+// popup
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
+// context
 import { IngredientsContext } from '../services/context';
+
+const totalPriceInitialState = { total: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "add":
+      const totalBunPrice = (action.bun?.price ?? 0) * 2;
+      const totalIngredientsPrice = action.ingredients.reduce((acc, curr) => acc + curr.price, state.total);
+      return { total: totalBunPrice + totalIngredientsPrice };
+    case "remove":
+      return totalPriceInitialState;
+    default:
+      throw new Error(`Кабзда рулю: ${action.type}`);
+  }
+}
 
 export default function BurgerConstructor() {
   const ingredients = useContext(IngredientsContext)
@@ -14,6 +31,12 @@ export default function BurgerConstructor() {
   // временный хак для получание одной булки
   const bun = buns[Math.floor(Math.random() * buns.length)];
   const otherIngredients = ingredients.filter(item => item.type !== 'bun');
+
+  const [totalPriceState, totalPriceDispatcher] = useReducer(reducer, totalPriceInitialState, undefined)
+
+  useEffect(() => {
+    totalPriceDispatcher({ type: "add", ingredients })
+  }, [ingredients])
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
@@ -62,7 +85,7 @@ export default function BurgerConstructor() {
       </article>
 
       <div className={`${styles.total} pt-10`}>
-        <p className="text text_type_digits-medium mr-10">610 <CurrencyIcon type="primary" /></p>
+        <p className="text text_type_digits-medium mr-10">{totalPriceState.total} <CurrencyIcon type="primary" /></p>
         <Button
           htmlType="button"
           type="primary"
