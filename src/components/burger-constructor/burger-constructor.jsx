@@ -8,6 +8,8 @@ import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 // context
 import { IngredientsContext } from '../services/context';
+// api
+import { getOrder } from '../../utils/api.js'
 
 const totalPriceInitialState = { total: 0 };
 
@@ -26,7 +28,12 @@ function reducer(state, action) {
 
 export default function BurgerConstructor() {
   const ingredients = useContext(IngredientsContext)
-
+  // номер заказа в попапе
+  const [orderState, setOrderState] = useState({
+    isLoading: false,
+    hasError: false,
+    order: 0,
+  })
   const buns = ingredients.filter(item => item.type === 'bun');
   // временный хак для получание одной булки
   const bun = buns[Math.floor(Math.random() * buns.length)];
@@ -34,20 +41,37 @@ export default function BurgerConstructor() {
 
   const [totalPriceState, totalPriceDispatcher] = useReducer(reducer, totalPriceInitialState, undefined)
 
-  useEffect(() => {
-    totalPriceDispatcher({ type: "add", ingredients })
-  }, [ingredients])
-
   // popup
   const [isVisible, setIsVisible] = useState(false);
 
   function handleOpenModal() {
+    const ingredientsId = ingredients.map(i => i._id);
+    getOrder(ingredientsId)
+      .then(res => {
+        if (res) {
+          setOrderState({
+            ...orderState,
+            isLoading: true,
+            order: res.order.number
+          })
+        }
+      })
+      .catch(err => {
+        setOrderState({ ...orderState, hasError: true, isLoading: false })
+        console.log(err)
+      })
     setIsVisible(true)
   }
 
   function handleCloseModal() {
     setIsVisible(false)
   }
+
+  const { order } = orderState;
+
+  useEffect(() => {
+    totalPriceDispatcher({ type: "add", ingredients })
+  }, [ingredients])
 
   return (
     <section className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}>
@@ -101,7 +125,7 @@ export default function BurgerConstructor() {
           closeModal={handleCloseModal}
           isOpened={isVisible}
         >
-          <OrderDetails />
+          <OrderDetails order={order} />
         </Modal>
       )}
 
