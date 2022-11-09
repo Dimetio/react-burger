@@ -30,8 +30,9 @@ function App() {
         {
           ingredients ? (
             <>
-              <BurgerIngredients ingredients={ingredients} />
+
               <IngredientsContext.Provider value={ingredients}>
+                <BurgerIngredients />
                 <BurgerConstructor />
               </IngredientsContext.Provider>
             </>
