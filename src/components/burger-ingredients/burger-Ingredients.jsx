@@ -53,6 +53,3 @@ export default function BurgerIngredients() {
     </section>
   )
 }
-
-BurgerIngredients.propTypes = {
-}

@@ -58,7 +58,7 @@ export default function BurgerConstructor() {
       })
       .catch(err => {
         setOrderState({ ...orderState, hasError: true, isLoading: false })
-        console.log(err)
+        console.log(err.message)
       })
     setIsVisible(true)
   }
@@ -131,7 +131,4 @@ export default function BurgerConstructor() {
 
     </section>
   )
-}
-
-BurgerConstructor.prototype = {
 }
