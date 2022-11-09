@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useReducer } from 'react'
+import { useState, useContext, useEffect, useReducer, useMemo } from 'react'
 // styles
 import styles from './burger-constructor.module.css'
 // ui components
@@ -17,7 +17,7 @@ function reducer(state, action) {
   switch (action.type) {
     case "add":
       const totalBunPrice = (action.bun?.price ?? 0) * 2;
-      const totalIngredientsPrice = action.ingredients.reduce((acc, curr) => acc + curr.price, state.total);
+      const totalIngredientsPrice = action.ingredients.reduce((acc, curr) => acc + curr.price, state.total); // и тут надо useMemo?
       return { total: totalBunPrice + totalIngredientsPrice };
     case "remove":
       return totalPriceInitialState;
@@ -34,18 +34,27 @@ export default function BurgerConstructor() {
     hasError: false,
     order: 0,
   })
-  const buns = ingredients.filter(item => item.type === 'bun');
+
+  // только булки
+  const buns = useMemo(() => ingredients.filter(item => item.type === 'bun'), [ingredients])
+
   // временный хак для получание одной булки
   const bun = buns[Math.floor(Math.random() * buns.length)];
-  const otherIngredients = ingredients.filter(item => item.type !== 'bun');
 
+  // все кроме булок
+  const otherIngredients = useMemo(() => ingredients.filter(item => item.type !== 'bun'), [ingredients])
+
+  // id всего для отправи в запрос
+  const ingredientsId = useMemo(() => ingredients.map(i => i._id), [ingredients])
+
+  // тут вообще какая-то магия проиходит, в итоге подсчитываю общий счет
   const [totalPriceState, totalPriceDispatcher] = useReducer(reducer, totalPriceInitialState, undefined)
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
 
-  function handleOpenModal() {
-    const ingredientsId = ingredients.map(i => i._id);
+  // запрос на сервер
+  function getIdIngredients() {
     getOrder(ingredientsId)
       .then(res => {
         if (res) {
@@ -60,9 +69,16 @@ export default function BurgerConstructor() {
         setOrderState({ ...orderState, hasError: true, isLoading: false })
         console.log(err.message)
       })
+  }
+
+  // открывашка
+  function handleOpenModal() {
+    getIdIngredients()
+
     setIsVisible(true)
   }
 
+  // закрывашка
   function handleCloseModal() {
     setIsVisible(false)
   }

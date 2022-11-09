@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useMemo } from 'react'
 import styles from './burger-Ingredients.module.css'
 import IngredientsList from '../ingredients-list/ingredients-list'
 import Tabs from '../tabs/tabs'
@@ -9,9 +9,9 @@ import { IngredientsContext } from '../../services/context';
 
 export default function BurgerIngredients() {
   const ingredients = useContext(IngredientsContext)
-  const buns = ingredients.filter(item => item.type === 'bun')
-  const mains = ingredients.filter(item => item.type === 'main')
-  const sauces = ingredients.filter(item => item.type === 'sauce')
+  const buns = useMemo(() => ingredients.filter(item => item.type === 'bun'), [ingredients])
+  const mains = useMemo(() => ingredients.filter(item => item.type === 'main'), [ingredients])
+  const sauces = useMemo(() => ingredients.filter(item => item.type === 'sauce'), [ingredients])
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
