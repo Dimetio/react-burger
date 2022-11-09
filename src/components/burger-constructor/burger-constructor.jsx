@@ -7,7 +7,7 @@ import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktiku
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 // context
-import { IngredientsContext } from '../services/context';
+import { IngredientsContext } from '../../services/context';
 // api
 import { getOrder } from '../../utils/api.js'
 

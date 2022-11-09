@@ -8,7 +8,7 @@ import styles from './app.module.css';
 // utils
 import * as api from '../../utils/api'
 // context
-import { IngredientsContext } from '../services/context'
+import { IngredientsContext } from '../../services/context'
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
