@@ -10,19 +10,21 @@ import Modal from '../modal/modal';
 import { IngredientsContext } from '../../services/context';
 // api
 import { getOrder } from '../../utils/api.js'
+// actions types
+import { SET_TOTAL_PRICE, RESET_TOTAL_PRICE } from '../../actions/types'
 
 const totalPriceInitialState = { total: 0 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "add":
+    case SET_TOTAL_PRICE:
       const totalBunPrice = (action.bun?.price ?? 0) * 2;
       const totalIngredientsPrice = action.ingredients.reduce((acc, curr) => acc + curr.price, state.total); // и тут надо useMemo?
       return { total: totalBunPrice + totalIngredientsPrice };
-    case "remove":
+    case RESET_TOTAL_PRICE:
       return totalPriceInitialState;
     default:
-      throw new Error(`Кабзда рулю: ${action.type}`);
+      throw new Error(`Wrong type of action: ${action.type}`);
   }
 }
 
@@ -86,7 +88,7 @@ export default function BurgerConstructor() {
   const { order } = orderState;
 
   useEffect(() => {
-    totalPriceDispatcher({ type: "add", ingredients })
+    totalPriceDispatcher({ type: SET_TOTAL_PRICE, ingredients })
   }, [ingredients])
 
   return (
