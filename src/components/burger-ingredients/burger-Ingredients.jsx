@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { useState, useContext, useMemo } from 'react'
 import styles from './burger-Ingredients.module.css'
 import IngredientsList from '../ingredients-list/ingredients-list'
 import Tabs from '../tabs/tabs'
-import PropTypes from 'prop-types';
-import ingredientPropTypes from '../../utils/prop-types';
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal';
+// context
+import { IngredientsContext } from '../../services/context';
 
-export default function BurgerIngredients({ ingredients }) {
-  const buns = ingredients.filter(item => item.type === 'bun')
-  const mains = ingredients.filter(item => item.type === 'main')
-  const sauces = ingredients.filter(item => item.type === 'sauce')
+export default function BurgerIngredients() {
+  const ingredients = useContext(IngredientsContext)
+  const buns = useMemo(() => ingredients.filter(item => item.type === 'bun'), [ingredients])
+  const mains = useMemo(() => ingredients.filter(item => item.type === 'main'), [ingredients])
+  const sauces = useMemo(() => ingredients.filter(item => item.type === 'sauce'), [ingredients])
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
@@ -51,8 +52,4 @@ export default function BurgerIngredients({ ingredients }) {
 
     </section>
   )
-}
-
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropTypes()).isRequired
 }
