@@ -11,7 +11,7 @@ import { IngredientsContext } from '../../services/context';
 // api
 import { getOrder } from '../../utils/api.js'
 // actions types
-import { SET_TOTAL_PRICE, RESET_TOTAL_PRICE } from '../../actions/types'
+import { SET_TOTAL_PRICE, RESET_TOTAL_PRICE } from '../../services/actions'
 
 const totalPriceInitialState = { total: 0 };
 

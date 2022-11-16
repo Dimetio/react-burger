@@ -1,2 +1,0 @@
-export const SET_TOTAL_PRICE = 'SET_TOTAL_PRICE';
-export const RESET_TOTAL_PRICE = 'RESET_TOTAL_PRICE';
