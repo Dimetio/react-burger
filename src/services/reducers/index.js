@@ -22,6 +22,8 @@ const targerIngredientInitialState = {
   ingredient: {}
 }
 
+const constructorInitialState = {}
+
 const ingredientsReducer = (state = ingredientsInitialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
@@ -65,7 +67,12 @@ const targetIngredientReducer = (state = targerIngredientInitialState, action) =
   }
 }
 
+const constructorReducer = (state = constructorInitialState, action) => {
+
+}
+
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   targetIngredient: targetIngredientReducer,
+  constructorIngredients: constructorReducer,
 })

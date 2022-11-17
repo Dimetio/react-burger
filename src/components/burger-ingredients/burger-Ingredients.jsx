@@ -1,14 +1,19 @@
-import { useState, useContext, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+//styles
 import styles from './burger-Ingredients.module.css'
+// components
 import IngredientsList from '../ingredients-list/ingredients-list'
 import Tabs from '../tabs/tabs'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal';
-// context
-import { IngredientsContext } from '../../services/context';
+// actions
+import { getIngredients } from '../../services/actions/index'
 
 export default function BurgerIngredients() {
-  const ingredients = useContext(IngredientsContext)
+  const dispatch = useDispatch();
+  const { ingredients } = useSelector(store => store.ingredients)
+
   const buns = useMemo(() => ingredients.filter(item => item.type === 'bun'), [ingredients])
   const mains = useMemo(() => ingredients.filter(item => item.type === 'main'), [ingredients])
   const sauces = useMemo(() => ingredients.filter(item => item.type === 'sauce'), [ingredients])
@@ -26,30 +31,37 @@ export default function BurgerIngredients() {
     setIsVisible(false)
   }
 
+  useEffect(() => {
+    dispatch(getIngredients())
+  }, [dispatch])
+
   return (
     <section className={`${styles.section} mr-10 pt-10 pb-10`}>
-      <p className="text text_type_main-large pb-5">
-        Соберите бургер
-      </p>
+      {ingredients && (
+        <>
+          <p className="text text_type_main-large pb-5">
+            Соберите бургер
+          </p>
 
-      <Tabs />
+          <Tabs />
 
-      <div className={styles.ingredients}>
-        <IngredientsList title="Булки" ingredients={buns} openModal={handleOpenModal} />
-        <IngredientsList title="Соусы" ingredients={sauces} openModal={handleOpenModal} />
-        <IngredientsList title="Начинки" ingredients={mains} openModal={handleOpenModal} />
-      </div>
+          <div className={styles.ingredients}>
+            <IngredientsList title="Булки" ingredients={buns} openModal={handleOpenModal} />
+            <IngredientsList title="Соусы" ingredients={sauces} openModal={handleOpenModal} />
+            <IngredientsList title="Начинки" ingredients={mains} openModal={handleOpenModal} />
+          </div>
 
-      {isVisible && (
-        <Modal
-          title={'Детали ингредиента'}
-          closeModal={handleCloseModal}
-          isOpened={isVisible}
-        >
-          <IngredientDetails ingredient={currentIngredient} />
-        </Modal>
+          {isVisible && (
+            <Modal
+              title={'Детали ингредиента'}
+              closeModal={handleCloseModal}
+              isOpened={isVisible}
+            >
+              <IngredientDetails ingredient={currentIngredient} />
+            </Modal>
+          )}
+        </>
       )}
-
     </section>
   )
 }
