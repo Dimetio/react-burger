@@ -2,6 +2,8 @@ import {
   v1 as random
 } from 'uuid';
 
+const BASE_URL = 'https://norma.nomoreparties.space/api';
+
 export const SET_TOTAL_PRICE = 'SET_TOTAL_PRICE';
 export const RESET_TOTAL_PRICE = 'RESET_TOTAL_PRICE';
 export const GET_TOTAL_PRICE = 'GET_TOTAL_PRICE';
@@ -39,7 +41,7 @@ export const getIngredients = () => {
     dispatch({
       type: GET_INGREDIENTS_REQUEST,
     })
-    fetch('https://norma.nomoreparties.space/api/ingredients')
+    fetch(`${BASE_URL}/ingredients`)
       .then(checkResponse)
       .then((data) => {
         // console.log(data.data)
@@ -97,7 +99,7 @@ export const getOrder = (ingredientsId) => {
     dispatch({
       type: GET_ORDER_REQUEST
     })
-    fetch('https://norma.nomoreparties.space/api/orders', {
+    fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {
           "Content-type": "application/json",
@@ -114,11 +116,11 @@ export const getOrder = (ingredientsId) => {
             type: GET_ORDER_SUCCESS,
             order: data.order.number,
           })
-          .catch((err) => {
-            dispatch({
-              type: GET_ORDER_FAILED,
-            })
-          })
+        })
+      .catch(() => {
+        dispatch({
+          type: GET_ORDER_FAILED,
+        })
       })
   }
 }
