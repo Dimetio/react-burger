@@ -61,9 +61,9 @@ const ingredientsReducer = (state = ingredientsInitialState, action) => {
       };
     case GET_INGREDIENTS_FAILED:
       return {
-        ...state,
+        ingredients: [],
         isLoading: false,
-          hasError: true,
+        hasError: true,
       };
     default:
       return state
@@ -138,7 +138,7 @@ const orderReducer = (state = orderInitialState, action) => {
       };
     case GET_ORDER_FAILED:
       return {
-        ...state,
+        order: null,
         hasError: true,
         isLoading: false,
       };
