@@ -4,6 +4,8 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import { useDispatch } from 'react-redux';
 import { deleteIngredientConstructor } from '../../services/actions';
 import { useDrag, useDrop } from 'react-dnd';
+import ingredientPropTypes from '../../utils/prop-types'
+import { PropTypes } from 'prop-types';
 
 export default function BurgerIngredientsItem({ item, index, moveCard }) {
   const dispatch = useDispatch();
@@ -77,4 +79,10 @@ export default function BurgerIngredientsItem({ item, index, moveCard }) {
       />
     </div>
   )
+}
+
+BurgerIngredientsItem.propTypes = {
+  item: ingredientPropTypes().isRequired,
+  index: PropTypes.number.isRequired,
+  moveCard: PropTypes.func.isRequired,
 }
