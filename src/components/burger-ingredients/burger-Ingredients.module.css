@@ -20,3 +20,7 @@
 .ingredients::-webkit-scrollbar-thumb {
   background: #8585AD;
 }
+
+.tabs {
+  display: flex;
+}

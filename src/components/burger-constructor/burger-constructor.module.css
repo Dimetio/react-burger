@@ -5,9 +5,13 @@
 
 .ingredients {
   padding: 0;
+  margin: 0;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 464px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
 }
 
 .ingredients::-webkit-scrollbar-track {
@@ -25,16 +29,6 @@
 .bun {
   display: flex;
   align-items: center;
-}
-
-.ingredient {
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-}
-
-.ingredient:last-child {
-  padding-bottom: 0;
 }
 
 .total {
