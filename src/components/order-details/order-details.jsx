@@ -1,8 +1,9 @@
 import styles from './order-details.module.css'
 import image from '../../images/done.svg'
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux'
 
-export default function OrderDetails({ order }) {
+export default function OrderDetails() {
+  const { order} = useSelector(store => store.order)
 
   return (
     <article className={`${styles.wrap} mt-30 mb-30 ml-25 mr-25`}>
@@ -18,7 +19,3 @@ export default function OrderDetails({ order }) {
     </article>
   )
 }
-
-OrderDetails.propTypes = {
-  order: PropTypes.number.isRequired,
-};

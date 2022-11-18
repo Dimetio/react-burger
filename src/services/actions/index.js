@@ -109,9 +109,10 @@ export const getOrder = (ingredientsId) => {
       })
       .then(checkResponse)
       .then((data) => {
+        // console.log(data.order)
         dispatch({
             type: GET_ORDER_SUCCESS,
-            order: data.order,
+            order: data.order.number,
           })
           .catch((err) => {
             dispatch({

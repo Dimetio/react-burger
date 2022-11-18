@@ -37,7 +37,7 @@ const constructorInitialState = {
 }
 
 const orderInitialState = {
-  order: {},
+  order: null,
   isLoading: false,
   hasError: false,
 }
@@ -111,7 +111,7 @@ const constructorReducer = (state = constructorInitialState, action) => {
       return {
         ...state,
         bun: null,
-          ingredients: [],
+        ingredients: [],
       };
     case ADD_BUNS_CONSTRUCTOR:
       return {
@@ -134,13 +134,13 @@ const orderReducer = (state = orderInitialState, action) => {
       return {
         ...state,
         order: action.order,
-          osLoading: false,
+        isLoading: false,
       };
     case GET_ORDER_FAILED:
       return {
         ...state,
         hasError: true,
-          osLoading: false,
+        isLoading: false,
       };
     default:
       return state;

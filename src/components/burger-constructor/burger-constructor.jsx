@@ -31,8 +31,8 @@ export default function BurgerConstructor() {
 
   // открывашка
   function handleOpenModal() {
-    dispatch(getOrder(ingredientsId)); // отправляю idшки
     setIsVisible(true)
+    dispatch(getOrder(ingredientsId)); // отправляю idшки, чтобы получить order
   }
 
   // закрывашка
@@ -51,7 +51,7 @@ export default function BurgerConstructor() {
         ? dispatch(addBunsConstructor(ingredients))
         : dispatch(addIngredientConstructor(ingredients))
 
-        //console.log(bun)
+      //console.log(bun)
     }
   })
 
@@ -104,7 +104,7 @@ export default function BurgerConstructor() {
               closeModal={handleCloseModal}
               isOpened={isVisible}
             >
-              <OrderDetails order='order' />
+              <OrderDetails />
             </Modal>
           )}
         </>
