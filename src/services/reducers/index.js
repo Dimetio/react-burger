@@ -5,7 +5,7 @@ import {
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
-  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_ERROR,
   GET_TARGET_INGREDIENT,
   DELETE_TARGET_INGREDIENT,
   ADD_INGREDIENT_CONSTRUCTOR,
@@ -15,7 +15,7 @@ import {
   ADD_BUNS_CONSTRUCTOR,
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
-  GET_ORDER_FAILED,
+  GET_ORDER_ERROR,
   GET_TOTAL_PRICE,
 } from '../actions/index'
 
@@ -57,9 +57,9 @@ const ingredientsReducer = (state = ingredientsInitialState, action) => {
       return {
         ...state,
         isLoading: false,
-          ingredients: action.ingredients,
+        ingredients: action.ingredients,
       };
-    case GET_INGREDIENTS_FAILED:
+    case GET_INGREDIENTS_ERROR:
       return {
         ingredients: [],
         isLoading: false,
@@ -136,7 +136,7 @@ const orderReducer = (state = orderInitialState, action) => {
         order: action.order,
         isLoading: false,
       };
-    case GET_ORDER_FAILED:
+    case GET_ORDER_ERROR:
       return {
         order: null,
         hasError: true,
