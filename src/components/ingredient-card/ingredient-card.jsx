@@ -18,9 +18,9 @@ export default function IngredientCard({ ingredient, openModal }) {
     return ingredient.type !== 'bun'
       ? ingredients.filter((item) => item._id === ingredient._id).length
       : bun?._id === ingredient._id
-        ? 2
-        : 0
-  }, [ingredient.type, ingredient._id, ingredients, bun?._id])
+      ? 2
+      : 0
+  }, [ingredients, bun])
 
   return (
     <div
