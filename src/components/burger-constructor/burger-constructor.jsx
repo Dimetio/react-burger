@@ -24,15 +24,21 @@ export default function BurgerConstructor() {
   const { ingredients, bun } = useSelector(store => store.constructorIngredients);
   const { sum } = useSelector(store => store.totalPrice)
 
-  const ingredientsId = useMemo(() => ingredients.map(i => i._id), [ingredients])
+  const burgerId = useMemo(() => {
+    const ingredientsId = ingredients.map(i => i._id)
+    const bunsId = bun?._id;
+    
+    return [bunsId, ...ingredientsId]
+  }, [ingredients, bun])
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
 
   // открывашка
   function handleOpenModal() {
+    console.log(burgerId)
     setIsVisible(true)
-    dispatch(getOrder(ingredientsId)); // отправляю idшки, чтобы получить order
+    dispatch(getOrder(burgerId)); // отправляю idшки, чтобы получить order
   }
 
   // закрывашка
@@ -46,12 +52,10 @@ export default function BurgerConstructor() {
     collect: monitor => ({
       isHover: monitor.isOver(),
     }),
-    drop(ingredients) {
-      ingredients.type === 'bun'
-        ? dispatch(addBunsConstructor(ingredients))
-        : dispatch(addIngredientConstructor(ingredients))
-
-      //console.log(bun)
+    drop(data) {
+      data.type === 'bun'
+        ? dispatch(addBunsConstructor(data))
+        : dispatch(addIngredientConstructor(data))
     }
   })
 
