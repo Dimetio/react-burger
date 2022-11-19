@@ -40,7 +40,6 @@ export default function BurgerIngredients() {
   }
 
   function handleClickTab(tab) {
-    console.log(tab)
     tab.current.scrollIntoView({ behavior: 'smooth' });
   }
 
