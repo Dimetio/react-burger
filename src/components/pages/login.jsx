@@ -18,15 +18,14 @@ export default function Login() {
         buttonText={'Войти'}
       >
         <InputComponent
-          name='email'
-          isIcon={false}
-          placeholder='E-mail'
-          type='email'
+          name={'email'}
+          placeholder={'E-mail'}
+          type={'email'}
         />
 
         <InputComponent
-          name='password'
-          placeholder='Пароль'
+          name={'password'}
+          placeholder={'Пароль'}
           icon={showPassord ? 'HideIcon' : 'ShowIcon'}
           onIconClick={onIconClick}
           type={showPassord ? 'text' : 'password'}
@@ -34,15 +33,15 @@ export default function Login() {
       </Form>
 
       <CustomLink
-        text='Вы — новый пользователь?'
-        url='/register'
-        linkText='Зарегистрироваться'
+        text={'Вы — новый пользователь?'}
+        url={'/register'}
+        linkText={'Зарегистрироваться'}
       />
 
       <CustomLink
-        text='Забыли пароль?'
-        url='/forgot-password'
-        linkText='Восстановить пароль'
+        text={'Забыли пароль?'}
+        url={'/forgot-password'}
+        linkText={'Восстановить пароль'}
       />
     </section>
   )
