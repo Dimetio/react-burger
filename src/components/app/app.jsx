@@ -13,43 +13,43 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact={true}>
-          <div className="App">
-            <AppHeader />
-            <main className={styles.main}>
+    <div className="App">
+      <AppHeader />
+      <main className={styles.main}>
+        <Router>
+          <Switch>
+            <Route path="/" exact={true}>
               <DndProvider backend={HTML5Backend}>
                 <BurgerIngredients />
                 <BurgerConstructor />
               </DndProvider>
-            </main>
-          </div>
-        </Route>
-        <Route path="/login" exact={true}>
-          <Login />
-        </Route>
-        <Route path="/register" exact={true}>
-          <Register />
-        </Route>
-        <Route path="/forgot-password" exact={true}>
-          <ForgotPassword />
-        </Route>
-        <Route path="/reset-password" exact={true}>
-          <ResetPassword />
-        </Route>
-        <Route path="/profile" exact={true}>
-          <Profile />
-        </Route>
-        <Route path={`/ingredients/:id`} exact={true}>
-          <TargetIngredient />
-        </Route>
-        <Route>
-          <NotFound404 />
-        </Route>
-      </Switch>
-    </Router>
-  );
+            </Route>
+            <Route path="/login" exact={true}>
+              <Login />
+            </Route>
+            <Route path="/register" exact={true}>
+              <Register />
+            </Route>
+            <Route path="/forgot-password" exact={true}>
+              <ForgotPassword />
+            </Route>
+            <Route path="/reset-password" exact={true}>
+              <ResetPassword />
+            </Route>
+            <Route path="/profile" exact={true}>
+              <Profile />
+            </Route>
+            <Route path={`/ingredients/:id`} exact={true}>
+              <TargetIngredient />
+            </Route>
+            <Route>
+              <NotFound404 />
+            </Route>
+          </Switch>
+        </Router>
+      </main>
+    </div>
+  )
 }
 
 export default App;
