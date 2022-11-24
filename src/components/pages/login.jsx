@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Form from '../form/form'
-import InputComponent from '../input/input'
-import { Link } from 'react-router-dom'
+import InputComponent from '../form/input/input'
+import CustomLink from '../form/link/link'
 import styles from './page.module.css'
 
 export default function Login() {
@@ -26,28 +26,24 @@ export default function Login() {
 
         <InputComponent
           name='password'
-          placeholder='password'
+          placeholder='Пароль'
           icon={showPassord ? 'HideIcon' : 'ShowIcon'}
           onIconClick={onIconClick}
           type={showPassord ? 'text' : 'password'}
         />
       </Form>
 
-      <p className="text text_type_main-default mb-4" style={{ textAlign: 'center' }}>
-        Вы — новый пользователь?
-        <Link
-          to='/register'
-          className='ml-2 text text_type_main-default'
-        >Зарегистрироваться</Link>
-      </p>
+      <CustomLink
+        text='Вы — новый пользователь?'
+        url='/register'
+        linkText='Зарегистрироваться'
+      />
 
-      <p className="text text_type_main-default mb-4" style={{ textAlign: 'center' }}>
-        Забыли пароль?
-        <Link
-          to='/forgot-password'
-          className='ml-2 text text_type_main-default'
-        >Восстановить пароль</Link>
-      </p>
+      <CustomLink
+        text='Забыли пароль?'
+        url='/forgot-password'
+        linkText='Восстановить пароль'
+      />
     </section>
   )
 }
