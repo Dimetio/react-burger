@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
 
 export default function InputComponent({
-  isIcon,
   name,
   placeholder,
   icon,
