@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './ingredients-list.module.css'
-import IngredientCard from '../ingredient-card/ingredient-card';
+import IngredientCard from './ingredient-card/ingredient-card';
 import PropTypes from 'prop-types'
 import ingredientPropTypes from '../../utils/prop-types';
 

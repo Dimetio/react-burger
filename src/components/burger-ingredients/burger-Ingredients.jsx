@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './burger-Ingredients.module.css'
 // components
 import IngredientsList from '../ingredients-list/ingredients-list'
-import IngredientDetails from '../ingredient-details/ingredient-details'
+import IngredientDetails from './ingredient-details/ingredient-details'
 import Modal from '../modal/modal';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 // actions

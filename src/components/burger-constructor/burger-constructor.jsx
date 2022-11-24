@@ -5,7 +5,7 @@ import styles from './burger-constructor.module.css';
 import BurgerIngredientsList from '../burger-ingredients-list/burger-ingredients-list'
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 // popup
-import OrderDetails from '../order-details/order-details';
+import OrderDetails from './order-details/order-details';
 import Modal from '../modal/modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
@@ -36,7 +36,6 @@ export default function BurgerConstructor() {
 
   // открывашка
   function handleOpenModal() {
-    console.log(burgerId)
     setIsVisible(true)
     dispatch(getOrder(burgerId)); // отправляю idшки, чтобы получить order
   }

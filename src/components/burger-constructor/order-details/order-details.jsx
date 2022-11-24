@@ -1,5 +1,5 @@
 import styles from './order-details.module.css'
-import image from '../../images/done.svg'
+import image from '../../../images/done.svg'
 import { useSelector } from 'react-redux'
 
 export default function OrderDetails() {

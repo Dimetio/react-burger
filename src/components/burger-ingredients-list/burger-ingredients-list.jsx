@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
+import BurgerIngredientsItem from './burger-ingredients-item/burger-ingredients-item';
 import { updateIngredientConstructor } from '../../services/actions';
 import ingredientPropTypes from '../../utils/prop-types'
 import PropTypes from 'prop-types'

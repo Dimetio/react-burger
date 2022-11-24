@@ -2,9 +2,9 @@ import React, { useRef } from 'react'
 import styles from './burger-ingredients-item.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
-import { deleteIngredientConstructor } from '../../services/actions';
+import { deleteIngredientConstructor } from '../../../services/actions';
 import { useDrag, useDrop } from 'react-dnd';
-import ingredientPropTypes from '../../utils/prop-types'
+import ingredientPropTypes from '../../../utils/prop-types'
 import { PropTypes } from 'prop-types';
 
 export default function BurgerIngredientsItem({ item, index, moveCard }) {
