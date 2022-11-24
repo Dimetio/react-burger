@@ -4,7 +4,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 export default function Form({ title, children, buttonText, url }) {
   return (
-    <div className={styles.form}>
+    <form className={styles.form}>
       <h1 className='text text_type_main-medium mb-6'>{title}</h1>
 
       {children}
@@ -13,6 +13,6 @@ export default function Form({ title, children, buttonText, url }) {
         <Button htmlType="button" type="primary" size="medium">{buttonText}</Button>
       </div>
 
-    </div>
+    </form>
   )
 }
