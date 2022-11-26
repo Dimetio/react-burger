@@ -15,6 +15,7 @@ export default function ForgotPassword() {
     forgotPassword(values.email)
       .then((data) => {
         if (data.success) {
+          console.log(data)
           history.replace({ pathname: '/reset-password' })
         }
       })

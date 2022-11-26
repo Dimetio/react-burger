@@ -11,6 +11,11 @@ function checkResponse(res) {
     });
 };
 
+const headers = {
+  "Content-type": "application/json",
+  "Accept": "application/json",
+}
+
 function request(url, options) {
   return fetch(url, options).then(checkResponse)
 }
@@ -23,8 +28,7 @@ export const getOrder = (ingredientsId) => {
   return request(`${BASE_URL}/orders`, {
     method: 'POST',
     headers: {
-      "Content-type": "application/json",
-      "Accept": "application/json",
+      ...headers
     },
     body: JSON.stringify({
       ingredients: ingredientsId
@@ -36,11 +40,23 @@ export const forgotPassword = (email) => {
   return request(`${BASE_URL}/password-reset`, {
     method: 'POST',
     headers: {
-      "Content-type": "application/json",
-      "Accept": "application/json",
+      ...headers
     },
     body: JSON.stringify({
       email: email,
+    })
+  })
+}
+
+export const resetPassword = (password, code) => {
+  return request(`${BASE_URL}/password-reset/reset`, {
+    method: 'POST',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify({
+      password: password,
+      token: code,
     })
   })
 }
