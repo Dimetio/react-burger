@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
 
 export default function InputComponent({
@@ -6,17 +5,16 @@ export default function InputComponent({
   placeholder,
   icon,
   onIconClick,
-  type
+  type,
+  handleChange,
+  value
 }) {
-  const [value, setValue] = useState('')
-  const onChange = e => {
-    setValue(e.target.value)
-  }
+
   return (
     <div className='mb-6'>
       <Input
-        onChange={onChange}
-        value={value}
+        onChange={handleChange}
+        value={value || ''}
         name={name}
         placeholder={placeholder}
         icon={icon}
