@@ -24,10 +24,23 @@ export const getOrder = (ingredientsId) => {
     method: 'POST',
     headers: {
       "Content-type": "application/json",
-      'Accept': 'application/json',
+      "Accept": "application/json",
     },
     body: JSON.stringify({
       ingredients: ingredientsId
+    })
+  })
+}
+
+export const forgotPassword = (email) => {
+  return request(`${BASE_URL}/password-reset`, {
+    method: 'POST',
+    headers: {
+      "Content-type": "application/json",
+      "Accept": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
     })
   })
 }
