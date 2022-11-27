@@ -4,12 +4,12 @@ import InputComponent from '../form/input/input'
 import CustomLink from '../form/link/link'
 import styles from './page.module.css'
 import useForm from '../../hook/useForm'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { resetPassword } from '../../utils/api'
 
 export default function ResetPassword() {
   const { values, handleChange } = useForm();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [showPassord, setShowPassword] = useState(false)
 
   function onIconClick() {
@@ -23,7 +23,7 @@ export default function ResetPassword() {
       .then((data) => {
         if (data.success) {
           console.log(data)
-          history.replace({ pathname: '/' })
+          navigate('/')
         }
       })
       .catch(err => console.log(err.message))

@@ -28,8 +28,3 @@
 .item_active {
   color: #fff;
 }
-
-.profile:hover {
-  cursor: pointer;
-  color: #fff;
-}

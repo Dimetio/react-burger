@@ -7,18 +7,18 @@ export default function AppHeader() {
     <header>
       <nav className={`${styles.nav} px-4`}>
         <ul className={styles.ul}>
-          <NavLink to='/' className={`${styles.item} p-5 mr-2`} activeClassName={styles.item_active}>
+          <NavLink to='/' className={`${styles.item} p-5 mr-2`}>
             <BurgerIcon type="primary" />
             <p className='text text_type_main-default ml-2'>Конструктор</p>
           </NavLink>
-          <NavLink to='/orders' className={`${styles.item} p-5`} activeClassName={styles.item_active}>
+          <NavLink to='/orders' className={`${styles.item} p-5`}>
             <ListIcon type="secondary" />
             <p className="text text_type_main-default ml-2">Лента заказов</p>
           </NavLink>
         </ul>
         <Logo />
 
-        <NavLink to='/profile' className={`${styles.item} p-5`} activeClassName={styles.item_active}>
+        <NavLink to='/profile' className={`${styles.item} p-5`}>
           <ProfileIcon type="secondary" />
           <p className="text text_type_main-default ml-2">Личный кабинет</p>
         </NavLink>

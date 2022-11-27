@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 // components
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
@@ -13,44 +13,26 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   return (
-
-    <Router>
-      <div className="App">
-        <AppHeader />
-        <main className={styles.main}>
-          <Switch>
-            <Route path="/" exact={true}>
-              <DndProvider backend={HTML5Backend}>
-                <BurgerIngredients />
-                <BurgerConstructor />
-              </DndProvider>
-            </Route>
-            <Route path="/login" exact={true}>
-              <Login />
-            </Route>
-            <Route path="/register" exact={true}>
-              <Register />
-            </Route>
-            <Route path="/forgot-password" exact={true}>
-              <ForgotPassword />
-            </Route>
-            <Route path="/reset-password" exact={true}>
-              <ResetPassword />
-            </Route>
-            <Route path="/profile" exact={true}>
-              <Profile />
-            </Route>
-            <Route path={`/ingredients/:id`} exact={true}>
-              <TargetIngredient />
-            </Route>
-            <Route>
-              <NotFound404 />
-            </Route>
-          </Switch>
-        </main>
-      </div>
-    </Router >
-
+    <div className="App">
+      <AppHeader />
+      <main className={styles.main}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
+          <Route element={<NotFound404 />} />
+          <Route path="/" element={
+            <DndProvider backend={HTML5Backend}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </DndProvider>
+          } />
+        </Routes>
+      </main>
+    </div >
   )
 }
 

@@ -20,14 +20,12 @@ export default function Profile() {
         <NavLink
           to='/profile'
           className={`${styles.nav_item} text text_type_main-medium`}
-          activeClassName={styles.nav_item_active}
         >
           Профиль
         </NavLink>
         <NavLink
           to='/profile/orders'
           className={`${styles.nav_item} text text_type_main-medium`}
-          activeClassName={styles.nav_item_active}
         >
           История заказов
         </NavLink>

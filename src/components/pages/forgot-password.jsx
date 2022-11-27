@@ -4,11 +4,11 @@ import CustomLink from '../form/link/link'
 import styles from './page.module.css'
 import { forgotPassword } from '../../utils/api'
 import useForm from '../../hook/useForm'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ForgotPassword() {
   const { values, handleChange } = useForm();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -16,7 +16,7 @@ export default function ForgotPassword() {
       .then((data) => {
         if (data.success) {
           console.log(data)
-          history.replace({ pathname: '/reset-password' })
+          navigate('/reset-password')
         }
       })
       .catch(err => console.log(err.message))
