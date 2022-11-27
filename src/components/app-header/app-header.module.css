@@ -14,22 +14,19 @@
   padding: 0;
 }
 
-.li {
+.item {
   display: flex;
   color: #8585AD;
+  text-decoration: none;
 }
 
-li:hover {
+.item:hover {
   cursor: pointer;
   color: #fff;
 }
 
-.li_active {
+.item_active {
   color: #fff;
-}
-
-.profile {
-  composes: li;
 }
 
 .profile:hover {
