@@ -25,6 +25,9 @@ export const UPDATE_INGREDIENT_CONSTRUCTOR = 'UPDATE_INGREDIENT_CONSTRUCTOR';
 export const CLEAR_INGREDIENT_CONSTRUCTOR = 'CLEAR_INGREDIENT_CONSTRUCTOR';
 export const ADD_BUNS_CONSTRUCTOR = 'ADD_BUNS_CONSTRUCTOR';
 
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_ERROR = 'REGISTER_ERROR';
+
 function checkResponse(res) {
   if (res.ok) {
     return res.json();
@@ -113,10 +116,10 @@ export const getOrder = (ingredientsId) => {
       .then((data) => {
         // console.log(data.order)
         dispatch({
-            type: GET_ORDER_SUCCESS,
-            order: data.order.number,
-          })
+          type: GET_ORDER_SUCCESS,
+          order: data.order.number,
         })
+      })
       .catch(() => {
         dispatch({
           type: GET_ORDER_ERROR,
@@ -143,5 +146,18 @@ export const getTargetIngredient = (ingredient) => {
 export const deleteTargetIngredient = () => {
   return {
     type: DELETE_TARGET_INGREDIENT
+  }
+}
+
+export const registerSucces = (user) => {
+  return {
+    type: REGISTER_SUCCESS,
+    user
+  }
+}
+
+export const registerError = () => {
+  return {
+    type: REGISTER_ERROR,
   }
 }
