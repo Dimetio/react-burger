@@ -60,3 +60,17 @@ export const resetPassword = (password, code) => {
     })
   })
 }
+
+export const signup = (name, email, password) => {
+  return request(`${BASE_URL}/auth/register`, {
+    method: 'POST',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      password: password,
+    })
+  })
+}
