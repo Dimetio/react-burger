@@ -26,7 +26,6 @@ export default function Login() {
   const isAuth = useSelector(store => store.auth.isAuth)
 
   if (isAuth) {
-    console.log(isAuth)
     navigate('/profile')
   }
 

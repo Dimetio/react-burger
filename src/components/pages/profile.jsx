@@ -8,12 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function Profile() {
   const dispatch = useDispatch();
 
-  const store = useSelector(store => store.auth)
-  console.log(store)
+  const user = useSelector(store => store.auth.user)
 
   const [values, setValues] = useState({
-    name: '',
-    email: '',
+    name: user.name || '',
+    email: user.email || '',
   })
 
 
