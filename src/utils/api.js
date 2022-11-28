@@ -87,3 +87,15 @@ export const signin = (data) => {
     })
   })
 }
+
+export const logout = (data) => {
+  return request(`${BASE_URL}/auth/logout`, {
+    method: 'POST',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify({
+      token: data.refreshToken
+    })
+  })
+}

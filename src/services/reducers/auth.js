@@ -2,6 +2,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_ERROR,
   LOGIN_SUCCESS,
+  LOGOUT,
 } from '../actions/index'
 
 const initialState = {
@@ -26,7 +27,8 @@ export default function authReducer(state = initialState, action) {
     }
     case REGISTER_ERROR: {
       return {
-        ...state
+        ...state,
+        isAuth: false
       }
     }
     case LOGIN_SUCCESS: {
@@ -34,6 +36,13 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: action.data,
         isAuth: true
+      }
+    }
+    case LOGOUT: {
+      return {
+        ...state,
+        user: {},
+        isAuth: false,
       }
     }
     default: {

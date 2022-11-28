@@ -38,3 +38,18 @@ export function login(state) {
       })
   }
 }
+
+export function logout(state) {
+  return function (dispatch) {
+    logout(state)
+      .then(res => {
+        if (res.success) {
+          console.log(res)
+          dispatch(logout(res))
+        }
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  }
+}

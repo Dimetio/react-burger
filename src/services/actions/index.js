@@ -29,6 +29,7 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT = 'LOGOUT';
 
 function checkResponse(res) {
   if (res.ok) {
@@ -167,5 +168,11 @@ export const registerError = () => {
 export const loginSuccess = () => {
   return {
     type: LOGIN_SUCCESS,
+  }
+}
+
+export const logout = () => {
+  return {
+    type: LOGOUT,
   }
 }
