@@ -6,13 +6,19 @@ import styles from './page.module.css'
 import useForm from '../../hook/useForm'
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../services/actions/auth'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function Login() {
   const { values, handleChange } = useForm();
   const [showPassord, setShowPassword] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const isAuth = useSelector(store => store.auth.isAuth)
+
+  if (isAuth) {
+    navigate('/')
+  }
 
   function onIconClick() {
     setShowPassword(!showPassord)

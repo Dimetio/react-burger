@@ -14,7 +14,6 @@ export function register(state) {
     signup(state)
       .then(res => {
         if (res.success) {
-          console.log(res)
           dispatch(registerSuccess(res.user))
         }
       })
