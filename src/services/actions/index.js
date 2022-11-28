@@ -31,6 +31,8 @@ export const REGISTER_ERROR = 'REGISTER_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
+export const CHECK_TOKEN = 'CHECK_TOKEN';
+
 function checkResponse(res) {
   if (res.ok) {
     return res.json();
@@ -165,14 +167,21 @@ export const registerError = () => {
   }
 }
 
-export const loginSuccess = () => {
+export const loginSuccess = (user) => {
   return {
     type: LOGIN_SUCCESS,
+    user
   }
 }
 
 export const logout = () => {
   return {
     type: LOGOUT,
+  }
+}
+
+export const check_token = () => {
+  return {
+    type: CHECK_TOKEN,
   }
 }
