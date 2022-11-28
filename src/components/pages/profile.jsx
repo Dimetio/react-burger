@@ -1,28 +1,36 @@
 import styles from './page.module.css'
 import { NavLink } from 'react-router-dom'
 import { Input, PasswordInput, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
-import { logoutAction } from '../../services/actions/auth';
+import { useEffect, useState } from 'react';
+import { logoutAction, getUserAction } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import useForm from '../../hook/useForm'
 
 export default function Profile() {
   const dispatch = useDispatch();
+  const { values, handleChange, setValues } = useForm();
+  const [defaultValues, setDefaultValues] = useState({})
 
   const user = useSelector(store => store.auth.user)
-
-  const [values, setValues] = useState({
-    name: user.name || '',
-    email: user.email || '',
-  })
-
-
-  function onChange(e) {
-    setValues({ ...values, [e.target.name]: e.target.value })
-  }
 
   function onExit() {
     dispatch(logoutAction())
   }
+
+  function handleResetValues(e) {
+    e.preventDefault();
+
+    setValues(defaultValues)
+  }
+
+  useEffect(() => {
+    setDefaultValues(user);
+    setValues(user)
+  }, [user])
+
+  useEffect(() => {
+    dispatch(getUserAction())
+  }, [])
 
   return (
     <section className={styles.section_profile}>
@@ -54,7 +62,7 @@ export default function Profile() {
             placeholder="Имя"
             value={values.name || ''}
             name="name"
-            onChange={onChange}
+            onChange={handleChange}
             icon={"EditIcon"}
           />
         </div>
@@ -62,7 +70,7 @@ export default function Profile() {
           <EmailInput
             value={values.email || ''}
             name="email"
-            onChange={onChange}
+            onChange={handleChange}
             isIcon={true}
           />
         </div>
@@ -70,13 +78,13 @@ export default function Profile() {
           <PasswordInput
             value={values.password || ''}
             name={"password"}
-            onChange={onChange}
+            onChange={handleChange}
             icon="EditIcon"
           />
         </div>
 
         <div className={styles.buttons}>
-          <Button htmlType="button" type="secondary">
+          <Button htmlType="button" type="secondary" onClick={handleResetValues}>
             Отмена
           </Button>
           <Button htmlType="button" type="primary" size="medium">

@@ -180,7 +180,7 @@ export const logout = () => {
   }
 }
 
-export const check_token = () => {
+export const checkToken = () => {
   return {
     type: CHECK_TOKEN,
   }

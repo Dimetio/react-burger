@@ -3,6 +3,7 @@ import {
   registerError,
   loginSuccess,
   logout,
+  checkToken,
 } from '../actions/index.js'
 
 import * as api from '../../utils/api'
@@ -36,7 +37,6 @@ export function loginAction(state) {
     api.signin(state)
       .then(res => {
         if (res.success) {
-          console.log(res.user)
           const authToken = res.accessToken.split('Bearer ')[1]
           setCookie('token', authToken)
 
@@ -74,6 +74,7 @@ export function getUserAction() {
       .then(res => {
         if (res.success) {
           console.log(res)
+          dispatch(checkToken())
         }
       })
       .catch(err => {

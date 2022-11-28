@@ -109,7 +109,7 @@ export const getUser = () => {
     method: 'GET',
     headers: {
       ...headers,
-      authorization: `Bearer ${getCookie('accessToken')}`
+      authorization: 'Bearer ' + getCookie('token')
     }
   })
 }
