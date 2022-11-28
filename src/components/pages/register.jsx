@@ -5,7 +5,7 @@ import CustomLink from '../form/link/link'
 import styles from './page.module.css'
 import useForm from '../../hook/useForm'
 import { useNavigate } from 'react-router-dom';
-import { register } from '../../services/actions/auth'
+import { registerAction } from '../../services/actions/auth'
 import { useDispatch } from 'react-redux'
 
 export default function Register() {
@@ -20,7 +20,7 @@ export default function Register() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(register(values))
+    dispatch(registerAction(values))
   }
 
   return (

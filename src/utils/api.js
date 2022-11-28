@@ -1,3 +1,7 @@
+import {
+  getCookie
+} from "./cookie";
+
 const BASE_URL = 'https://norma.nomoreparties.space/api';
 
 function checkResponse(res) {
@@ -88,14 +92,24 @@ export const signin = (data) => {
   })
 }
 
-export const logout = (data) => {
+export const logout = () => {
   return request(`${BASE_URL}/auth/logout`, {
     method: 'POST',
     headers: {
       ...headers
     },
     body: JSON.stringify({
-      token: data.refreshToken
+      token: localStorage.getItem('refreshToken')
     })
+  })
+}
+
+export const getUser = () => {
+  return request(`${BASE_URL}/auth/user`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      authorization: `Bearer ${getCookie('accessToken')}`
+    }
   })
 }

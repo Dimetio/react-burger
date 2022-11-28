@@ -6,11 +6,7 @@ import {
 } from '../actions/index'
 
 const initialState = {
-  user: {
-    name: '',
-    email: '',
-    password: '',
-  },
+  user: {},
   accessToken: '',
   refreshToken: '',
   isAuth: false
@@ -34,7 +30,10 @@ export default function authReducer(state = initialState, action) {
     case LOGIN_SUCCESS: {
       return {
         ...state,
-        user: action.data,
+        user: {
+          name: action.name,
+          email: action.email
+        },
         isAuth: true
       }
     }

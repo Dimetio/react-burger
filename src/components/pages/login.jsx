@@ -5,7 +5,7 @@ import CustomLink from '../form/link/link'
 import styles from './page.module.css'
 import useForm from '../../hook/useForm'
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../services/actions/auth'
+import { loginAction } from '../../services/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function Login() {
@@ -14,19 +14,20 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const isAuth = useSelector(store => store.auth.isAuth)
-
-  if (isAuth) {
-    navigate('/')
-  }
-
   function onIconClick() {
     setShowPassword(!showPassord)
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(login(values))
+    dispatch(loginAction(values))
+  }
+
+  const isAuth = useSelector(store => store.auth.isAuth)
+
+  if (isAuth) {
+    console.log(isAuth)
+    navigate('/profile')
   }
 
   return (

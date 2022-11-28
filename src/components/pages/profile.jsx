@@ -1,29 +1,29 @@
 import styles from './page.module.css'
 import { NavLink } from 'react-router-dom'
 import { Input, PasswordInput, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect, useState } from 'react';
-import { logout } from '../../services/actions/auth';
+import { useState } from 'react';
+import { logoutAction } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const [values, setValues] = useState({})
 
-  const token = useSelector(store => store.auth.refreshToken)
-  const user = useSelector(store => store.auth.user)
-  console.log(token)
+  const store = useSelector(store => store.auth)
+  console.log(store)
+
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+  })
+
 
   function onChange(e) {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
   function onExit() {
-    dispatch(logout(token))
+    dispatch(logoutAction())
   }
-
-  useEffect(() => {
-    setValues(user)
-  }, [])
 
   return (
     <section className={styles.section_profile}>

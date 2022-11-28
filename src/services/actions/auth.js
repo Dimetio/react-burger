@@ -1,24 +1,22 @@
 import {
   registerSuccess,
   registerError,
-  loginSuccess
+  loginSuccess,
+  logout,
 } from '../actions/index.js'
 
-import {
-  signup,
-  signin
-} from '../../utils/api'
+import * as api from '../../utils/api'
 import {
   deleteCookie,
   setCookie
 } from '../../utils/cookie.js'
 
-export function register(state) {
+export function registerAction(state) {
   return function (dispatch) {
-    signup(state)
+    api.signup(state)
       .then(res => {
         if (res.success) {
-          const authToken = res.accessToken.split('Bearer ', [1])
+          const authToken = res.accessToken.split('Bearer ')[1]
           setCookie('token', authToken)
 
           const refreshToken = res.refreshToken;
@@ -33,19 +31,18 @@ export function register(state) {
   }
 }
 
-export function login(state) {
+export function loginAction(state) {
   return function (dispatch) {
-    signin(state)
+    api.signin(state)
       .then(res => {
         if (res.success) {
-          const authToken = res.accessToken.split('Bearer ', [1])
+          console.log(res.user)
+          const authToken = res.accessToken.split('Bearer ')[1]
           setCookie('token', authToken)
 
           const refreshToken = res.refreshToken;
           localStorage.setItem('refreshToken', refreshToken)
           dispatch(loginSuccess(res.user))
-
-          console.log(localStorage)
         }
       })
       .catch(err => {
@@ -54,14 +51,29 @@ export function login(state) {
   }
 }
 
-export function logout(state) {
+export function logoutAction(token) {
   return function (dispatch) {
-    logout(state)
+    api.logout(token)
       .then(res => {
         if (res.success) {
           deleteCookie('token')
           localStorage.removeItem('refreshToken')
           dispatch(logout(res))
+        }
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  }
+}
+
+
+export function getUserAction() {
+  return function (dispatch) {
+    api.getUser()
+      .then(res => {
+        if (res.success) {
+          console.log(res)
         }
       })
       .catch(err => {
