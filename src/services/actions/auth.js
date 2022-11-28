@@ -8,12 +8,21 @@ import {
   signup,
   signin
 } from '../../utils/api'
+import {
+  deleteCookie,
+  setCookie
+} from '../../utils/cookie.js'
 
 export function register(state) {
   return function (dispatch) {
     signup(state)
       .then(res => {
         if (res.success) {
+          const authToken = res.accessToken.split('Bearer ', [1])
+          setCookie('token', authToken)
+
+          const refreshToken = res.refreshToken;
+          localStorage.setItem('refreshToken', refreshToken)
           dispatch(registerSuccess(res.user))
         }
       })
@@ -29,8 +38,14 @@ export function login(state) {
     signin(state)
       .then(res => {
         if (res.success) {
-          console.log(res)
+          const authToken = res.accessToken.split('Bearer ', [1])
+          setCookie('token', authToken)
+
+          const refreshToken = res.refreshToken;
+          localStorage.setItem('refreshToken', refreshToken)
           dispatch(loginSuccess(res.user))
+
+          console.log(localStorage)
         }
       })
       .catch(err => {
@@ -44,7 +59,8 @@ export function logout(state) {
     logout(state)
       .then(res => {
         if (res.success) {
-          console.log(res)
+          deleteCookie('token')
+          localStorage.removeItem('refreshToken')
           dispatch(logout(res))
         }
       })
