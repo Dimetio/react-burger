@@ -28,6 +28,8 @@ export const ADD_BUNS_CONSTRUCTOR = 'ADD_BUNS_CONSTRUCTOR';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+
 function checkResponse(res) {
   if (res.ok) {
     return res.json();
@@ -149,7 +151,7 @@ export const deleteTargetIngredient = () => {
   }
 }
 
-export const registerSucces = (user) => {
+export const registerSuccess = (user) => {
   return {
     type: REGISTER_SUCCESS,
     user
@@ -159,5 +161,11 @@ export const registerSucces = (user) => {
 export const registerError = () => {
   return {
     type: REGISTER_ERROR,
+  }
+}
+
+export const loginSuccess = () => {
+  return {
+    type: LOGIN_SUCCESS,
   }
 }

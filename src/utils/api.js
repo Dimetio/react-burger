@@ -74,3 +74,16 @@ export const signup = (data) => {
     })
   })
 }
+
+export const signin = (data) => {
+  return request(`${BASE_URL}/auth/login`, {
+    method: 'POST',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify({
+      email: data.email,
+      password: data.password,
+    })
+  })
+}

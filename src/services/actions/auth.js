@@ -1,10 +1,12 @@
 import {
-  registerSucces,
-  registerError
+  registerSuccess,
+  registerError,
+  loginSuccess
 } from '../actions/index.js'
 
 import {
-  signup
+  signup,
+  signin
 } from '../../utils/api'
 
 export function register(state) {
@@ -13,12 +15,27 @@ export function register(state) {
       .then(res => {
         if (res.success) {
           console.log(res)
-          dispatch(registerSucces(res.user))
+          dispatch(registerSuccess(res.user))
         }
       })
       .catch(err => {
         console.log(err.message)
         dispatch(registerError())
+      })
+  }
+}
+
+export function login(state) {
+  return function (dispatch) {
+    signin(state)
+      .then(res => {
+        if (res.success) {
+          console.log(res)
+          dispatch(loginSuccess(res.user))
+        }
+      })
+      .catch(err => {
+        console.log(err.message)
       })
   }
 }
