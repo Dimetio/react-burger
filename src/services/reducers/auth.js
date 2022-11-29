@@ -8,8 +8,6 @@ import {
 
 const initialState = {
   user: {},
-  accessToken: '',
-  refreshToken: '',
   isAuth: false
 }
 
