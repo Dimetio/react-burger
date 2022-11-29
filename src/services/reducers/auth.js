@@ -45,6 +45,7 @@ export default function authReducer(state = initialState, action) {
     case CHECK_TOKEN: {
       return {
         ...state,
+        user: action.user
       }
     }
     default: {

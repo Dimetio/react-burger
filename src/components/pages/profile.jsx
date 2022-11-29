@@ -2,13 +2,13 @@ import styles from './page.module.css'
 import { NavLink } from 'react-router-dom'
 import { Input, PasswordInput, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useEffect, useState } from 'react';
-import { logoutAction, getUserAction } from '../../services/actions/auth';
+import { logoutAction, getUserAction, updateUserAction } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hook/useForm'
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const { values, handleChange, setValues } = useForm();
+  const { values, handleChange, setValues } = useForm({ name: '', email: '', password: '' });
   const [defaultValues, setDefaultValues] = useState({})
 
   const user = useSelector(store => store.auth.user)
@@ -19,18 +19,22 @@ export default function Profile() {
 
   function handleResetValues(e) {
     e.preventDefault();
-
     setValues(defaultValues)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    dispatch(updateUserAction(values))
   }
 
   useEffect(() => {
     setDefaultValues(user);
     setValues(user)
-  }, [user])
+  }, [setValues, user])
 
   useEffect(() => {
     dispatch(getUserAction())
-  }, [])
+  }, [dispatch])
 
   return (
     <section className={styles.section_profile}>
@@ -56,7 +60,7 @@ export default function Profile() {
         <p className={`${styles.nav_text} text text_type_main-default mt-20`}> В этом разделе вы можете изменить свои персональные данные</p>
       </div>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={'mb-6'}>
           <Input
             placeholder="Имя"
@@ -87,7 +91,7 @@ export default function Profile() {
           <Button htmlType="button" type="secondary" onClick={handleResetValues}>
             Отмена
           </Button>
-          <Button htmlType="button" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Сохранить
           </Button>
         </div>

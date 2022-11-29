@@ -113,3 +113,18 @@ export const getUser = () => {
     }
   })
 }
+
+export const updateUser = (data) => {
+  return request(`${BASE_URL}/auth/user`, {
+    method: 'PATCH',
+    headers: {
+      ...headers,
+      authorization: 'Bearer ' + getCookie('token')
+    },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    })
+  })
+}
