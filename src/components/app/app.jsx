@@ -11,6 +11,9 @@ import styles from './app.module.css';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+
+import { ProtectedRoute } from '../protected-route/protected-route';
+
 function App() {
   return (
     <div className="App">
@@ -21,7 +24,16 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/profile" element={<Profile />} />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
           <Route element={<NotFound404 />} />
           <Route path="/" element={
