@@ -4,7 +4,7 @@ import {
   UPDATE_INGREDIENT_CONSTRUCTOR,
   CLEAR_INGREDIENT_CONSTRUCTOR,
   ADD_BUNS_CONSTRUCTOR,
-} from '../actions/index'
+} from '../actions/constructor'
 
 const initialState = {
   bun: null,

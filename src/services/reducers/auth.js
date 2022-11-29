@@ -4,7 +4,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   CHECK_TOKEN,
-} from '../actions/index'
+} from '../actions/auth'
 
 const initialState = {
   user: {},

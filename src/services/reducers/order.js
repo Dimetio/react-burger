@@ -2,7 +2,7 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_ERROR,
-} from '../actions/index'
+} from '../actions/order'
 
 const initialState = {
   order: null,

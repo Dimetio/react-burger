@@ -1,16 +1,18 @@
-import {
-  registerSuccess,
-  registerError,
-  loginSuccess,
-  logout,
-  checkToken,
-} from '../actions/index.js'
+import * as api from '../../utils/api';
 
-import * as api from '../../utils/api'
 import {
   deleteCookie,
   setCookie
-} from '../../utils/cookie.js'
+} from '../../utils/cookie.js';
+
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_ERROR = 'REGISTER_ERROR';
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT = 'LOGOUT';
+
+export const CHECK_TOKEN = 'CHECK_TOKEN';
+
 
 export function registerAction(state) {
   return function (dispatch) {
@@ -22,12 +24,17 @@ export function registerAction(state) {
 
           const refreshToken = res.refreshToken;
           localStorage.setItem('refreshToken', refreshToken)
-          dispatch(registerSuccess(res.user))
+          dispatch({
+            type: REGISTER_SUCCESS,
+            user: res.user,
+          })
         }
       })
       .catch(err => {
         console.log(err.message)
-        dispatch(registerError())
+        dispatch({
+          type: REGISTER_ERROR,
+        })
       })
   }
 }
@@ -42,7 +49,10 @@ export function loginAction(state) {
 
           const refreshToken = res.refreshToken;
           localStorage.setItem('refreshToken', refreshToken)
-          dispatch(loginSuccess(res.user))
+          dispatch({
+            type: LOGIN_SUCCESS,
+            user: res.user,
+          })
         }
       })
       .catch(err => {
@@ -58,7 +68,9 @@ export function logoutAction(token) {
         if (res.success) {
           deleteCookie('token')
           localStorage.removeItem('refreshToken')
-          dispatch(logout(res))
+          dispatch({
+            type: LOGOUT,
+          })
         }
       })
       .catch(err => {
@@ -67,14 +79,33 @@ export function logoutAction(token) {
   }
 }
 
-
 export function getUserAction() {
   return function (dispatch) {
     api.getUser()
       .then(res => {
         if (res.success) {
-          console.log(res)
-          dispatch(checkToken())
+          dispatch({
+            type: CHECK_TOKEN,
+            user: res.user,
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  }
+}
+
+export function updateUserAction(state) {
+  return function (dispatch) {
+    api.updateUser(state)
+      .then(res => {
+        if (res.success) {
+          dispatch({
+            type: CHECK_TOKEN,
+            user: res.user,
+          })
+          console.log('обновил')
         }
       })
       .catch(err => {
