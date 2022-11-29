@@ -4,14 +4,13 @@ import InputComponent from '../form/input/input'
 import CustomLink from '../form/link/link'
 import styles from './page.module.css'
 import useForm from '../../hook/useForm'
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { loginAction } from '../../services/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function Login() {
   const { values, handleChange } = useForm();
   const [showPassord, setShowPassword] = useState(false)
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function onIconClick() {
@@ -26,7 +25,7 @@ export default function Login() {
   const isAuth = useSelector(store => store.auth.isAuth)
 
   if (isAuth) {
-    navigate('/profile')
+    return <Navigate to={'/profile'} />
   }
 
   return (
