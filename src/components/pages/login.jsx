@@ -25,7 +25,7 @@ export default function Login() {
   const isAuth = useSelector(store => store.auth.isAuth)
 
   if (isAuth) {
-    return <Navigate to={'/profile'} />
+    return <Navigate to={'/'} />
   }
 
   return (
