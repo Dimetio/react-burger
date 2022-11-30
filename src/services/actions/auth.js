@@ -21,7 +21,9 @@ export const GET_USER_ERROR = 'GET_USER_ERROR';
 
 export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
-export const UPDATE_USER_ERROR = 'UPDATE_USER_ERROR'
+export const UPDATE_USER_ERROR = 'UPDATE_USER_ERROR';
+
+export const AUTH_CHECKED = 'AUTH_CHECKED'
 
 export function registerAction(state) {
   return function (dispatch) {
@@ -34,7 +36,7 @@ export function registerAction(state) {
           // записываю в куки токены
           const authToken = res.accessToken.split('Bearer ')[1]
           const refreshToken = res.refreshToken
-          setCookie('token', authToken)
+          setCookie('accessToken', authToken)
           setCookie('refreshToken', refreshToken)
 
           dispatch({
@@ -63,7 +65,7 @@ export function loginAction(state) {
           // записываю в куки токены
           const authToken = res.accessToken.split('Bearer ')[1]
           const refreshToken = res.refreshToken
-          setCookie('token', authToken)
+          setCookie('accessToken', authToken)
           setCookie('refreshToken', refreshToken)
 
           dispatch({
@@ -86,8 +88,8 @@ export function logoutAction(token) {
     api.logout(token)
       .then(res => {
         if (res.success) {
-          deleteCookie('token')
-          localStorage.removeItem('refreshToken')
+          deleteCookie('accessToken')
+          deleteCookie('refreshToken')
           dispatch({
             type: LOGOUT,
           })
@@ -122,6 +124,20 @@ export function getUserAction() {
   }
 }
 
+// export function getUserAction() {
+//   return async function (dispatch) {
+//     try {
+//       dispatch({
+//         type: GET_USER_REQUEST
+//       })
+
+//       await api.getUser()
+//     } catch (err) {
+
+//     }
+//   }
+// }
+
 export function updateUserAction(state) {
   return function (dispatch) {
     dispatch({
@@ -143,5 +159,13 @@ export function updateUserAction(state) {
           type: UPDATE_USER_ERROR
         })
       })
+  }
+}
+
+export function authCheckedAction() {
+  return function (dispatch) {
+    dispatch({
+      type: AUTH_CHECKED
+    })
   }
 }

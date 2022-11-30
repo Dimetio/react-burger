@@ -4,9 +4,8 @@ import InputComponent from '../form/input/input'
 import CustomLink from '../form/link/link'
 import styles from './page.module.css'
 import useForm from '../../hook/useForm'
-import { Navigate } from 'react-router-dom';
 import { loginAction } from '../../services/actions/auth'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 export default function Login() {
   const { values, handleChange } = useForm();
@@ -20,12 +19,7 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(loginAction(values))
-  }
-
-  const isAuth = useSelector(store => store.auth.isAuth)
-
-  if (isAuth) {
-    return <Navigate to={'/'} />
+    console.log('login')
   }
 
   return (

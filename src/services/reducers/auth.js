@@ -5,6 +5,7 @@ import {
   LOGOUT,
   UPDATE_USER_SUCCESS,
   GET_USER_SUCCESS,
+  AUTH_CHECKED,
 } from '../actions/auth'
 
 const initialState = {
@@ -51,6 +52,12 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         user: action.user,
+      }
+    }
+    case AUTH_CHECKED: {
+      return {
+        ...state,
+        isAuth: true
       }
     }
     default: {

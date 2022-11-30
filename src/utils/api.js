@@ -1,5 +1,6 @@
 import {
-  getCookie
+  getCookie,
+  setCookie
 } from "./cookie";
 
 const BASE_URL = 'https://norma.nomoreparties.space/api';
@@ -22,6 +23,71 @@ const headers = {
 
 function request(url, options) {
   return fetch(url, options).then(checkResponse)
+}
+
+function refreshToken() {
+  return request(`${BASE_URL}/auth/token`, {
+    method: 'POST',
+    headers: {
+      ...headers
+    },
+    body: JSON.stringify({
+      token: getCookie('refreshToken')
+    })
+  })
+}
+
+function fetchWithRefresh(url, options) {
+  const res = request(url, options).then(data => console.log(data))
+  return request(url, options)
+    .catch(err => {
+      if (err.message === 'jwt expired') {
+        refreshToken()
+          .then(data => {
+            console.log(data)
+            setCookie('accessToken', data.res.accessToken.split('Bearer ')[1])
+            setCookie('refreshToken', data.refreshToken)
+             options.headers.authorization = data.accessToken
+            return request(url, options)
+          })
+      } else {
+        console.log('жопа черви')
+        console.log(err.message)
+      }
+    })
+}
+
+// const fetchWithRefresh = async (url, options) => {
+//   try {
+//     const res = await fetch(url, options).then(checkResponse)
+//     return res
+//   } catch (err) {
+//     if (err.message === 'jwt exprired') {
+//       const refreshData = await refreshToken()
+
+//       if (refreshData.success) {
+//         console.log(refreshData)
+//         setCookie('accessToken', refreshData.res.accessToken.split('Bearer ')[1])
+//         setCookie('refreshToken', refreshData.refreshToken)
+//         options.headers.authorization = refreshData.accessToken.split('Bearer ')[1]
+
+//         const res = await fetch(url, options)
+//         return await checkResponse(res)
+//       }
+//     } else {
+//       console.log(err.message)
+//     }
+//   }
+// }
+
+export const getUser = () => {
+  fetchWithRefresh(`${BASE_URL}/auth/user`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      authorization: 'Bearer ' + getCookie('accessToken')
+    }
+  })
 }
 
 export const getBurgers = () => {
@@ -104,22 +170,24 @@ export const logout = () => {
   })
 }
 
-export const getUser = () => {
-  return request(`${BASE_URL}/auth/user`, {
-    method: 'GET',
-    headers: {
-      ...headers,
-      authorization: 'Bearer ' + getCookie('token')
-    }
-  })
-}
+// export const getUser = () => {
+//   return request(`${BASE_URL}/auth/user`, {
+//     method: 'GET',
+//     headers: {
+//       ...headers,
+//       authorization: 'Bearer ' + getCookie('accessToken')
+//     }
+//   })
+// }
+
+
 
 export const updateUser = (data) => {
   return request(`${BASE_URL}/auth/user`, {
     method: 'PATCH',
     headers: {
       ...headers,
-      authorization: 'Bearer ' + getCookie('token')
+      authorization: 'Bearer ' + getCookie('accessToken')
     },
     body: JSON.stringify({
       name: data.name,

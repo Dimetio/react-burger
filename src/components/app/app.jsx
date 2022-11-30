@@ -20,20 +20,42 @@ function App() {
       <AppHeader />
       <main className={styles.main}>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-
           <Route
-            path="/profile"
+            path="/login"
+            element={
+                <Login />
+            }
+          />
+          <Route
+            path="/register"
             element={
               <ProtectedRoute>
-                <Profile />
+                <Register />
               </ProtectedRoute>
             }
           />
-
+          <Route
+            path="/forgot-password"
+            element={
+              <ProtectedRoute>
+                <ForgotPassword />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <ProtectedRoute>
+                <ResetPassword />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+                <Profile />
+            }
+          />
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
           <Route element={<NotFound404 />} />
           <Route path="/" element={
