@@ -38,10 +38,11 @@ function refreshToken() {
 }
 
 function fetchWithRefresh(url, options) {
-  const res = request(url, options).then(data => console.log(data))
+  console.log('итак заебок')
   return request(url, options)
     .catch(err => {
       if (err.message === 'jwt expired') {
+        console.log('обновим токен')
         refreshToken()
           .then(data => {
             console.log(data)
@@ -51,37 +52,14 @@ function fetchWithRefresh(url, options) {
             return request(url, options)
           })
       } else {
-        console.log('жопа черви')
+        console.log('писос че')
         console.log(err.message)
       }
     })
 }
 
-// const fetchWithRefresh = async (url, options) => {
-//   try {
-//     const res = await fetch(url, options).then(checkResponse)
-//     return res
-//   } catch (err) {
-//     if (err.message === 'jwt exprired') {
-//       const refreshData = await refreshToken()
-
-//       if (refreshData.success) {
-//         console.log(refreshData)
-//         setCookie('accessToken', refreshData.res.accessToken.split('Bearer ')[1])
-//         setCookie('refreshToken', refreshData.refreshToken)
-//         options.headers.authorization = refreshData.accessToken.split('Bearer ')[1]
-
-//         const res = await fetch(url, options)
-//         return await checkResponse(res)
-//       }
-//     } else {
-//       console.log(err.message)
-//     }
-//   }
-// }
-
 export const getUser = () => {
-  fetchWithRefresh(`${BASE_URL}/auth/user`, {
+  return fetchWithRefresh(`${BASE_URL}/auth/user`, {
     method: 'GET',
     headers: {
       ...headers,
