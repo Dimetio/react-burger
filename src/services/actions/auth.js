@@ -34,10 +34,8 @@ export function registerAction(state) {
       .then(res => {
         if (res.success) {
           // записываю в куки токены
-          const authToken = res.accessToken.split('Bearer ')[1]
-          const refreshToken = res.refreshToken
-          setCookie('accessToken', authToken)
-          setCookie('refreshToken', refreshToken)
+          setCookie('accessToken', res.accessToken.split('Bearer ')[1])
+          setCookie('refreshToken', res.refreshToken)
 
           dispatch({
             type: REGISTER_SUCCESS,
@@ -63,11 +61,8 @@ export function loginAction(state) {
       .then(res => {
         if (res.success) {
           // записываю в куки токены
-          const authToken = res.accessToken.split('Bearer ')[1]
-          const refreshToken = res.refreshToken
-          setCookie('accessToken', authToken)
-          setCookie('refreshToken', refreshToken)
-
+          setCookie('accessToken', res.accessToken.split('Bearer ')[1])
+          setCookie('refreshToken', res.refreshToken)
           dispatch({
             type: LOGIN_SUCCESS,
             user: res.user,
@@ -123,20 +118,6 @@ export function getUserAction() {
       })
   }
 }
-
-// export function getUserAction() {
-//   return async function (dispatch) {
-//     try {
-//       dispatch({
-//         type: GET_USER_REQUEST
-//       })
-
-//       await api.getUser()
-//     } catch (err) {
-
-//     }
-//   }
-// }
 
 export function updateUserAction(state) {
   return function (dispatch) {

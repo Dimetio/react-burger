@@ -25,7 +25,7 @@ function request(url, options) {
   return fetch(url, options).then(checkResponse)
 }
 
-function refreshToken() {
+export function refreshToken() {
   return request(`${BASE_URL}/auth/token`, {
     method: 'POST',
     headers: {
@@ -37,35 +37,22 @@ function refreshToken() {
   })
 }
 
-function fetchWithRefresh(url, options) {
-  console.log('итак заебок')
+export function fetchWithRefresh(url, options) {
   return request(url, options)
     .catch(err => {
       if (err.message === 'jwt expired') {
-        console.log('обновим токен')
-        refreshToken()
+        return refreshToken()
           .then(data => {
-            console.log(data)
-            setCookie('accessToken', data.res.accessToken.split('Bearer ')[1])
+            setCookie('accessToken', data.accessToken.split('Bearer ')[1])
             setCookie('refreshToken', data.refreshToken)
-             options.headers.authorization = data.accessToken
+            options.headers.authorization = data.accessToken
+
             return request(url, options)
           })
       } else {
-        console.log('писос че')
         console.log(err.message)
       }
     })
-}
-
-export const getUser = () => {
-  return fetchWithRefresh(`${BASE_URL}/auth/user`, {
-    method: 'GET',
-    headers: {
-      ...headers,
-      authorization: 'Bearer ' + getCookie('accessToken')
-    }
-  })
 }
 
 export const getBurgers = () => {
@@ -148,20 +135,18 @@ export const logout = () => {
   })
 }
 
-// export const getUser = () => {
-//   return request(`${BASE_URL}/auth/user`, {
-//     method: 'GET',
-//     headers: {
-//       ...headers,
-//       authorization: 'Bearer ' + getCookie('accessToken')
-//     }
-//   })
-// }
-
-
+export const getUser = () => {
+  return fetchWithRefresh(`${BASE_URL}/auth/user`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      authorization: 'Bearer ' + getCookie('accessToken')
+    }
+  })
+}
 
 export const updateUser = (data) => {
-  return request(`${BASE_URL}/auth/user`, {
+  return fetchWithRefresh(`${BASE_URL}/auth/user`, {
     method: 'PATCH',
     headers: {
       ...headers,
