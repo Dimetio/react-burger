@@ -23,7 +23,9 @@ function App() {
           <Route
             path="/login"
             element={
+              <ProtectedRoute onlyUnAuth={true}>
                 <Login />
+              </ProtectedRoute>
             }
           />
           <Route
@@ -53,7 +55,9 @@ function App() {
           <Route
             path="/profile"
             element={
+              <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
             }
           />
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />

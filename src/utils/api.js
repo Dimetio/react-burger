@@ -130,7 +130,7 @@ export const logout = () => {
       ...headers
     },
     body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
+      token: getCookie('refreshToken')
     })
   })
 }
