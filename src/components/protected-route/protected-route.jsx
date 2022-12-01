@@ -34,10 +34,8 @@ export function ProtectedRoute({ children, onlyUnAuth = false }) {
       children
     )
   }
-  // рендерит Login, когда не авторизован
-  if (onlyUnAuth && !user) {
-    return (
-      children
-    )
-  }
+
+  return (
+    children
+  )
 } 
