@@ -18,16 +18,20 @@ import {
   getTotalPrice,
   getOrder,
 } from '../../services/actions';
+import { useNavigate } from 'react-router-dom';
 
 export default function BurgerConstructor() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const { ingredients, bun } = useSelector(store => store.constructorIngredients);
   const { sum } = useSelector(store => store.totalPrice)
 
+  const user = useSelector(store => store.auth.user)
+
   const burgerId = useMemo(() => {
     const ingredientsId = ingredients.map(i => i._id)
     const bunsId = bun?._id;
-    
+
     return [bunsId, ...ingredientsId]
   }, [ingredients, bun])
 
@@ -37,7 +41,8 @@ export default function BurgerConstructor() {
   // открывашка
   function handleOpenModal() {
     setIsVisible(true)
-    dispatch(getOrder(burgerId)); // отправляю idшки, чтобы получить order
+    // проверка на авторизацию
+    user ? dispatch(getOrder(burgerId)) : navigate('/login')
   }
 
   // закрывашка

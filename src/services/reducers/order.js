@@ -21,13 +21,13 @@ export default function orderReducer(state = initialState, action) {
       return {
         ...state,
         order: action.order,
-          isLoading: false,
+        isLoading: false,
       };
     case GET_ORDER_ERROR:
       return {
         order: null,
-          hasError: true,
-          isLoading: false,
+        hasError: true,
+        isLoading: false,
       };
     default:
       return state;

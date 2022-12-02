@@ -1,6 +1,9 @@
 import {
   BASE_URL
 } from '../../utils/constants'
+import {
+  getCookie
+} from '../../utils/cookie';
 
 export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
 export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
@@ -26,10 +29,11 @@ export default function getOrder(ingredientsId) {
         method: 'POST',
         headers: {
           "Content-type": "application/json",
-          'Accept': 'application/json',
+          "Accept": "application/json",
+          "Authorization": 'Bearer ' + getCookie('accessToken')
         },
         body: JSON.stringify({
-          ingredients: ingredientsId
+          ingredients: ingredientsId,
         })
       })
       .then(checkResponse)
