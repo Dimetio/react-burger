@@ -40,9 +40,14 @@ export default function BurgerConstructor() {
 
   // открывашка
   function handleOpenModal() {
-    setIsVisible(true)
     // проверка на авторизацию
-    user ? dispatch(getOrder(burgerId)) : navigate('/login')
+    if (!user) {
+      navigate('/login')
+      return
+    }
+
+    setIsVisible(true)
+    dispatch(getOrder(burgerId))
   }
 
   // закрывашка
