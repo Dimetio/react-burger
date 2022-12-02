@@ -101,7 +101,7 @@ export default function BurgerIngredients() {
             <IngredientsList title="Начинки" ref={categoryMain} ingredients={mains} openModal={handleOpenModal} />
           </div>
 
-          {isVisible && (
+          {/* {isVisible && (
             <Modal
               title={'Детали ингредиента'}
               closeModal={handleCloseModal}
@@ -114,7 +114,7 @@ export default function BurgerIngredients() {
                 <IngredientDetails ingredient={ingredient} />
               </Link>
             </Modal>
-          )}
+          )} */}
         </>
       )}
     </section>

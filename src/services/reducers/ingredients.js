@@ -22,7 +22,7 @@ export default function ingredientsReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-          ingredients: action.ingredients,
+        ingredients: action.ingredients,
       };
     case GET_INGREDIENTS_ERROR:
       return {

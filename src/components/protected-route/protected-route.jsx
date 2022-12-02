@@ -17,7 +17,7 @@ export function ProtectedRoute({ children, onlyUnAuth = false }) {
   // не пускает на страницу Login, когда авторизован
   if (user && onlyUnAuth) {
     return (
-      <Navigate to='/' />
+      <Navigate to={-1} />
     )
   }
 

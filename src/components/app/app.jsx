@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 // components
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
@@ -10,11 +10,14 @@ import styles from './app.module.css';
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-
-
 import { ProtectedRoute } from '../protected-route/protected-route';
+import Modal from '../modal/modal';
+import IngredientDetails from '../burger-ingredients/ingredient-details/ingredient-details';
 
 function App() {
+  const location = useLocation();
+  const background = location.state && location.state.background
+  //console.log(location)
   return (
     <div className="App">
       <AppHeader />
@@ -31,7 +34,7 @@ function App() {
           <Route
             path="/register"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute onlyUnAuth={true}>
                 <Register />
               </ProtectedRoute>
             }
@@ -39,7 +42,7 @@ function App() {
           <Route
             path="/forgot-password"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute onlyUnAuth={true}>
                 <ForgotPassword />
               </ProtectedRoute>
             }
@@ -47,7 +50,7 @@ function App() {
           <Route
             path="/reset-password"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute onlyUnAuth={true}>
                 <ResetPassword />
               </ProtectedRoute>
             }
@@ -69,6 +72,16 @@ function App() {
             </DndProvider>
           } />
         </Routes>
+
+        {background && (
+          <Routes>
+            <Route path="ingredients/:id" element={
+              <Modal>
+                <IngredientDetails />
+              </Modal>
+            } />
+          </Routes>
+        )}
       </main>
     </div >
   )
