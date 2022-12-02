@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Form from '../form/form'
 import InputComponent from '../form/input/input'
 import CustomLink from '../form/link/link'
@@ -24,10 +24,19 @@ export default function ResetPassword() {
         if (data.success) {
           console.log(data)
           navigate('/')
+          localStorage.remove('forgot-success')
         }
       })
       .catch(err => console.log(err.message))
   }
+
+  useEffect(() => {
+    const forgotRequest = localStorage.getItem('forgot-success')
+    console.log(forgotRequest)
+    if (!forgotRequest) {
+      navigate('/forgot-password')
+    }
+  }, [])
 
   return (
     <section className={styles.section}>
