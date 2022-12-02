@@ -28,70 +28,70 @@ function App() {
     <div className="App">
       <AppHeader />
       <main className={styles.main}>
+        <Routes location={background || location}>
+        <Route
+          path="/login"
+          element={
+            <ProtectedRoute onlyUnAuth={true}>
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <ProtectedRoute onlyUnAuth={true}>
+              <Register />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <ProtectedRoute onlyUnAuth={true}>
+              <ForgotPassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <ProtectedRoute onlyUnAuth={true}>
+              <ResetPassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
+        <Route element={<NotFound404 />} />
+        <Route path="/" element={
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
+        } />
+      </Routes>
+
+      {background && (
         <Routes>
-          <Route
-            path="/login"
-            element={
-              <ProtectedRoute onlyUnAuth={true}>
-                <Login />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <ProtectedRoute onlyUnAuth={true}>
-                <Register />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/forgot-password"
-            element={
-              <ProtectedRoute onlyUnAuth={true}>
-                <ForgotPassword />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/reset-password"
-            element={
-              <ProtectedRoute onlyUnAuth={true}>
-                <ResetPassword />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
-          <Route element={<NotFound404 />} />
-          <Route path="/" element={
-            <DndProvider backend={HTML5Backend}>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </DndProvider>
+          <Route path="ingredients/:id" element={
+            <Modal
+              title={'Детали ингредиента'}
+              closeModal={onDismiss}
+            >
+              <IngredientDetails />
+            </Modal>
           } />
         </Routes>
-
-        {background && (
-          <Routes>
-            <Route path="ingredients/:id" element={
-              <Modal
-                title={'Детали ингредиента'}
-                closeModal={onDismiss}
-              >
-                <IngredientDetails />
-              </Modal>
-            } />
-          </Routes>
-        )}
-      </main>
+      )}
+    </main>
     </div >
   )
 }
