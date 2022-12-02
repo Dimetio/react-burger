@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 // components
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
@@ -15,9 +15,15 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../burger-ingredients/ingredient-details/ingredient-details';
 
 function App() {
+  const navigate = useNavigate()
   const location = useLocation();
   const background = location.state && location.state.background
   //console.log(location)
+
+  function onDismiss() {
+    navigate(-1)
+  }
+
   return (
     <div className="App">
       <AppHeader />
@@ -76,7 +82,10 @@ function App() {
         {background && (
           <Routes>
             <Route path="ingredients/:id" element={
-              <Modal>
+              <Modal
+                title={'Детали ингредиента'}
+                closeModal={onDismiss}
+              >
                 <IngredientDetails />
               </Modal>
             } />
