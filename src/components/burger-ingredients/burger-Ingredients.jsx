@@ -4,17 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './burger-Ingredients.module.css'
 // components
 import IngredientsList from '../ingredients-list/ingredients-list'
-import IngredientDetails from './ingredient-details/ingredient-details'
-import Modal from '../modal/modal';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 // actions
-import { getIngredients, getTargetIngredient, deleteTargetIngredient } from '../../services/actions/index'
-import { Link } from 'react-router-dom'
+import { getIngredients, } from '../../services/actions/index'
 
 export default function BurgerIngredients() {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(store => store.ingredients)
-  const { ingredient } = useSelector(store => store.targetIngredient)
 
   const buns = useMemo(() => ingredients.filter(item => item.type === 'bun'), [ingredients])
   const mains = useMemo(() => ingredients.filter(item => item.type === 'main'), [ingredients])
@@ -25,20 +21,8 @@ export default function BurgerIngredients() {
   const categoryMain = useRef(null);
   const listRef = useRef(null);
 
-  // popup
-  const [isVisible, setIsVisible] = useState(false);
   //  tab
   const [currentCategory, setCurrentCategory] = useState(['bun']);
-
-  function handleOpenModal(ingredient) {
-    dispatch(getTargetIngredient(ingredient))
-    setIsVisible(true)
-  }
-
-  function handleCloseModal() {
-    setIsVisible(false)
-    dispatch(deleteTargetIngredient())
-  }
 
   function handleClickTab(tab) {
     tab.current.scrollIntoView({ behavior: 'smooth' });
@@ -96,25 +80,10 @@ export default function BurgerIngredients() {
             className={styles.ingredients}
             onScroll={handleScroll}
           >
-            <IngredientsList title="Булки" ref={categoryBuns} ingredients={buns} openModal={handleOpenModal} />
-            <IngredientsList title="Соусы" ref={categorySauces} ingredients={sauces} openModal={handleOpenModal} />
-            <IngredientsList title="Начинки" ref={categoryMain} ingredients={mains} openModal={handleOpenModal} />
+            <IngredientsList title="Булки" ref={categoryBuns} ingredients={buns} />
+            <IngredientsList title="Соусы" ref={categorySauces} ingredients={sauces} />
+            <IngredientsList title="Начинки" ref={categoryMain} ingredients={mains} />
           </div>
-
-          {/* {isVisible && (
-            <Modal
-              title={'Детали ингредиента'}
-              closeModal={handleCloseModal}
-              isOpened={isVisible}
-            >
-              <Link 
-              to={`ingredients/${ingredient._id}`}
-              className={styles.link}
-              >
-                <IngredientDetails ingredient={ingredient} />
-              </Link>
-            </Modal>
-          )} */}
         </>
       )}
     </section>

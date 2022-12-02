@@ -18,7 +18,6 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation();
   const background = location.state && location.state.background
-  //console.log(location)
 
   function onDismiss() {
     navigate(-1)
@@ -29,69 +28,70 @@ function App() {
       <AppHeader />
       <main className={styles.main}>
         <Routes location={background || location}>
-        <Route
-          path="/login"
-          element={
-            <ProtectedRoute onlyUnAuth={true}>
-              <Login />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <ProtectedRoute onlyUnAuth={true}>
-              <Register />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/forgot-password"
-          element={
-            <ProtectedRoute onlyUnAuth={true}>
-              <ForgotPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/reset-password"
-          element={
-            <ProtectedRoute onlyUnAuth={true}>
-              <ResetPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
-        <Route element={<NotFound404 />} />
-        <Route path="/" element={
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-        } />
-      </Routes>
-
-      {background && (
-        <Routes>
-          <Route path="ingredients/:id" element={
-            <Modal
-              title={'Детали ингредиента'}
-              closeModal={onDismiss}
-            >
-              <IngredientDetails />
-            </Modal>
+          <Route
+            path="/login"
+            element={
+              <ProtectedRoute onlyUnAuth={true}>
+                <Login />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute onlyUnAuth={true}>
+                <Register />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <ProtectedRoute onlyUnAuth={true}>
+                <ForgotPassword />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <ProtectedRoute onlyUnAuth={true}>
+                <ResetPassword />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
+          <Route element={<NotFound404 />} />
+          <Route path="/" element={
+            <DndProvider backend={HTML5Backend}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </DndProvider>
           } />
         </Routes>
-      )}
-    </main>
+
+        {background && (
+          <Routes>
+            <Route path="ingredients/:id" element={
+              <Modal
+                title={'Детали ингредиента'}
+                closeModal={onDismiss}
+                isOpened={true}
+              >
+                <IngredientDetails />
+              </Modal>
+            } />
+          </Routes>
+        )}
+      </main>
     </div >
   )
 }

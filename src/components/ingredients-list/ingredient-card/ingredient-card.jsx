@@ -1,12 +1,11 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import styles from './ingredient-card.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types';
 import ingredientPropTypes from '../../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
 
-export default function IngredientCard({ ingredient, openModal }) {
+export default function IngredientCard({ ingredient }) {
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: ingredient,
@@ -18,15 +17,14 @@ export default function IngredientCard({ ingredient, openModal }) {
     return ingredient.type !== 'bun'
       ? ingredients.filter((item) => item._id === ingredient._id).length
       : bun?._id === ingredient._id
-      ? 2
-      : 0
+        ? 2
+        : 0
   }, [ingredients, bun])
 
   return (
     <div
       ref={dragRef}
       className={`${styles.ingredient} pt-6`}
-      onClick={() => openModal(ingredient)}
     >
       <div className={styles.image}>
         {counter !== 0 && (
@@ -53,5 +51,4 @@ export default function IngredientCard({ ingredient, openModal }) {
 
 IngredientCard.propTypes = {
   ingredient: ingredientPropTypes().isRequired,
-  openModal: PropTypes.func.isRequired,
 }

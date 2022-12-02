@@ -1,5 +1,4 @@
 import styles from './ingredient-details.module.css'
-import ingredientPropTypes from '../../../utils/prop-types';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -7,19 +6,20 @@ import { getIngredients } from '../../../services/actions';
 
 export default function IngredientDetails() {
   const dispatch = useDispatch()
-
+  // забираю id из урла
   const { id } = useParams()
+  // забираю ингредиенты из стора
   const { ingredients } = useSelector(store => store.ingredients)
-
+  // нахожу нужный ингредиент
   const ingredient = ingredients.find(i => i._id === id)
 
+  // получаю все ингредиенты из и записываю в стор
   useEffect(() => {
     dispatch(getIngredients())
-  }, [])
-
+  }, [dispatch])
 
   return (
-    <Link>
+    <Link className={styles.link}>
       <article className={`${styles.wrap} ml-10 mr-10 mb-15`}>
         <div className={`${styles.image} mb-4`}>
           <img src={ingredient?.image_large} alt={ingredient?.name} />
@@ -46,8 +46,4 @@ export default function IngredientDetails() {
       </article>
     </Link>
   )
-}
-
-IngredientDetails.propTypes = {
-  //ingredient: ingredientPropTypes().isRequired,
 }

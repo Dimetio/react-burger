@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import ingredientPropTypes from '../../utils/prop-types';
 import { Link, useLocation } from 'react-router-dom';
 
-const IngredientsList = React.forwardRef(({ title, ingredients, openModal }, ref) => {
+const IngredientsList = React.forwardRef(({ title, ingredients }, ref) => {
   const location = useLocation()
   return (
     <article ref={ref}>
@@ -20,10 +20,8 @@ const IngredientsList = React.forwardRef(({ title, ingredients, openModal }, ref
             >
               <IngredientCard
                 ingredient={item}
-                openModal={openModal}
               />
             </Link>
-
           </li>
         ))}
       </ul>
@@ -34,8 +32,6 @@ const IngredientsList = React.forwardRef(({ title, ingredients, openModal }, ref
 ingredientPropTypes.propTypes = {
   title: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(ingredientPropTypes()).isRequired,
-  openModal: PropTypes.func.isRequired,
 }
-
 
 export default IngredientsList
