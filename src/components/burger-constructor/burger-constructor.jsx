@@ -17,6 +17,7 @@ import {
   addBunsConstructor,
   getTotalPrice,
   getOrder,
+  getUserAction,
 } from '../../services/actions';
 import { useNavigate } from 'react-router-dom';
 
@@ -69,6 +70,9 @@ export default function BurgerConstructor() {
   })
 
   useEffect(() => {
+    // проверка на наличие юзера
+    dispatch(getUserAction())
+
     dispatch(getTotalPrice(ingredients, bun))
   }, [ingredients, bun, dispatch])
 

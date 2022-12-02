@@ -63,7 +63,8 @@ export const getOrder = (ingredientsId) => {
   return request(`${BASE_URL}/orders`, {
     method: 'POST',
     headers: {
-      ...headers
+      ...headers,
+      "Authorization": 'Bearer ' + getCookie('accessToken')
     },
     body: JSON.stringify({
       ingredients: ingredientsId
