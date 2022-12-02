@@ -1,9 +1,9 @@
-import React from 'react'
 import styles from './ingredient-details.module.css'
 import ingredientPropTypes from '../../../utils/prop-types';
 
 export default function IngredientDetails({ ingredient }) {
   return (
+
     <article className={`${styles.wrap} ml-10 mr-10 mb-15`}>
       <div className={`${styles.image} mb-4`}>
         <img src={ingredient.image_large} alt={ingredient.name} />

@@ -9,6 +9,7 @@ import Modal from '../modal/modal';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 // actions
 import { getIngredients, getTargetIngredient, deleteTargetIngredient } from '../../services/actions/index'
+import { Link } from 'react-router-dom'
 
 export default function BurgerIngredients() {
   const dispatch = useDispatch();
@@ -106,7 +107,12 @@ export default function BurgerIngredients() {
               closeModal={handleCloseModal}
               isOpened={isVisible}
             >
-              <IngredientDetails ingredient={ingredient} />
+              <Link 
+              to={`ingredients/${ingredient._id}`}
+              className={styles.link}
+              >
+                <IngredientDetails ingredient={ingredient} />
+              </Link>
             </Modal>
           )}
         </>
