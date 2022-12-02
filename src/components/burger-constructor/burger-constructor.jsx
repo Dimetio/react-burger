@@ -15,7 +15,6 @@ import {
   addIngredientConstructor,
   clearIngredientConstructor,
   addBunsConstructor,
-  getTotalPrice,
   getOrder,
   getUserAction,
 } from '../../services/actions';
@@ -25,7 +24,6 @@ export default function BurgerConstructor() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { ingredients, bun } = useSelector(store => store.constructorIngredients);
-  const { sum } = useSelector(store => store.totalPrice)
   const user = useSelector(store => store.auth.user)
 
   const burgerId = useMemo(() => {
@@ -34,6 +32,11 @@ export default function BurgerConstructor() {
 
     return [bunsId, ...ingredientsId]
   }, [ingredients, bun])
+
+  const total = useMemo(() => {
+     return (bun ? bun.price * 2 : 0) + 
+     ingredients.reduce((acc, item) => acc + item.price, 0)
+  }, [bun, ingredients])
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
@@ -71,9 +74,7 @@ export default function BurgerConstructor() {
   useEffect(() => {
     // проверка на наличие юзера
     dispatch(getUserAction())
-
-    dispatch(getTotalPrice(ingredients, bun))
-  }, [ingredients, bun, dispatch])
+  }, [dispatch])
 
   return (
     <section ref={dropTargetRef} className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}>
@@ -104,7 +105,7 @@ export default function BurgerConstructor() {
           </article>
 
           <div className={`${styles.total} pt-10`}>
-            <p className="text text_type_digits-medium mr-10">{sum} <CurrencyIcon type="primary" /></p>
+            <p className="text text_type_digits-medium mr-10">{total} <CurrencyIcon type="primary" /></p>
             <Button
               htmlType="button"
               type="primary"

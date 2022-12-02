@@ -3,7 +3,6 @@ import {
 } from "redux";
 
 import order from '../reducers/order'
-import totalPrice from '../reducers/totalPrice'
 import constructorIngredients from '../reducers/constructor'
 import targetIngredient from '../reducers/targetIngredient'
 import ingredients from '../reducers/ingredients'
@@ -14,6 +13,5 @@ export const rootReducer = combineReducers({
   targetIngredient,
   constructorIngredients,
   order,
-  totalPrice,
   auth,
 })
