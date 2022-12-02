@@ -30,9 +30,9 @@ export default function ResetPassword() {
       .catch(err => console.log(err.message))
   }
 
+  // без флага не пускать на страницу
   useEffect(() => {
     const forgotRequest = localStorage.getItem('forgot-success')
-    console.log(forgotRequest)
     if (!forgotRequest) {
       navigate('/forgot-password')
     }

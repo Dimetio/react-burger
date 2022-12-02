@@ -5,7 +5,6 @@ import styles from './page.module.css'
 import { forgotPassword } from '../../utils/api'
 import useForm from '../../hook/useForm'
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react'
 
 export default function ForgotPassword() {
   const { values, handleChange } = useForm();
@@ -18,6 +17,7 @@ export default function ForgotPassword() {
         if (data.success) {
           console.log(data)
           navigate('/reset-password')
+          // флаг для пропуска в reset-password
           localStorage.setItem('forgot-success', true)
         }
       })
