@@ -26,7 +26,6 @@ export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const { ingredients, bun } = useSelector(store => store.constructorIngredients);
   const { sum } = useSelector(store => store.totalPrice)
-
   const user = useSelector(store => store.auth.user)
 
   const burgerId = useMemo(() => {
