@@ -4,7 +4,7 @@ import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-Ingredients';
 // pages
-import { ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword, TargetIngredient } from '../pages/index'
+import { ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword, TargetIngredient } from '../../pages/index'
 // styles
 import styles from './app.module.css';
 
