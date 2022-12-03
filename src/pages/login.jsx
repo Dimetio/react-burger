@@ -6,8 +6,11 @@ import styles from './page.module.css'
 import useForm from '../hook/useForm'
 import { loginAction } from '../services/actions/auth'
 import { useDispatch } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export default function Login() {
+  const location = useLocation()
+  const navigate = useNavigate();
   const { values, handleChange } = useForm();
   const [showPassord, setShowPassword] = useState(false)
   const dispatch = useDispatch();
@@ -19,7 +22,8 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(loginAction(values))
-    console.log('login')
+    navigate(location.state?.from || '/')
+    console.log('добавить тост на успех авторизации')
   }
 
   return (
