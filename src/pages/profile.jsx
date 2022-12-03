@@ -1,5 +1,5 @@
 import styles from './page.module.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Input, PasswordInput, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useEffect, useState } from 'react';
 import { logoutAction, getUserAction, updateUserAction } from '../services/actions/auth';
@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../hook/useForm'
 
 export default function Profile() {
+  const { pathname } = useLocation()
+  const activeClassName = styles.nav_item_active
   const dispatch = useDispatch();
   const { values, handleChange, setValues } = useForm({ name: '', email: '', password: '' });
   const [defaultValues, setDefaultValues] = useState({})
@@ -41,13 +43,13 @@ export default function Profile() {
       <div className={styles.nav}>
         <NavLink
           to='/profile'
-          className={`${styles.nav_item} text text_type_main-medium`}
+          className={({ isActive }) => `${styles.nav_item} text text_type_main-medium` + (isActive ? ` ${activeClassName}` : '')}
         >
           Профиль
         </NavLink>
         <NavLink
           to='/profile/orders'
-          className={`${styles.nav_item} text text_type_main-medium`}
+          className={({ isActive }) => `${styles.nav_item} text text_type_main-medium` + (isActive ? ` ${activeClassName}` : '')}
         >
           История заказов
         </NavLink>
