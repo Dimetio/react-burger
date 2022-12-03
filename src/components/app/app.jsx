@@ -31,7 +31,7 @@ function App() {
           <Route
             path="/login"
             element={
-              <ProtectedRoute onlyUnAuth={true}>
+              <ProtectedRoute anonymous={true}>
                 <Login />
               </ProtectedRoute>
             }
@@ -39,7 +39,7 @@ function App() {
           <Route
             path="/register"
             element={
-              <ProtectedRoute onlyUnAuth={true}>
+              <ProtectedRoute anonymous={true}>
                 <Register />
               </ProtectedRoute>
             }
@@ -47,7 +47,7 @@ function App() {
           <Route
             path="/forgot-password"
             element={
-              <ProtectedRoute onlyUnAuth={true}>
+              <ProtectedRoute anonymous={true}>
                 <ForgotPassword />
               </ProtectedRoute>
             }
@@ -55,7 +55,7 @@ function App() {
           <Route
             path="/reset-password"
             element={
-              <ProtectedRoute onlyUnAuth={true}>
+              <ProtectedRoute anonymous={true}>
                 <ResetPassword />
               </ProtectedRoute>
             }

@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { getUserAction } from '../../services/actions/auth';
 import { getCookie } from '../../utils/cookie';
 
-export function ProtectedRoute({ children, onlyUnAuth = false }) {
+export function ProtectedRoute({ children, anonymous = false }) {
   const user = useSelector(store => store.auth.user)
   const dispatch = useDispatch();
+  const location = useLocation()
 
   useEffect(() => {
     if (getCookie('accessToken')) {
@@ -14,24 +15,19 @@ export function ProtectedRoute({ children, onlyUnAuth = false }) {
     }
   }, [dispatch])
 
+  const from = location.state?.from || '/'
+
   // не пускает на страницу Login, когда авторизован
-  if (user && onlyUnAuth) {
+  if (user && anonymous) {
     return (
-      <Navigate to={-1} />
+      <Navigate to={from} />
     )
   }
 
   // редиректит на Login, когда не авторизован
-  if (!user && !onlyUnAuth) {
+  if (!user && !anonymous) {
     return (
-      <Navigate to='/login' />
-    )
-  }
-
-  // рендерит другую страницу, кроме Login, когда авторизован
-  if (!onlyUnAuth && user) {
-    return (
-      children
+      <Navigate to='/login' state={{ from: location }} />
     )
   }
 
