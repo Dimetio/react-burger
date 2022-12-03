@@ -69,7 +69,7 @@ function App() {
             }
           />
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
-          <Route element={<NotFound404 />} />
+          <Route path='*' element={<NotFound404 />} />
           <Route path="/" element={
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />
