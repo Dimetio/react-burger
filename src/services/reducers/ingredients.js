@@ -10,7 +10,6 @@ const initialState = {
   hasError: false,
 }
 
-
 export default function ingredientsReducer(state = initialState, action) {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
