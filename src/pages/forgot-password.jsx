@@ -1,9 +1,9 @@
-import Form from '../form/form'
-import InputComponent from '../form/input/input'
-import CustomLink from '../form/link/link'
+import Form from '../components/form/form'
+import InputComponent from '../components/form/input/input'
+import CustomLink from '../components/form/link/link'
 import styles from './page.module.css'
-import { forgotPassword } from '../../utils/api'
-import useForm from '../../hook/useForm'
+import { forgotPassword } from '../utils/api'
+import useForm from '../hook/useForm'
 import { useNavigate } from 'react-router-dom';
 
 export default function ForgotPassword() {

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import Form from '../form/form'
-import InputComponent from '../form/input/input'
-import CustomLink from '../form/link/link'
+import Form from '../components/form/form'
+import InputComponent from '../components/form/input/input'
+import CustomLink from '../components/form/link/link'
 import styles from './page.module.css'
-import useForm from '../../hook/useForm'
+import useForm from '../hook/useForm'
 import { useNavigate } from 'react-router-dom';
-import { resetPassword } from '../../utils/api'
+import { resetPassword } from '../utils/api'
 
 export default function ResetPassword() {
   const { values, handleChange } = useForm();

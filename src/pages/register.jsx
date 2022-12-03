@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import Form from '../form/form'
-import InputComponent from '../form/input/input'
-import CustomLink from '../form/link/link'
+import Form from '../components/form/form'
+import InputComponent from '../components/form/input/input'
+import CustomLink from '../components/form/link/link'
 import styles from './page.module.css'
-import useForm from '../../hook/useForm'
-import { loginAction } from '../../services/actions/auth'
+import useForm from '../hook/useForm'
+import { useNavigate } from 'react-router-dom';
+import { registerAction } from '../services/actions/auth'
 import { useDispatch } from 'react-redux'
 
-export default function Login() {
+export default function Register() {
   const { values, handleChange } = useForm();
   const [showPassord, setShowPassword] = useState(false)
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function onIconClick() {
@@ -18,17 +20,24 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(loginAction(values))
-    console.log('login')
+    dispatch(registerAction(values))
   }
 
   return (
     <section className={styles.section}>
       <Form
-        title={'Вход'}
-        buttonText={'Войти'}
+        title={'Регистрация'}
+        buttonText={'Зарегистрироваться'}
         handleSubmit={handleSubmit}
       >
+        <InputComponent
+          name={'name'}
+          placeholder={'Имя'}
+          type={'text'}
+          handleChange={handleChange}
+          value={values.name}
+        />
+
         <InputComponent
           name={'email'}
           placeholder={'E-mail'}
@@ -49,15 +58,9 @@ export default function Login() {
       </Form>
 
       <CustomLink
-        text={'Вы — новый пользователь?'}
-        url={'/register'}
-        linkText={'Зарегистрироваться'}
-      />
-
-      <CustomLink
-        text={'Забыли пароль?'}
-        url={'/forgot-password'}
-        linkText={'Восстановить пароль'}
+        text={'Уже зарегистрированы?'}
+        url={'/login'}
+        linkText={'Войти'}
       />
     </section>
   )
