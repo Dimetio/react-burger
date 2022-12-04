@@ -1,11 +1,8 @@
 import styles from './ingredient-details.module.css'
-import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getIngredients } from '../../../services/actions';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function IngredientDetails() {
-  const dispatch = useDispatch()
   // забираю id из урла
   const { id } = useParams()
   // забираю ингредиенты из стора
