@@ -13,8 +13,12 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { ProtectedRoute } from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientDetails from '../burger-ingredients/ingredient-details/ingredient-details';
+import { useEffect } from 'react';
+import { getIngredients, getUserAction } from '../../services/actions';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation();
   const background = location.state && location.state.background
@@ -22,6 +26,11 @@ function App() {
   function onDismiss() {
     navigate(-1)
   }
+
+  useEffect(() => {
+    dispatch(getIngredients())
+    dispatch(getUserAction())
+  }, [dispatch])
 
   return (
     <div className="App">

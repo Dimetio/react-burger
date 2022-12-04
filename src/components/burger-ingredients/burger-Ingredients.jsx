@@ -45,10 +45,6 @@ export default function BurgerIngredients() {
     }
   }
 
-  useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
-
   return (
     <section className={`${styles.section} mr-10 pt-10 pb-10`}>
       {ingredients && (

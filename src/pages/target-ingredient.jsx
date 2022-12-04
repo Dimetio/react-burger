@@ -11,10 +11,6 @@ export default function TargetIngredient() {
   const { ingredients } = useSelector(store => store.ingredients)
   const ingredient = ingredients.find(item => item._id === id)
 
-  useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
-
   return (
     ingredient && (
       <section className={`${styles.section_ingredient}`}>

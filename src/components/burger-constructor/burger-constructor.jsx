@@ -71,11 +71,6 @@ export default function BurgerConstructor() {
     }
   })
 
-  useEffect(() => {
-    // проверка на наличие юзера
-    dispatch(getUserAction())
-  }, [dispatch])
-
   return (
     <section ref={dropTargetRef} className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}>
       {bun ? (

@@ -34,10 +34,6 @@ export default function Profile() {
     setValues(user)
   }, [setValues, user])
 
-  useEffect(() => {
-    dispatch(getUserAction())
-  }, [dispatch])
-
   return (
     <section className={styles.section_profile}>
       <div className={styles.nav}>

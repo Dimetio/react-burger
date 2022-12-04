@@ -13,11 +13,6 @@ export default function IngredientDetails() {
   // нахожу нужный ингредиент
   const ingredient = ingredients.find(i => i._id === id)
 
-  // получаю все ингредиенты из и записываю в стор
-  useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
-
   return (
     <Link className={styles.link}>
       <article className={`${styles.wrap} ml-10 mr-10 mb-15`}>
