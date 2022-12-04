@@ -1,15 +1,12 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState, useMemo, useRef } from 'react'
+import { useSelector } from 'react-redux'
 //styles
 import styles from './burger-Ingredients.module.css'
 // components
 import IngredientsList from '../ingredients-list/ingredients-list'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-// actions
-import { getIngredients, } from '../../services/actions/index'
 
 export default function BurgerIngredients() {
-  const dispatch = useDispatch();
   const { ingredients } = useSelector(store => store.ingredients)
 
   const buns = useMemo(() => ingredients.filter(item => item.type === 'bun'), [ingredients])

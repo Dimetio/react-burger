@@ -1,13 +1,12 @@
 import styles from './page.module.css'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import { Input, PasswordInput, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useEffect, useState } from 'react';
-import { logoutAction, getUserAction, updateUserAction } from '../services/actions/auth';
+import { logoutAction, updateUserAction } from '../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../hook/useForm'
 
 export default function Profile() {
-  const { pathname } = useLocation()
   const activeClassName = styles.nav_item_active
   const dispatch = useDispatch();
   const { values, handleChange, setValues } = useForm({ name: '', email: '', password: '' });

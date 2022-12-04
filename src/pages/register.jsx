@@ -4,14 +4,12 @@ import InputComponent from '../components/form/input/input'
 import CustomLink from '../components/form/link/link'
 import styles from './page.module.css'
 import useForm from '../hook/useForm'
-import { useNavigate } from 'react-router-dom';
 import { registerAction } from '../services/actions/auth'
 import { useDispatch } from 'react-redux'
 
 export default function Register() {
   const { values, handleChange } = useForm();
   const [showPassord, setShowPassword] = useState(false)
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function onIconClick() {
