@@ -23,3 +23,8 @@
 .image {
   min-height: 240px;
 }
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}

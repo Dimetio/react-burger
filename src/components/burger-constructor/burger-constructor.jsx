@@ -5,7 +5,7 @@ import styles from './burger-constructor.module.css';
 import BurgerIngredientsList from '../burger-ingredients-list/burger-ingredients-list'
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 // popup
-import OrderDetails from '../order-details/order-details';
+import OrderDetails from './order-details/order-details';
 import Modal from '../modal/modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
@@ -15,30 +15,42 @@ import {
   addIngredientConstructor,
   clearIngredientConstructor,
   addBunsConstructor,
-  getTotalPrice,
   getOrder,
+  getUserAction,
 } from '../../services/actions';
+import { useNavigate } from 'react-router-dom';
 
 export default function BurgerConstructor() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const { ingredients, bun } = useSelector(store => store.constructorIngredients);
-  const { sum } = useSelector(store => store.totalPrice)
+  const user = useSelector(store => store.auth.user)
 
   const burgerId = useMemo(() => {
     const ingredientsId = ingredients.map(i => i._id)
     const bunsId = bun?._id;
-    
+
     return [bunsId, ...ingredientsId]
   }, [ingredients, bun])
+
+  const total = useMemo(() => {
+     return (bun ? bun.price * 2 : 0) + 
+     ingredients.reduce((acc, item) => acc + item.price, 0)
+  }, [bun, ingredients])
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
 
   // открывашка
   function handleOpenModal() {
-    console.log(burgerId)
+    // проверка на авторизацию
+    if (!user) {
+      navigate('/login')
+      return
+    }
+
     setIsVisible(true)
-    dispatch(getOrder(burgerId)); // отправляю idшки, чтобы получить order
+    dispatch(getOrder(burgerId))
   }
 
   // закрывашка
@@ -58,10 +70,6 @@ export default function BurgerConstructor() {
         : dispatch(addIngredientConstructor(data))
     }
   })
-
-  useEffect(() => {
-    dispatch(getTotalPrice(ingredients, bun))
-  }, [ingredients, bun, dispatch])
 
   return (
     <section ref={dropTargetRef} className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}>
@@ -92,7 +100,7 @@ export default function BurgerConstructor() {
           </article>
 
           <div className={`${styles.total} pt-10`}>
-            <p className="text text_type_digits-medium mr-10">{sum} <CurrencyIcon type="primary" /></p>
+            <p className="text text_type_digits-medium mr-10">{total} <CurrencyIcon type="primary" /></p>
             <Button
               htmlType="button"
               type="primary"

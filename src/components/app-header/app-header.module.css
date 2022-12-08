@@ -9,30 +9,23 @@
 
 .ul {
   display: flex;
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.li {
+.item {
   display: flex;
   color: #8585AD;
+  text-decoration: none;
 }
 
-li:hover {
+.item:hover {
   cursor: pointer;
   color: #fff;
 }
 
-.li_active {
-  color: #fff;
-}
-
-.profile {
-  composes: li;
-}
-
-.profile:hover {
-  cursor: pointer;
+.item_active {
   color: #fff;
 }

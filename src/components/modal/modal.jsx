@@ -24,7 +24,7 @@ export default function Modal({ children, title, closeModal, isOpened }) {
     }
   }, [isOpened])
 
-  return isOpened && ReactDOM.createPortal(
+  return ReactDOM.createPortal(
     <div className={styles.modal}>
       <div className={styles.content}>
         {title && (<p className={`${styles.title} text text_type_main-large ml-10 mr-10 mt-10`}>{title}</p>)}

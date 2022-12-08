@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  color: #4C4CFF;
+  text-decoration: none;
+  transition: all .3s;
+}
+
+.link:hover {
+  opacity: .6;
+}
