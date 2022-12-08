@@ -15,13 +15,14 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../burger-ingredients/ingredient-details/ingredient-details';
 import { useEffect } from 'react';
 import { getIngredients, getUserAction } from '../../services/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation();
-  const background = location.state && location.state.background
+  const background = location.state && location.state.background;
+  const user = useSelector(store => store.auth.user)
 
   function onDismiss() {
     navigate(-1)
@@ -29,8 +30,10 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients())
-    dispatch(getUserAction())
-  }, [dispatch])
+    if (user) {
+      dispatch(getUserAction())
+    }
+  }, [])
 
   return (
     <div className="App">
