@@ -16,6 +16,8 @@ import IngredientDetails from '../burger-ingredients/ingredient-details/ingredie
 import { useEffect } from 'react';
 import { getIngredients, getUserAction } from '../../services/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import Nav from '../nav/nav';
+import Orders from '../../pages/orders';
 
 function App() {
   const dispatch = useDispatch()
@@ -72,14 +74,19 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
           <Route
             path="/profile"
             element={
               <ProtectedRoute>
-                <Profile />
+                <Nav />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<Profile />}/>
+            <Route path="/profile/orders" element={<Orders />}/>
+          </Route>
+
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
           <Route path='*' element={<NotFound404 />} />
           <Route path="/" element={
