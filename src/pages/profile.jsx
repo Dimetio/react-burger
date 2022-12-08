@@ -20,7 +20,11 @@ export default function Profile() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(updateUserAction(values))
+    if (values !== defaultValues) {
+      dispatch(updateUserAction(values))
+    } else {
+      console.log('данные не изменили, сделай тут тост по человечески')
+    }
   }
 
   useEffect(() => {
