@@ -1,75 +1,43 @@
+import { useDispatch } from 'react-redux'
+import { NavLink, Outlet } from 'react-router-dom'
+import { logoutAction } from '../services/actions'
 import styles from './page.module.css'
-import { Input, PasswordInput, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect, useState } from 'react';
-import { updateUserAction } from '../services/actions/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import useForm from '../hook/useForm'
 
-export default function Profile() {
+export default function ProfilePage () {
+  const activeClassName = styles.nav_item_active
+  const dispatch = useDispatch()
 
-  const dispatch = useDispatch();
-  const { values, handleChange, setValues } = useForm({ name: '', email: '', password: '' });
-  const [defaultValues, setDefaultValues] = useState({})
-
-  const user = useSelector(store => store.auth.user)
-
-  function handleResetValues(e) {
-    e.preventDefault();
-    setValues(defaultValues)
+  function onExit() {
+    dispatch(logoutAction())
   }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    if (values !== defaultValues) {
-      dispatch(updateUserAction(values))
-    } else {
-      console.log('данные не изменили, сделай тут тост по человечески')
-    }
-  }
-
-  useEffect(() => {
-    setDefaultValues(user);
-    setValues(user)
-  }, [setValues, user])
 
   return (
     <section className={styles.section_profile}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={'mb-6'}>
-          <Input
-            placeholder="Имя"
-            value={values.name || ''}
-            name="name"
-            onChange={handleChange}
-            icon={"EditIcon"}
-          />
-        </div>
-        <div className={'mb-6'}>
-          <EmailInput
-            value={values.email || ''}
-            name="email"
-            onChange={handleChange}
-            isIcon={true}
-          />
-        </div>
-        <div className={'mb-6'}>
-          <PasswordInput
-            value={values.password || ''}
-            name={"password"}
-            onChange={handleChange}
-            icon="EditIcon"
-          />
-        </div>
+      <nav className={styles.nav}>
+        <NavLink
+          to=''
+          end
+          className={({ isActive }) => `${styles.nav_item} text text_type_main-medium` + (isActive ? ` ${activeClassName}` : '')}
+        >
+          Профиль
+        </NavLink>
+        <NavLink
+          to='orders'
+          end
+          className={({ isActive }) => `${styles.nav_item} text text_type_main-medium` + (isActive ? ` ${activeClassName}` : '')}
+        >
+          История заказов
+        </NavLink>
 
-        <div className={styles.buttons}>
-          <Button htmlType="button" type="secondary" onClick={handleResetValues}>
-            Отмена
-          </Button>
-          <Button htmlType="submit" type="primary" size="medium">
-            Сохранить
-          </Button>
-        </div>
-      </form>
+        <div
+          onClick={onExit}
+          className={`${styles.nav_item} text text_type_main-medium`}
+        >Выход</div>
+
+        <p className={`${styles.nav_text} text text_type_main-default mt-20`}> В этом разделе вы можете изменить свои персональные данные</p>
+      </nav>
+
+      <Outlet />
     </section>
   )
 }

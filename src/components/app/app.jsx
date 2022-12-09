@@ -3,8 +3,10 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-Ingredients';
+import Orders from '../orders/orders';
+import Profile from '../profile/profile';
 // pages
-import { ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword, TargetIngredient } from '../../pages/index'
+import { ForgotPassword, Login, NotFound404, ProfilePage, Register, ResetPassword, TargetIngredient } from '../../pages/index'
 // styles
 import styles from './app.module.css';
 
@@ -16,8 +18,7 @@ import IngredientDetails from '../burger-ingredients/ingredient-details/ingredie
 import { useEffect } from 'react';
 import { getIngredients, getUserAction } from '../../services/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import Nav from '../nav/nav';
-import Orders from '../../pages/orders';
+
 
 function App() {
   const dispatch = useDispatch()
@@ -74,17 +75,17 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
+
           <Route
-            path="/profile"
+            path="/profile/*"
             element={
               <ProtectedRoute>
-                <Nav />
+                <ProfilePage />
               </ProtectedRoute>
             }
           >
-            <Route index element={<Profile />}/>
-            <Route path="/profile/orders" element={<Orders />}/>
+            <Route index element={<Profile />} />
+            <Route path="orders" element={<Orders />} />
           </Route>
 
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
