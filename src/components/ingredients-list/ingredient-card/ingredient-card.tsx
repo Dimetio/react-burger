@@ -54,8 +54,8 @@ const IngredientCard: FC<{ ingredient: TIngredient }> = ({ ingredient }) => {
   );
 };
 
-IngredientCard.propTypes = {
-  ingredient: ingredientPropTypes().isRequired,
-};
+// IngredientCard.propTypes = {
+//   ingredient: ingredientPropTypes().isRequired,
+// };
 
 export default IngredientCard;
