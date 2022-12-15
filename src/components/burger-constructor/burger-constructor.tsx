@@ -1,14 +1,20 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo, FC } from "react";
 // styles
-import styles from './burger-constructor.module.css';
+import styles from "./burger-constructor.module.css";
 // ui components
-import BurgerIngredientsList from '../burger-ingredients-list/burger-ingredients-list'
-import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients-list";
+import {
+  ConstructorElement,
+  CurrencyIcon,
+  Button,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 // popup
-import OrderDetails from './order-details/order-details';
-import Modal from '../modal/modal';
-import { useDispatch, useSelector } from 'react-redux';
-import { useDrop } from 'react-dnd';
+import OrderDetails from "./order-details/order-details";
+import Modal from "../modal/modal";
+import { useDispatch, useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+
+import { TIngredient } from "../../utils/types";
 
 // actions
 import {
@@ -16,27 +22,32 @@ import {
   clearIngredientConstructor,
   addBunsConstructor,
   getOrder,
-  getUserAction,
-} from '../../services/actions';
-import { useNavigate } from 'react-router-dom';
+} from "../../services/actions";
+import { useNavigate } from "react-router-dom";
 
 export default function BurgerConstructor() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { ingredients, bun } = useSelector(store => store.constructorIngredients);
-  const user = useSelector(store => store.auth.user)
+  // TODO fix any type
+  const { ingredients, bun } = useSelector(
+    (store: any) => store.constructorIngredients
+  );
+  const user = useSelector((store: any) => store.auth.user);
 
-  const burgerId = useMemo(() => {
-    const ingredientsId = ingredients.map(i => i._id)
+  const burgerId: Array<string> = useMemo(() => {
+    const ingredientsId = ingredients.map((i: { _id: string }) => i._id);
     const bunsId = bun?._id;
 
-    return [bunsId, ...ingredientsId]
-  }, [ingredients, bun])
+    return [bunsId, ...ingredientsId];
+  }, [ingredients, bun]);
 
+  // TODO fix any type
   const total = useMemo(() => {
-     return (bun ? bun.price * 2 : 0) + 
-     ingredients.reduce((acc, item) => acc + item.price, 0)
-  }, [bun, ingredients])
+    return (
+      (bun ? bun.price * 2 : 0) +
+      ingredients.reduce((acc: any, item: any) => acc + item.price, 0)
+    );
+  }, [bun, ingredients]);
 
   // popup
   const [isVisible, setIsVisible] = useState(false);
@@ -45,34 +56,34 @@ export default function BurgerConstructor() {
   function handleOpenModal() {
     // проверка на авторизацию
     if (!user) {
-      navigate('/login')
-      return
+      navigate("/login");
+      return;
     }
 
-    setIsVisible(true)
-    dispatch(getOrder(burgerId))
+    setIsVisible(true);
+    dispatch<any>(getOrder(burgerId));
   }
 
   // закрывашка
   function handleCloseModal() {
-    setIsVisible(false)
-    dispatch(clearIngredientConstructor())
+    setIsVisible(false);
+    dispatch(clearIngredientConstructor());
   }
 
-  const [{ isHover }, dropTargetRef] = useDrop({
-    accept: 'ingredient',
-    collect: monitor => ({
-      isHover: monitor.isOver(),
-    }),
-    drop(data) {
-      data.type === 'bun'
+  const [, dropTargetRef] = useDrop({
+    accept: "ingredient",
+    drop(data: { type: string }) {
+      data.type === "bun"
         ? dispatch(addBunsConstructor(data))
-        : dispatch(addIngredientConstructor(data))
-    }
-  })
+        : dispatch(addIngredientConstructor(data));
+    },
+  });
 
   return (
-    <section ref={dropTargetRef} className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}>
+    <section
+      ref={dropTargetRef}
+      className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}
+    >
       {bun ? (
         <>
           <article className={`${styles.bun} pl-8 pb-4`}>
@@ -100,7 +111,9 @@ export default function BurgerConstructor() {
           </article>
 
           <div className={`${styles.total} pt-10`}>
-            <p className="text text_type_digits-medium mr-10">{total} <CurrencyIcon type="primary" /></p>
+            <p className="text text_type_digits-medium mr-10">
+              {total} <CurrencyIcon type="primary" />
+            </p>
             <Button
               htmlType="button"
               type="primary"
@@ -112,10 +125,7 @@ export default function BurgerConstructor() {
           </div>
 
           {isVisible && (
-            <Modal
-              closeModal={handleCloseModal}
-              isOpened={isVisible}
-            >
+            <Modal closeModal={handleCloseModal} isOpened={isVisible}>
               <OrderDetails />
             </Modal>
           )}
@@ -124,5 +134,5 @@ export default function BurgerConstructor() {
         <p className="text text_type_main-medium">Сначала выберите булку</p>
       )}
     </section>
-  )
+  );
 }
