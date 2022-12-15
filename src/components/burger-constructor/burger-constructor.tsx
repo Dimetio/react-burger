@@ -12,7 +12,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 // popup
-import OrderDetails from "./order-details/order-details.js";
+import OrderDetails from "./order-details/order-details";
 import Modal from "../modal/modal";
 // types
 import { TIngredient } from "../../utils/types";
