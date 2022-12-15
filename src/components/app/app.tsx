@@ -25,16 +25,16 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation();
   const background = location.state && location.state.background;
-  const user = useSelector(store => store.auth.user)
+  const user = useSelector((store: any) => store.auth.user)
 
   function onDismiss() {
     navigate(-1)
   }
 
   useEffect(() => {
-    dispatch(getIngredients())
+    dispatch<any>(getIngredients())
     if (user) {
-      dispatch(getUserAction())
+      dispatch<any>(getUserAction())
     }
   }, [])
 
