@@ -35,22 +35,26 @@ export default function BurgerConstructor() {
   const user = useSelector((store: any) => store.auth.user);
 
   const burgerId: Array<string> = useMemo(() => {
-    const ingredientsId = ingredients.map((i: { _id: string }) => i._id);
-    const bunsId = bun?._id;
+    const ingredientsId: Array<string> = ingredients.map(
+      (i: { _id: string }) => i._id
+    );
+    const bunsId: string = bun?._id;
 
     return [bunsId, ...ingredientsId];
   }, [ingredients, bun]);
 
-  // TODO fix any type
-  const total = useMemo(() => {
+  const total: number = useMemo(() => {
     return (
       (bun ? bun.price * 2 : 0) +
-      ingredients.reduce((acc: any, item: any) => acc + item.price, 0)
+      ingredients.reduce(
+        (acc: number, item: TIngredient) => acc + item.price,
+        0
+      )
     );
   }, [bun, ingredients]);
 
   // popup
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   // открывашка
   function handleOpenModal() {
