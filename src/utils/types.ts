@@ -1,5 +1,4 @@
 export type TIngredient = {
-  map(arg0: (item: TIngredient) => JSX.Element): import("react").ReactNode;
   _id: string;
   calories: number;
   carbohydrates: number;
@@ -16,5 +15,5 @@ export type TIngredient = {
 
 export type TIngredientList = {
   title: string;
-  ingredients: TIngredient;
+  ingredients: [TIngredient];
 };
