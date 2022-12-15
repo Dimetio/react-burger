@@ -1,4 +1,7 @@
-import { useState, useMemo, FC } from "react";
+import { useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDrop } from "react-dnd";
 // styles
 import styles from "./burger-constructor.module.css";
 // ui components
@@ -11,9 +14,7 @@ import {
 // popup
 import OrderDetails from "./order-details/order-details";
 import Modal from "../modal/modal";
-import { useDispatch, useSelector } from "react-redux";
-import { useDrop } from "react-dnd";
-
+// types
 import { TIngredient } from "../../utils/types";
 
 // actions
@@ -23,7 +24,6 @@ import {
   addBunsConstructor,
   getOrder,
 } from "../../services/actions";
-import { useNavigate } from "react-router-dom";
 
 export default function BurgerConstructor() {
   const navigate = useNavigate();
@@ -35,9 +35,7 @@ export default function BurgerConstructor() {
   const user = useSelector((store: any) => store.auth.user);
 
   const burgerId: Array<string> = useMemo(() => {
-    const ingredientsId: Array<string> = ingredients.map(
-      (i: { _id: string }) => i._id
-    );
+    const ingredientsId = ingredients.map((i: TIngredient) => i._id);
     const bunsId: string = bun?._id;
 
     return [bunsId, ...ingredientsId];
