@@ -7,7 +7,7 @@ type TInput = {
   placeholder?: string;
   icon?: keyof TICons;
   onIconClick: () => void;
-  type?: "text" | "email" | "password" | undefined;
+  type?: "text" | "email" | "password";
   handleChange: () => void;
   value?: string;
 };

@@ -1,11 +1,12 @@
 import { FormEvent } from "react";
 import Form from "../components/form/form";
-import { InputComponent } from "../components/form/input/input";
 import { CustomLink } from "../components/form/link/link";
 import styles from "./page.module.css";
 import { forgotPassword } from "../utils/api";
 import useForm from "../hook/useForm";
 import { useNavigate } from "react-router-dom";
+
+import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export default function ForgotPassword() {
   const { values, handleChange } = useForm();
@@ -32,13 +33,16 @@ export default function ForgotPassword() {
         buttonText={"Восстановить"}
         handleSubmit={handleSubmit}
       >
-        <InputComponent
-          name={"email"}
-          placeholder={"Укажите e-mail"}
-          type={"email"}
-          handleChange={handleChange}
-          value={values.email}
-        />
+        <div className="mb-6">
+          <Input
+            type={"email"}
+            placeholder={"Укажите e-mail"}
+            onChange={handleChange}
+            icon={"CurrencyIcon"}
+            value={values.email}
+            name={"email"}
+          />
+        </div>
       </Form>
 
       <CustomLink
