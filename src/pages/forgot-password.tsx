@@ -39,7 +39,7 @@ export default function ForgotPassword() {
             placeholder={"Укажите e-mail"}
             onChange={handleChange}
             icon={"CurrencyIcon"}
-            value={values.email}
+            value={values.email || ''}
             name={"email"}
           />
         </div>
