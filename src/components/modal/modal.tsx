@@ -1,16 +1,11 @@
-import { useEffect, FC, ReactNode } from "react";
+import { useEffect, FC } from "react";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./modal.module.css";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import PropTypes from "prop-types";
-
-type TModalProps = {
-  children: ReactNode;
-  title?: string;
-  closeModal: () => void;
-  isOpened: boolean;
-};
+//types
+import { TModalProps } from "../../utils/types";
 
 const modalRoot = document.getElementById("modal");
 

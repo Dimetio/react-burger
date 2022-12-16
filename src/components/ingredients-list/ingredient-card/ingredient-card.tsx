@@ -7,7 +7,7 @@ import {
 import ingredientPropTypes from "../../../utils/prop-types";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
-
+// types
 import { TIngredient } from "../../../utils/types";
 
 const IngredientCard: FC<{ ingredient: TIngredient }> = ({ ingredient }) => {
@@ -54,8 +54,8 @@ const IngredientCard: FC<{ ingredient: TIngredient }> = ({ ingredient }) => {
   );
 };
 
-// IngredientCard.propTypes = {
-//   ingredient: ingredientPropTypes().isRequired,
-// };
+IngredientCard.propTypes = {
+  ingredient: ingredientPropTypes().isRequired,
+};
 
 export default IngredientCard;

@@ -1,12 +1,12 @@
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import IngredientDetails from '../components/burger-ingredients/ingredient-details/ingredient-details'
-import styles from './page.module.css'
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import IngredientDetails from "../components/burger-ingredients/ingredient-details/ingredient-details";
+import styles from "./page.module.css";
 
 export default function TargetIngredient() {
-  const { id } = useParams()
-  const { ingredients } = useSelector(store => store.ingredients)
-  const ingredient = ingredients.find(item => item._id === id)
+  const { id } = useParams();
+  const { ingredients } = useSelector((store) => store.ingredients);
+  const ingredient = ingredients.find((item) => item._id === id);
 
   return (
     ingredient && (
@@ -15,5 +15,5 @@ export default function TargetIngredient() {
         <IngredientDetails ingredient={ingredient} />
       </section>
     )
-  )
+  );
 }

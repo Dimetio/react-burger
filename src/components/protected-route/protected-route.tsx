@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { getUserAction } from "../../services/actions/auth";
 import { getCookie } from "../../utils/cookie";
-
-type TProtected = {
-  children: JSX.Element;
-  anonymous?: boolean;
-};
+// types
+import { TProtected } from "../../utils/types";
 
 const ProtectedRoute: FC<TProtected> = ({ children, anonymous = false }) => {
   const user = useSelector((store: any) => store.auth.user);

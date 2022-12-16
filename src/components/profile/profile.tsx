@@ -1,27 +1,26 @@
-import { FC, FormEvent, MouseEvent } from "react";
-
+import { FormEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+//styles
 import styles from "./profile.module.css";
+// ui components
 import {
   Input,
   PasswordInput,
   EmailInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from "react";
+//actions
 import { updateUserAction } from "../../services/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+// hooks
 import useForm from "../../hook/useForm";
-
-type TForm = {
-  name: string;
-  email: string;
-  password: string;
-};
+// interfaces
+import { IForm } from "../../utils/interfaces";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const { values, handleChange, setValues } = useForm();
-  const [defaultValues, setDefaultValues] = useState<TForm>({
+  const [defaultValues, setDefaultValues] = useState<IForm>({
     name: "",
     email: "",
     password: "",
