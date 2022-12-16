@@ -1,10 +1,10 @@
-import { FormEvent } from "react";
+import { FormEvent, ReactNode } from "react";
 import styles from "./form.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 type TFormProps = {
   title: string;
-  children: JSX.Element;
+  children: ReactNode;
   buttonText: string;
   handleSubmit: (e: FormEvent) => void;
 };

@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Form from "../components/form/form";
-import {InputComponent} from "../components/form/input/input";
 import { CustomLink } from "../components/form/link/link";
 import styles from "./page.module.css";
 import useForm from "../hook/useForm";
 import { useNavigate } from "react-router-dom";
 import { resetPassword } from "../utils/api";
+
+import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export default function ResetPassword() {
   const { values, handleChange } = useForm();
@@ -16,7 +17,7 @@ export default function ResetPassword() {
     setShowPassword(!showPassord);
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     resetPassword(values.password, values.code)
@@ -45,23 +46,29 @@ export default function ResetPassword() {
         buttonText={"Сохранить"}
         handleSubmit={handleSubmit}
       >
-        <InputComponent
-          name={"password"}
-          placeholder={"Введите новый пароль"}
-          icon={showPassord ? "HideIcon" : "ShowIcon"}
-          onIconClick={onIconClick}
-          type={showPassord ? "text" : "password"}
-          handleChange={handleChange}
-          value={values.password}
-        />
+        <div className="mb-6">
+          <Input
+            name={"password"}
+            type={showPassord ? "text" : "password"}
+            placeholder={"Введите новый пароль"}
+            onChange={handleChange}
+            icon={showPassord ? "HideIcon" : "ShowIcon"}
+            value={values.password || ""}
+            onIconClick={onIconClick}
+          />
+        </div>
 
-        <InputComponent
-          name={"code"}
-          placeholder={"Введите код из письма"}
-          type={"text"}
-          handleChange={handleChange}
-          value={values.code}
-        />
+        <div className="mb-6">
+          <Input
+            name={"code"}
+            placeholder={"Введите код из письма"}
+            type={"text"}
+            onChange={handleChange}
+            icon={showPassord ? "HideIcon" : "ShowIcon"}
+            value={values.code || ""}
+            onIconClick={onIconClick}
+          />
+        </div>
       </Form>
 
       <CustomLink
