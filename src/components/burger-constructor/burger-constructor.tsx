@@ -99,7 +99,7 @@ export default function BurgerConstructor() {
           </article>
 
           <ul className={`${styles.ingredients}`}>
-            <BurgerIngredientsList ingredients={ingredients} />
+            <BurgerIngredientsList />
           </ul>
 
           <article className={`${styles.bun} pl-8 pt-4`}>

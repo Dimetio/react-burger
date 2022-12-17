@@ -17,8 +17,10 @@ export type TIngredient = {
 
 export type TIngredientList = {
   title: string;
-  ingredients: [TIngredient];
+  ingredients: TIngredient[];
 };
+
+export type TConstructorIngredient = TIngredient & { _dndid: string };
 
 export type TLink = {
   text: string;
