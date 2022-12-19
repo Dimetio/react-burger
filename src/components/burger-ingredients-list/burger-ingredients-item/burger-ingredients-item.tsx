@@ -7,10 +7,8 @@ import {
 import { useDispatch } from "react-redux";
 import { deleteIngredientConstructor } from "../../../services/actions";
 import { useDrag, useDrop } from "react-dnd";
-import ingredientPropTypes from "../../../utils/prop-types";
-//import { PropTypes } from "prop-types";
 
-import { TConstructorIngredient, TIngredient } from "../../../utils/types";
+import { TConstructorIngredient } from "../../../utils/types";
 
 type TItemsProps = {
   item: TConstructorIngredient;
@@ -95,9 +93,3 @@ export default function BurgerIngredientsItem({
     </div>
   );
 }
-
-// BurgerIngredientsItem.propTypes = {
-//   item: ingredientPropTypes().isRequired,
-//   index: PropTypes.number.isRequired,
-//   moveCard: PropTypes.func.isRequired,
-// };

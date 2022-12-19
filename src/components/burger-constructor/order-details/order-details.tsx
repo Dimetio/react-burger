@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Preloader from "../../preloader/preloader";
 
 export default function OrderDetails() {
+  // TODO fix any type
   const { order } = useSelector((store: any) => store.order);
   const { isLoading } = useSelector((store: any) => store.order);
 

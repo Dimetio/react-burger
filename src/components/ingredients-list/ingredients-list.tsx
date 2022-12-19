@@ -1,13 +1,11 @@
 import React from "react";
 import styles from "./ingredients-list.module.css";
 import IngredientCard from "./ingredient-card/ingredient-card";
-import PropTypes from "prop-types";
-import ingredientPropTypes from "../../utils/prop-types";
 import { Link, useLocation } from "react-router-dom";
 
-import { TIngredientList, TIngredient } from "../../utils/types";
+import { TIngredientListProps, TIngredient } from "../../utils/types";
 
-const IngredientsList = React.forwardRef<HTMLDivElement, TIngredientList>(
+const IngredientsList = React.forwardRef<HTMLDivElement, TIngredientListProps>(
   ({ title, ingredients }, ref) => {
     const location = useLocation();
     return (
@@ -30,10 +28,5 @@ const IngredientsList = React.forwardRef<HTMLDivElement, TIngredientList>(
     );
   }
 );
-
-// ingredientPropTypes.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   ingredients: PropTypes.arrayOf(ingredientPropTypes()).isRequired,
-// };
 
 export default IngredientsList;

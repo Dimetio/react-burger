@@ -1,5 +1,5 @@
-import styles from './preloader.module.css'
-import preloader from '../../images/preloader.svg'
+import styles from "./preloader.module.css";
+import preloader from "../../images/preloader.svg";
 
 export default function Preloader() {
   return (
@@ -10,5 +10,5 @@ export default function Preloader() {
         alt="Загрузка..."
       />
     </div>
-  )
+  );
 }

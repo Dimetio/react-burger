@@ -1,4 +1,4 @@
-import { useEffect, FC } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { getUserAction } from "../../services/actions/auth";
@@ -6,7 +6,10 @@ import { getCookie } from "../../utils/cookie";
 // types
 import { TProtected } from "../../utils/types";
 
-const ProtectedRoute: FC<TProtected> = ({ children, anonymous = false }) => {
+export default function ProtectedRoute({
+  children,
+  anonymous = false,
+}: TProtected): JSX.Element {
   const user = useSelector((store: any) => store.auth.user);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -30,6 +33,4 @@ const ProtectedRoute: FC<TProtected> = ({ children, anonymous = false }) => {
   }
 
   return children;
-};
-
-export default ProtectedRoute;
+}

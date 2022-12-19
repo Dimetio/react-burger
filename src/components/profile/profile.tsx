@@ -17,7 +17,7 @@ import useForm from "../../hook/useForm";
 // interfaces
 import { IForm } from "../../utils/interfaces";
 
-export default function Profile() {
+export default function Profile(): JSX.Element {
   const dispatch = useDispatch();
   const { values, handleChange, setValues } = useForm();
   const [defaultValues, setDefaultValues] = useState<IForm>({

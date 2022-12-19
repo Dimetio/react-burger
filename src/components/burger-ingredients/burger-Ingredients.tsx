@@ -9,6 +9,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { TIngredient } from "../../utils/types";
 
 export default function BurgerIngredients() {
+  // TODO fix any type
   const { ingredients } = useSelector((store: any) => store.ingredients);
 
   const buns = useMemo(

@@ -1,16 +1,15 @@
-import { useMemo, FC } from "react";
+import { useMemo } from "react";
 import styles from "./ingredient-card.module.css";
 import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import ingredientPropTypes from "../../../utils/prop-types";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 // types
-import { TIngredient } from "../../../utils/types";
+import { TIngrdientCardProps } from "../../../utils/types";
 
-const IngredientCard: FC<{ ingredient: TIngredient }> = ({ ingredient }) => {
+const IngredientCard = ({ ingredient }: TIngrdientCardProps): JSX.Element => {
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: ingredient,
@@ -52,10 +51,6 @@ const IngredientCard: FC<{ ingredient: TIngredient }> = ({ ingredient }) => {
       </p>
     </div>
   );
-};
-
-IngredientCard.propTypes = {
-  ingredient: ingredientPropTypes().isRequired,
 };
 
 export default IngredientCard;

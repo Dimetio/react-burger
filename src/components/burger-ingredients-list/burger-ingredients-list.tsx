@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BurgerIngredientsItem from "./burger-ingredients-item/burger-ingredients-item";
 import { updateIngredientConstructor } from "../../services/actions";
@@ -6,6 +6,7 @@ import { updateIngredientConstructor } from "../../services/actions";
 import { TConstructorIngredient } from "../../utils/types";
 
 export default function BurgerIngredientsList(): JSX.Element {
+  // TODO fix any type
   const { ingredients } = useSelector(
     (store: any) => store.constructorIngredients
   );
@@ -25,11 +26,7 @@ export default function BurgerIngredientsList(): JSX.Element {
 
   return ingredients.map((item: TConstructorIngredient, index: number) => (
     <li key={item._dndid}>
-      <BurgerIngredientsItem
-        item={item}
-        index={index}
-        moveCard={moveCard}
-      />
+      <BurgerIngredientsItem item={item} index={index} moveCard={moveCard} />
     </li>
   ));
 }

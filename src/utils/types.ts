@@ -15,7 +15,11 @@ export type TIngredient = {
   __v: number;
 };
 
-export type TIngredientList = {
+export type TIngrdientCardProps = {
+  ingredient: TIngredient;
+};
+
+export type TIngredientListProps = {
   title: string;
   ingredients: TIngredient[];
 };
