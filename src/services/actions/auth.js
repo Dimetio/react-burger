@@ -49,7 +49,7 @@ export function registerAction(state) {
           type: REGISTER_ERROR,
         })
       })
-  }
+  }   
 }
 
 export function loginAction(state) {
