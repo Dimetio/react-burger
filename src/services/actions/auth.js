@@ -3,7 +3,7 @@ import * as api from '../../utils/api';
 import {
   deleteCookie,
   setCookie
-} from '../../utils/cookie.js';
+} from '../../utils/cookie.ts';
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -49,7 +49,7 @@ export function registerAction(state) {
           type: REGISTER_ERROR,
         })
       })
-  }
+  }   
 }
 
 export function loginAction(state) {

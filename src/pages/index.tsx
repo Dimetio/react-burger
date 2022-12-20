@@ -3,8 +3,8 @@ import NotFound404 from './not-found'
 import ForgotPassword from './forgot-password'
 import Login from './login'
 import ResetPassword from './reset-password'
-import Profile from './profile'
-import TargetIngredient from './target-ingredient' 
+import ProfilePage from './profile'
+import TargetIngredient from './target-ingredient'
 
 export {
   NotFound404,
@@ -12,6 +12,6 @@ export {
   ForgotPassword,
   Login,
   ResetPassword,
-  Profile,
+  ProfilePage,
   TargetIngredient,
 }

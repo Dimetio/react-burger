@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export default function ingredientPropTypes() {
   return PropTypes.shape({
@@ -14,5 +14,5 @@ export default function ingredientPropTypes() {
     proteins: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     __v: PropTypes.number.isRequired,
-  })
+  });
 }
