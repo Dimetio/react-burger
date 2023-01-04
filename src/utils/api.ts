@@ -3,7 +3,11 @@ import {
   TUser,
   TUserResponse,
   TRefreshTokenResponse,
-  resetPasswordRequest,
+  TResetPasswordRequest,
+  TGetOrder,
+  TGetBurgers,
+  TUserUpdate,
+  TUserLogout,
 } from "./types";
 
 const BASE_URL = "https://norma.nomoreparties.space/api";
@@ -60,11 +64,11 @@ function fetchWithRefresh<T>(url: string, options: RequestInit): Promise<T> {
   });
 }
 
-export const getBurgers = () => {
+export const getBurgers = (): Promise<TGetBurgers> => {
   return request(`${BASE_URL}/ingredients`);
 };
 
-export const getOrder = (ingredientsId: number[]) => {
+export const getOrder = (ingredientsId: number[]): Promise<TGetOrder> => {
   return request(`${BASE_URL}/orders`, {
     method: "POST",
     headers: {
@@ -79,7 +83,7 @@ export const getOrder = (ingredientsId: number[]) => {
 
 export const forgotPassword = (
   email: string
-): Promise<resetPasswordRequest> => {
+): Promise<TResetPasswordRequest> => {
   return request(`${BASE_URL}/password-reset`, {
     method: "POST",
     headers: {
@@ -94,7 +98,7 @@ export const forgotPassword = (
 export const resetPassword = (
   password: string,
   code: string
-): Promise<resetPasswordRequest> => {
+): Promise<TResetPasswordRequest> => {
   return request(`${BASE_URL}/password-reset/reset`, {
     method: "POST",
     headers: {
@@ -136,7 +140,7 @@ export const signin = (
   });
 };
 
-export const logout = () => {
+export const logout = (): Promise<TUserLogout> => {
   return request(`${BASE_URL}/auth/logout`, {
     method: "POST",
     headers: {
@@ -158,7 +162,7 @@ export const getUser = (): Promise<TUserResponse> => {
   });
 };
 
-export const updateUser = (data: TUser) => {
+export const updateUser = (data: TUser): Promise<TUserUpdate> => {
   return fetchWithRefresh(`${BASE_URL}/auth/user`, {
     method: "PATCH",
     headers: {
