@@ -2,15 +2,26 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_ERROR,
-} from '../actions/order'
+} from "../constans/order";
 
-const initialState = {
+import { TOrderActions } from "../actions/order";
+
+type TInitialState = {
+  order: null | number;
+  isLoading: boolean;
+  hasError: boolean;
+};
+
+const initialState: TInitialState = {
   order: null,
   isLoading: false,
   hasError: false,
-}
+};
 
-export default function orderReducer(state = initialState, action) {
+export default function orderReducer(
+  state = initialState,
+  action: TOrderActions
+): TInitialState {
   switch (action.type) {
     case GET_ORDER_REQUEST:
       return {
