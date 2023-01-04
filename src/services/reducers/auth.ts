@@ -8,76 +8,89 @@ import {
   GET_USER_SUCCESS,
   GET_USER_ERROR,
   AUTH_CHECKED,
-} from '../actions/auth'
+} from "../constans/auth";
 
-const initialState = {
+import { TUser } from "../../utils/types";
+import { TAuthActions } from "../actions/auth";
+
+type TInitialState = {
+  user: null | TUser;
+  isAuth: boolean;
+  isLoading: boolean;
+  hasError: boolean;
+};
+
+const initialState: TInitialState = {
   user: null,
   isAuth: false,
   isLoading: false,
-  hasError: false
-}
+  hasError: false,
+};
 
-export default function authReducer(state = initialState, action) {
+export default function authReducer(
+  state = initialState,
+  action: TAuthActions
+): TInitialState {
   switch (action.type) {
     case REGISTER_SUCCESS: {
       return {
         ...state,
         user: action.user,
-        isAuth: true
-      }
+        isAuth: true,
+      };
     }
     case REGISTER_ERROR: {
       return {
         ...state,
-        isAuth: false
-      }
+        isAuth: false,
+      };
     }
     case LOGIN_SUCCESS: {
       return {
         ...state,
         user: action.user,
-        isAuth: true
-      }
+        isAuth: true,
+      };
     }
     case LOGOUT: {
       return {
         ...state,
         user: null,
         isAuth: false,
-      }
+      };
     }
     case GET_USER_REQUEST: {
       return {
         ...state,
         isLoading: true,
-      }
+      };
     }
     case GET_USER_SUCCESS: {
       return {
         ...state,
         user: action.user,
         isLoading: false,
-        hasError: false
-      }
+        hasError: false,
+      };
     }
     case UPDATE_USER_SUCCESS: {
       return {
         ...state,
         user: action.user,
-      }
+      };
     }
     case GET_USER_ERROR: {
       return {
         ...state,
         isLoading: false,
         hasError: true,
-      }
+      };
     }
     case AUTH_CHECKED: {
       return {
         ...state,
-        isAuth: true
-      }
+        isAuth: true,
+      };
     }
     default: {
       return state;
