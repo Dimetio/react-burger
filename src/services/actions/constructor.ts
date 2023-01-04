@@ -35,7 +35,7 @@ type TAddBunsConstructor = {
   readonly data: TIngredient;
 };
 
-export type TConstructorACtions =
+export type TConstructorActions =
   | TAddIngredientConstructor
   | TDeleteIngredientConstructor
   | TUpdateIngredientConstructor
