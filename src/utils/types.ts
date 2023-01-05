@@ -15,7 +15,7 @@ export type TIngredient = {
   __v: number;
 };
 
-export type TIngrdientCardProps = {
+export type TIngredientCardProps = {
   ingredient: TIngredient;
 };
 
@@ -94,7 +94,7 @@ export type TResetPasswordRequest = {
 // get oreder
 export type TGetOrder = {
   order: {
-    number: number;
+    number: string;
   };
 };
 
