@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useNavigate } from "react-router-dom";
 import { useDrop } from "react-dnd";
 // styles
@@ -15,7 +15,7 @@ import {
 import OrderDetails from "./order-details/order-details";
 import Modal from "../modal/modal";
 // types
-import { TIngredient } from "../../utils/types";
+import { TIngredient, TConstructorIngredient } from "../../utils/types";
 
 // actions
 import {
@@ -30,11 +30,11 @@ export default function BurgerConstructor() {
   const dispatch = useDispatch();
   // TODO fix any type
   const { ingredients, bun } = useSelector(
-    (store: any) => store.constructorIngredients
+    (store) => store.constructorIngredients
   );
-  const user = useSelector((store: any) => store.auth.user);
+  const user = useSelector((store) => store.auth.user);
 
-  const burgerId: Array<string> = useMemo(() => {
+  const burgerId: string[] = useMemo(() => {
     const ingredientsId = ingredients.map((i: TIngredient) => i._id);
     const bunsId: string = bun?._id;
 
@@ -63,7 +63,7 @@ export default function BurgerConstructor() {
     }
 
     setIsVisible(true);
-    dispatch<any>(getOrder(burgerId));
+    dispatch(getOrder(burgerId));
   }
 
   // закрывашка
@@ -74,7 +74,7 @@ export default function BurgerConstructor() {
 
   const [, dropTargetRef] = useDrop({
     accept: "ingredient",
-    drop(data: { type: string }) {
+    drop(data: TConstructorIngredient) {
       data.type === "bun"
         ? dispatch(addBunsConstructor(data))
         : dispatch(addIngredientConstructor(data));
