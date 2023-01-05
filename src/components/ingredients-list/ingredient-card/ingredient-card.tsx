@@ -5,11 +5,11 @@ import {
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/hooks";
 // types
-import { TIngrdientCardProps } from "../../../utils/types";
+import { TIngredientCardProps } from "../../../utils/types";
 
-const IngredientCard = ({ ingredient }: TIngrdientCardProps): JSX.Element => {
+const IngredientCard = ({ ingredient }: TIngredientCardProps): JSX.Element => {
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: ingredient,
@@ -17,7 +17,7 @@ const IngredientCard = ({ ingredient }: TIngrdientCardProps): JSX.Element => {
 
   // TODO fix any type
   const { ingredients, bun } = useSelector(
-    (store: any) => store.constructorIngredients
+    (store) => store.constructorIngredients
   );
 
   const counter: number = useMemo(() => {
