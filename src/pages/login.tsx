@@ -4,7 +4,7 @@ import { CustomLink } from "../components/form/link/link";
 import styles from "./page.module.css";
 import useForm from "../hook/useForm";
 import { loginAction } from "../services/actions/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../services/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -22,7 +22,7 @@ export default function Login() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    dispatch<any>(loginAction(values));
+    dispatch(loginAction(values as { email: string; password: string }));
     navigate(location.state?.from || "/");
     console.log("добавить тост на успех авторизации");
   }
