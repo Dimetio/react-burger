@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../services/hooks";
 import { NavLink, Outlet } from "react-router-dom";
 import { logoutAction } from "../services/actions";
 import styles from "./page.module.css";
@@ -8,7 +8,7 @@ export default function ProfilePage() {
   const dispatch = useDispatch();
 
   function onExit() {
-    dispatch<any>(logoutAction());
+    dispatch(logoutAction());
   }
 
   return (
