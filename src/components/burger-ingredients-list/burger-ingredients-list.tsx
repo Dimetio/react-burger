@@ -1,15 +1,12 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import BurgerIngredientsItem from "./burger-ingredients-item/burger-ingredients-item";
 import { updateIngredientConstructor } from "../../services/actions";
 
 import { TConstructorIngredient } from "../../utils/types";
 
 export default function BurgerIngredientsList(): JSX.Element {
-  // TODO fix any type
-  const { ingredients } = useSelector(
-    (store: any) => store.constructorIngredients
-  );
+  const { ingredients } = useSelector((store) => store.constructorIngredients);
   const dispatch = useDispatch();
 
   const moveCard = useCallback(
