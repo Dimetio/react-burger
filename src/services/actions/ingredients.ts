@@ -28,12 +28,12 @@ export type TIngredientsActons =
   | TGetIngredientsSuccess
   | TGetIngredientsError;
 
-export const getIngredients = () => {
+export const getIngredients = (): AppThunk => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_INGREDIENTS_REQUEST,
     });
-    getBurgers() 
+    getBurgers()
       .then((data) => {
         dispatch({
           type: GET_INGREDIENTS_SUCCESS,

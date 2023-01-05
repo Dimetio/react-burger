@@ -99,7 +99,7 @@ export type TAuthActions =
   | TUpdateUserErrorAction
   | TAuthCheckedAction;
 
-export const registerAction: AppThunk = (state: TUser) => {
+export const registerAction = (state: TUser): AppThunk => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: REGISTER_REQUEST,
@@ -127,9 +127,9 @@ export const registerAction: AppThunk = (state: TUser) => {
   };
 };
 
-export const loginAction: AppThunk = (
+export const loginAction = (
   state: Pick<TUser, "email" | "password">
-) => {
+): AppThunk => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: LOGIN_REQUSET,
@@ -156,7 +156,7 @@ export const loginAction: AppThunk = (
   };
 };
 
-export const logoutAction: AppThunk = () => {
+export const logoutAction = (): AppThunk => {
   return function (dispatch: AppDispatch) {
     api
       .logout()
@@ -175,7 +175,7 @@ export const logoutAction: AppThunk = () => {
   };
 };
 
-export const getUserAction: AppThunk = () => {
+export const getUserAction = (): AppThunk => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_USER_REQUEST,
@@ -199,7 +199,7 @@ export const getUserAction: AppThunk = () => {
   };
 };
 
-export const updateUserAction: AppThunk = (state) => {
+export const updateUserAction = (state: TUser): AppThunk => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_USER_REQUEST,
@@ -224,7 +224,7 @@ export const updateUserAction: AppThunk = (state) => {
   };
 };
 
-export const authCheckedAction: AppThunk = () => {
+export const authCheckedAction = (): AppThunk => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: AUTH_CHECKED,
