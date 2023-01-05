@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 //styles
 import styles from "./burger-Ingredients.module.css";
 // components
@@ -10,18 +10,18 @@ import { TIngredient } from "../../utils/types";
 
 export default function BurgerIngredients() {
   // TODO fix any type
-  const { ingredients } = useSelector((store: any) => store.ingredients);
+  const { ingredients } = useSelector((store) => store.ingredients);
 
   const buns = useMemo(
-    () => ingredients.filter((item: TIngredient) => item.type === "bun"),
+    () => ingredients?.filter((item: TIngredient) => item.type === "bun"),
     [ingredients]
   );
   const mains = useMemo(
-    () => ingredients.filter((item: TIngredient) => item.type === "main"),
+    () => ingredients?.filter((item: TIngredient) => item.type === "main"),
     [ingredients]
   );
   const sauces = useMemo(
-    () => ingredients.filter((item: TIngredient) => item.type === "sauce"),
+    () => ingredients?.filter((item: TIngredient) => item.type === "sauce"),
     [ingredients]
   );
 
