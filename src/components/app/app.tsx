@@ -25,23 +25,23 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
 import { useEffect } from "react";
 import { getIngredients, getUserAction } from "../../services/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state && location.state.background;
-  const user = useSelector((store: any) => store.auth.user);
+  const user = useSelector((store) => store.auth.user);
 
   function onDismiss() {
     navigate(-1);
   }
 
   useEffect(() => {
-    dispatch<any>(getIngredients());
+    dispatch(getIngredients());
     if (user) {
-      dispatch<any>(getUserAction());
+      dispatch(getUserAction());
     }
   }, []);
 
