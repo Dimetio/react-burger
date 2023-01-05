@@ -1,6 +1,6 @@
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/hooks";
 // types
 import { TIngredient } from "../../../utils/types";
 
@@ -9,9 +9,9 @@ export default function IngredientDetails() {
   const { id } = useParams<"id">();
   // забираю ингредиенты из стора
   // TODO fix any type
-  const { ingredients } = useSelector((store: any) => store.ingredients);
+  const { ingredients } = useSelector((store) => store.ingredients);
   // нахожу нужный ингредиент
-  const ingredient = ingredients.find((i: TIngredient) => i._id === id);
+  const ingredient = ingredients?.find((i: TIngredient) => i._id === id);
 
   return (
     <article className={`${styles.wrap} ml-10 mr-10 mb-15`}>
