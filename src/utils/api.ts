@@ -68,7 +68,7 @@ export const getBurgers = (): Promise<TGetBurgers> => {
   return request(`${BASE_URL}/ingredients`);
 };
 
-export const getOrder = (ingredientsId: number[]): Promise<TGetOrder> => {
+export const getOrder = (ingredientsId: string[]): Promise<TGetOrder> => {
   return request(`${BASE_URL}/orders`, {
     method: "POST",
     headers: {

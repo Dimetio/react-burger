@@ -14,7 +14,7 @@ type TGetOrderRequset = {
 
 type TGetOrderSuccess = {
   readonly type: typeof GET_ORDER_SUCCESS;
-  order: number;
+  order: string;
 };
 
 type TGetOrderError = {
@@ -26,7 +26,7 @@ export type TOrderActions =
   | TGetOrderSuccess
   | TGetOrderError;
 
-export const getOrder: AppThunk = (ingredientsId: Array<number>) => {
+export const getOrder = (ingredientsId: string[]): AppThunk => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_ORDER_REQUEST,

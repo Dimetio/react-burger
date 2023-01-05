@@ -7,7 +7,7 @@ import {
 import { TOrderActions } from "../actions/order";
 
 type TInitialState = {
-  order: null | number;
+  order: null | string;
   isLoading: boolean;
   hasError: boolean;
 };
