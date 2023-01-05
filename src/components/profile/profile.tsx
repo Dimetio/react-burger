@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useEffect, useState } from "react";
 //styles
 import styles from "./profile.module.css";
@@ -26,7 +26,7 @@ export default function Profile(): JSX.Element {
     password: "",
   });
   // TODO fix any type
-  const user = useSelector((store: any) => store.auth.user);
+  const user = useSelector((store) => store.auth.user);
   // TODO fix any type
   function handleResetValues(e: any) {
     e.preventDefault();
@@ -36,15 +36,21 @@ export default function Profile(): JSX.Element {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (values !== defaultValues) {
-      dispatch<any>(updateUserAction(values));
+      dispatch(
+        updateUserAction(
+          values as { name: string; email: string; password: string }
+        )
+      );
     } else {
       console.log("данные не изменили, сделай тут тост по человечески");
     }
   }
 
   useEffect(() => {
-    setDefaultValues(user);
-    setValues(user);
+    if (user) {
+      setDefaultValues(user);
+      setValues(user);
+    }
   }, [setValues, user]);
 
   return (
