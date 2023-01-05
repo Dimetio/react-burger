@@ -4,7 +4,7 @@ import { CustomLink } from "../components/form/link/link";
 import styles from "./page.module.css";
 import useForm from "../hook/useForm";
 import { registerAction } from "../services/actions/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../services/hooks";
 
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -19,7 +19,11 @@ export default function Register() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    dispatch<any>(registerAction(values));
+    dispatch(
+      registerAction(
+        values as { name: string; email: string; password: string }
+      )
+    );
   }
 
   return (
