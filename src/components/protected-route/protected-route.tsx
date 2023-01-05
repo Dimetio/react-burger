@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { Navigate, useLocation } from "react-router-dom";
 import { getUserAction } from "../../services/actions/auth";
 import { getCookie } from "../../utils/cookie";
@@ -10,13 +10,13 @@ export default function ProtectedRoute({
   children,
   anonymous = false,
 }: TProtected): JSX.Element {
-  const user = useSelector((store: any) => store.auth.user);
+  const user = useSelector((store) => store.auth.user);
   const dispatch = useDispatch();
   const location = useLocation();
 
   useEffect(() => {
     if (getCookie("accessToken")) {
-      dispatch<any>(getUserAction());
+      dispatch(getUserAction());
     }
   }, [dispatch]);
 
