@@ -1,5 +1,3 @@
-import { v1 as random } from "uuid";
-
 import {
   ADD_INGREDIENT_CONSTRUCTOR,
   DELETE_INGREDIENT_CONSTRUCTOR,
@@ -13,7 +11,6 @@ import { TConstructorIngredient, TIngredient } from "../../utils/types";
 type TAddIngredientConstructor = {
   readonly type: typeof ADD_INGREDIENT_CONSTRUCTOR;
   readonly data: TConstructorIngredient;
-  readonly dndid: string;
 };
 
 type TDeleteIngredientConstructor = {
@@ -23,7 +20,7 @@ type TDeleteIngredientConstructor = {
 
 type TUpdateIngredientConstructor = {
   readonly type: typeof UPDATE_INGREDIENT_CONSTRUCTOR;
-  readonly data: TConstructorIngredient;
+  readonly payload: { dragIndex: number; hoverIndex: number };
 };
 
 type TClearIngredientConstructor = {
@@ -48,7 +45,6 @@ export const addIngredientConstructor = (
   return {
     type: ADD_INGREDIENT_CONSTRUCTOR,
     data,
-    dndid: random(),
   };
 };
 
@@ -62,11 +58,12 @@ export const deleteIngredientConstructor = (
 };
 
 export const updateIngredientConstructor = (
-  data: TConstructorIngredient
+  dragIndex: number,
+  hoverIndex: number
 ): TUpdateIngredientConstructor => {
   return {
     type: UPDATE_INGREDIENT_CONSTRUCTOR,
-    data,
+    payload: { dragIndex, hoverIndex },
   };
 };
 
