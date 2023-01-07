@@ -15,16 +15,13 @@ const IngredientCard = ({ ingredient }: TIngredientCardProps): JSX.Element => {
     item: ingredient,
   });
 
-  // TODO fix any type
   const { ingredients, bun } = useSelector(
     (store) => store.constructorIngredients
   );
 
   const counter: number = useMemo(() => {
     return ingredient.type !== "bun"
-      ? ingredients.filter(
-          (item: { id: string; _id: string }) => item._id === ingredient._id
-        ).length
+      ? ingredients.filter((item) => item._id === ingredient._id).length
       : bun?._id === ingredient._id
       ? 2
       : 0;

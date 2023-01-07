@@ -8,7 +8,6 @@ export default function IngredientDetails() {
   // забираю id из урла
   const { id } = useParams<"id">();
   // забираю ингредиенты из стора
-  // TODO fix any type
   const { ingredients } = useSelector((store) => store.ingredients);
   // нахожу нужный ингредиент
   const ingredient = ingredients?.find((i: TIngredient) => i._id === id);

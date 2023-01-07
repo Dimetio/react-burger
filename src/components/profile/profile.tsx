@@ -25,7 +25,6 @@ export default function Profile(): JSX.Element {
     email: "",
     password: "",
   });
-  // TODO fix any type
   const user = useSelector((store) => store.auth.user);
   // TODO fix any type
   function handleResetValues(e: any) {
