@@ -4,7 +4,7 @@ import {
   UPDATE_INGREDIENT_CONSTRUCTOR,
   CLEAR_INGREDIENT_CONSTRUCTOR,
   ADD_BUNS_CONSTRUCTOR,
-} from "../../services/constans/constructor";
+} from "../constans/constructor";
 
 import { TIngredient, TConstructorIngredient } from "../../utils/types";
 
@@ -12,7 +12,7 @@ import type { TConstructorActions } from "../actions/constructor";
 
 type TInitialState = {
   bun: TIngredient | null;
-  ingredients: ReadonlyArray<TConstructorIngredient>;
+  ingredients: TConstructorIngredient[];
 };
 
 const initialState: TInitialState = {
@@ -21,20 +21,14 @@ const initialState: TInitialState = {
 };
 
 export default function constructorReducer(
-  state = initialState,
+  state: TInitialState = initialState,
   action: TConstructorActions
 ) {
   switch (action.type) {
     case ADD_INGREDIENT_CONSTRUCTOR:
       return {
         ...state,
-        ingredients: [
-          ...state.ingredients,
-          {
-            ...action.data,
-            _dndid: action.dndid,
-          },
-        ],
+        ingredients: [...state.ingredients, action.data],
       };
     case DELETE_INGREDIENT_CONSTRUCTOR:
       return {
@@ -44,15 +38,20 @@ export default function constructorReducer(
         ),
       };
     case UPDATE_INGREDIENT_CONSTRUCTOR:
+      const { dragIndex, hoverIndex } = action.payload;
+      const dragCard = state.ingredients[dragIndex];
+      const newCards = [...state.ingredients];
+      newCards.splice(dragIndex, 1);
+      newCards.splice(hoverIndex, 0, dragCard);
       return {
         ...state,
-        ingredients: [...state.ingredients, { ...action.data }],
+        ingredients: newCards,
       };
     case CLEAR_INGREDIENT_CONSTRUCTOR:
       return {
         ...state,
         bun: null,
-        ingredients: [],
+        ingredients: [] as TConstructorIngredient[],
       };
     case ADD_BUNS_CONSTRUCTOR:
       return {
