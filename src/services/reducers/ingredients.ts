@@ -9,13 +9,13 @@ import { TIngredient } from "../../utils/types";
 import { TIngredientsActons } from "../actions/ingredients";
 
 type TInitialState = {
-  ingredients: null | ReadonlyArray<TIngredient>;
+  ingredients: TIngredient[];
   isLoading: boolean;
   hasError: boolean;
 };
 
 const initialState: TInitialState = {
-  ingredients: null,
+  ingredients: [],
   isLoading: false,
   hasError: false,
 };
@@ -34,11 +34,11 @@ export default function ingredientsReducer(
       return {
         ...state,
         isLoading: false,
-        ingredients: action.ingredients,
+        ingredients: [...action.ingredients],
       };
     case GET_INGREDIENTS_ERROR:
       return {
-        ingredients: null,
+        ingredients: [],
         isLoading: false,
         hasError: true,
       };
