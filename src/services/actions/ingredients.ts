@@ -16,7 +16,7 @@ type TGetIngredientsRequest = {
 
 type TGetIngredientsSuccess = {
   readonly type: typeof GET_INGREDIENTS_SUCCESS;
-  ingredients: ReadonlyArray<TIngredient>;
+  ingredients: TIngredient[];
 };
 
 type TGetIngredientsError = {
