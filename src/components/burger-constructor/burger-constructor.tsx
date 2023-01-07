@@ -15,7 +15,8 @@ import {
 import OrderDetails from "./order-details/order-details";
 import Modal from "../modal/modal";
 // types
-import { TIngredient, TConstructorIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
+import { v1 as uuid } from "uuid";
 
 // actions
 import {
@@ -28,15 +29,17 @@ import {
 export default function BurgerConstructor() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // TODO fix any type
   const { ingredients, bun } = useSelector(
     (store) => store.constructorIngredients
   );
   const user = useSelector((store) => store.auth.user);
 
   const burgerId: string[] = useMemo(() => {
+    if (bun === null || ingredients.length === null) {
+      return [];
+    }
     const ingredientsId = ingredients.map((i: TIngredient) => i._id);
-    const bunsId: string = bun?._id;
+    const bunsId: string = bun._id;
 
     return [bunsId, ...ingredientsId];
   }, [ingredients, bun]);
@@ -74,10 +77,10 @@ export default function BurgerConstructor() {
 
   const [, dropTargetRef] = useDrop({
     accept: "ingredient",
-    drop(data: TConstructorIngredient) {
+    drop(data: TIngredient) {
       data.type === "bun"
         ? dispatch(addBunsConstructor(data))
-        : dispatch(addIngredientConstructor(data));
+        : dispatch(addIngredientConstructor({ ...data, _dndid: uuid() }));
     },
   });
 
