@@ -13,7 +13,9 @@ const { CONNECTING, ONLINE, OFFLINE } = WebsocketStatus;
 const initialState: TWSState = {
   status: OFFLINE,
   orders: null,
-  connectionError: "",
+  total: null,
+  totalToday: null,
+  error: "",
 };
 
 export default function wsCommonReducer(
@@ -31,7 +33,7 @@ export default function wsCommonReducer(
       return {
         ...state,
         status: ONLINE,
-        connectionError: "",
+        error: "",
       };
 
     case WS_COMMON_CLOSE:
@@ -43,13 +45,15 @@ export default function wsCommonReducer(
     case WS_COMMON_ERROR:
       return {
         ...state,
-        connectionError: action.payload,
+        error: action.payload,
       };
 
     case WS_COMMON_MESSAGE:
       return {
         ...state,
-        orders: action.payload,
+        orders: action.payload.orders,
+        total: action.payload.total,
+        totalToday: action.payload.totalToday,
       };
 
     default:

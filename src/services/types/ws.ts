@@ -14,6 +14,8 @@ export enum WebsocketStatus {
 
 export type TWSState = {
   status: WebsocketStatus;
-  orders: TOrders | null;
-  connectionError: string;
+  orders: Array<TWSOrder> | null;
+  total: number | null;
+  totalToday: number | null;
+  error: string;
 };

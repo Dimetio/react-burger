@@ -13,7 +13,9 @@ const { CONNECTING, ONLINE, OFFLINE } = WebsocketStatus;
 const initialState: TWSState = {
   status: OFFLINE,
   orders: null,
-  connectionError: "",
+  total: null,
+  totalToday: null,
+  error: "",
 };
 
 export default function wsProfileReducer(
@@ -31,7 +33,7 @@ export default function wsProfileReducer(
       return {
         ...state,
         status: ONLINE,
-        connectionError: "",
+        error: "",
       };
 
     case WS_PROFILE_CLOSE:
@@ -43,13 +45,15 @@ export default function wsProfileReducer(
     case WS_PROFILE_ERROR:
       return {
         ...state,
-        connectionError: action.payload,
+        error: action.payload,
       };
 
     case WS_PROFILE_MESSAGE:
       return {
         ...state,
-        orders: action.payload,
+        orders: action.payload.orders,
+        total: action.payload.total,
+        totalToday: action.payload.totalToday,
       };
 
     default:

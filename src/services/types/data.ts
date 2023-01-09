@@ -107,8 +107,9 @@ export type TGetBurgers = {
 export type TWSOrder = {
   _id: string;
   ingredients: string[];
-  status: string;
+  name: string;
   number: string;
+  status: string;
   createdAt: string;
   updateAt: string;
 };
@@ -118,4 +119,8 @@ export type TWSOrders = {
   orders: TWSOrder[];
   total: number;
   totalToday: number;
+};
+
+export type TOrderProps = {
+  item: TWSOrder;
 };
