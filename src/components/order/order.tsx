@@ -35,8 +35,8 @@ export default function Order({ item }: TOrderProps): JSX.Element {
 
       <div className={styles.info}>
         <ul className={styles.order_preview}>
-          {items.map((ingredient) => (
-            <li className={styles.preview_item} key={ingredient._id}>
+          {items.map((ingredient, index) => (
+            <li className={styles.preview_item} key={index}>
               <img
                 className={styles.preview_img}
                 src={ingredient.image_mobile}

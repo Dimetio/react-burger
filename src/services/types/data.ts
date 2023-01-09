@@ -117,10 +117,16 @@ export type TWSOrder = {
 export type TWSOrders = {
   success: boolean;
   orders: TWSOrder[];
-  total: number;
-  totalToday: number;
+  total: number | null;
+  totalToday: number | null;
 };
 
 export type TOrderProps = {
   item: TWSOrder;
+};
+
+export type TOrdersTablo = {
+  orders: TWSOrder[];
+  total: number | null;
+  totalToday: number | null;
 };

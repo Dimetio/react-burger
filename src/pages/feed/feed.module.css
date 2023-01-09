@@ -17,7 +17,6 @@
   max-width: 50%;
   min-width: 600px;
   min-height: 400px;
-  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -37,7 +36,7 @@
   flex-direction: column;
   flex: 1 1 0px;
   cursor: pointer;
-  background: #1C1C21;
+  background: #1c1c21;
   border-radius: 40px;
   transition: background-color 0.2s ease;
   z-index: 1;
