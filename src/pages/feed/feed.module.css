@@ -15,8 +15,6 @@
   box-sizing: border-box;
   flex: 0 1 600px;
   max-width: 50%;
-  min-width: 600px;
-  min-height: 400px;
   overflow: hidden;
 }
 
