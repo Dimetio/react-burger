@@ -3,7 +3,6 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-Ingredients";
-import Orders from "../orders/orders";
 import Profile from "../profile/profile";
 // pages
 import {
@@ -93,8 +92,9 @@ function App() {
             }
           >
             <Route index element={<Profile />} />
-            <Route path="orders" element={<Orders />} />
           </Route>
+
+          <Route path="/feed" element={<Feed />} />
 
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
           <Route path="*" element={<NotFound404 />} />
@@ -107,8 +107,6 @@ function App() {
               </DndProvider>
             }
           />
-
-          <Route path="/feed" element={<Feed />} />
         </Routes>
 
         {background && (
