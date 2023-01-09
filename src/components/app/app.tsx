@@ -14,6 +14,7 @@ import {
   Register,
   ResetPassword,
   TargetIngredient,
+  Feed,
 } from "../../pages/index";
 // styles
 import styles from "./app.module.css";
@@ -106,6 +107,8 @@ function App() {
               </DndProvider>
             }
           />
+
+          <Route path="/feed" element={<Feed />} />
         </Routes>
 
         {background && (
