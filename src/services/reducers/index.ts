@@ -5,6 +5,7 @@ import constructorIngredients from "./constructor";
 import targetIngredient from "./targetIngredient";
 import ingredients from "./ingredients";
 import auth from "./auth";
+import wsCommon from "./ws-common";
 
 export const rootReducer = combineReducers({
   ingredients,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   constructorIngredients,
   order,
   auth,
+  wsCommon,
 });

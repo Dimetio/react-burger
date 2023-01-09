@@ -6,7 +6,7 @@ import styles from "./burger-Ingredients.module.css";
 import IngredientsList from "../ingredients-list/ingredients-list";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 // types
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../services/types/data";
 
 export default function BurgerIngredients() {
   const { ingredients } = useSelector((store) => store.ingredients);

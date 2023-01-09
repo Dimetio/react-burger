@@ -4,9 +4,9 @@ import {
   UPDATE_INGREDIENT_CONSTRUCTOR,
   CLEAR_INGREDIENT_CONSTRUCTOR,
   ADD_BUNS_CONSTRUCTOR,
-} from "../constans/constructor";
+} from "../constants/constructor";
 
-import { TIngredient, TConstructorIngredient } from "../../utils/types";
+import { TIngredient, TConstructorIngredient } from "../types/data";
 
 import type { TConstructorActions } from "../actions/constructor";
 

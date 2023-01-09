@@ -1,9 +1,9 @@
 import {
   GET_TARGET_INGREDIENT,
   DELETE_TARGET_INGREDIENT,
-} from "../constans/targetIngredient";
+} from "../constants/targetIngredient";
 
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../types/data";
 
 import type { TTargetIngredientActions } from "../actions/targetIngredient";
 

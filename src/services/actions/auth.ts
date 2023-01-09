@@ -19,9 +19,9 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
   AUTH_CHECKED,
-} from "../constans/auth";
+} from "../constants/auth";
 
-import { TUser } from "../../utils/types";
+import { TUser } from "../types/data";
 
 type TRegisterRequestAction = {
   readonly type: typeof REGISTER_REQUEST;

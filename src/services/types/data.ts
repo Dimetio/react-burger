@@ -103,3 +103,19 @@ export type TGetBurgers = {
   success: boolean;
   data: TIngredient[];
 };
+
+export type TWSOrder = {
+  _id: string;
+  ingredients: string[];
+  status: string;
+  number: string;
+  createdAt: string;
+  updateAt: string;
+};
+
+export type TWSOrders = {
+  success: boolean;
+  orders: TWSOrder[];
+  total: number;
+  totalToday: number;
+};

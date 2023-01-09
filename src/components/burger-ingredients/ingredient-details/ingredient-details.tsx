@@ -2,7 +2,7 @@ import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "../../../services/hooks";
 // types
-import { TIngredient } from "../../../utils/types";
+import { TIngredient } from "../../../services/types/data";
 
 export default function IngredientDetails() {
   // забираю id из урла

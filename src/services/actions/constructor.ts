@@ -4,9 +4,9 @@ import {
   UPDATE_INGREDIENT_CONSTRUCTOR,
   CLEAR_INGREDIENT_CONSTRUCTOR,
   ADD_BUNS_CONSTRUCTOR,
-} from "../constans/constructor";
+} from "../constants/constructor";
 
-import { TConstructorIngredient, TIngredient } from "../../utils/types";
+import { TConstructorIngredient, TIngredient } from "../types/data";
 
 type TAddIngredientConstructor = {
   readonly type: typeof ADD_INGREDIENT_CONSTRUCTOR;

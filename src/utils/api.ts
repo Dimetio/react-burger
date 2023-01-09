@@ -8,9 +8,11 @@ import {
   TGetBurgers,
   TUserUpdate,
   TUserLogout,
-} from "./types";
+} from "../services/types/data";
 
 const BASE_URL = "https://norma.nomoreparties.space/api";
+export const wsUrl = "wss://norma.nomoreparties.space/orders/all";
+export const wsAuthUrl = "wss://norma.nomoreparties.space/orders";
 
 function checkResponse<T>(res: Response): Promise<T> {
   if (res.ok) {

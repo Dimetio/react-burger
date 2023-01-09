@@ -2,7 +2,7 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_ERROR,
-} from "../constans/order";
+} from "../constants/order";
 
 import { TOrderActions } from "../actions/order";
 

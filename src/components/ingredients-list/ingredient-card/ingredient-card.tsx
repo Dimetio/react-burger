@@ -7,7 +7,7 @@ import {
 import { useDrag } from "react-dnd";
 import { useSelector } from "../../../services/hooks";
 // types
-import { TIngredientCardProps } from "../../../utils/types";
+import { TIngredientCardProps } from "../../../services/types/data";
 
 const IngredientCard = ({ ingredient }: TIngredientCardProps): JSX.Element => {
   const [, dragRef] = useDrag({

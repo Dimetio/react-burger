@@ -2,9 +2,9 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_ERROR,
-} from "../constans/inhredients";
+} from "../constants/inhredients";
 
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../types/data";
 
 import { TIngredientsActons } from "../actions/ingredients";
 

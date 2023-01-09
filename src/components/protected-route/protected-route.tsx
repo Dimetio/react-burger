@@ -4,7 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { getUserAction } from "../../services/actions/auth";
 import { getCookie } from "../../utils/cookie";
 // types
-import { TProtected } from "../../utils/types";
+import { TProtected } from "../../services/types/data";
 
 export default function ProtectedRoute({
   children,

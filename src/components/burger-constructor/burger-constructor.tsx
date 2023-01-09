@@ -15,7 +15,7 @@ import {
 import OrderDetails from "./order-details/order-details";
 import Modal from "../modal/modal";
 // types
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../services/types/data";
 import { v1 as uuid } from "uuid";
 
 // actions
