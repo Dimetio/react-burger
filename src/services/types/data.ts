@@ -123,10 +123,15 @@ export type TWSOrders = {
 
 export type TOrderProps = {
   item: TWSOrder;
+  showStatus?: boolean;
 };
 
 export type TOrdersTablo = {
   orders: TWSOrder[];
   total: number | null;
   totalToday: number | null;
+};
+
+export type TProfileOrders = {
+  orders: TWSOrder[];
 };

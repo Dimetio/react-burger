@@ -4,7 +4,10 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { useSelector } from "../../services/hooks";
 import { useMemo } from "react";
 
-export default function Order({ item }: TOrderProps): JSX.Element {
+export default function Order({
+  item,
+  showStatus = false,
+}: TOrderProps): JSX.Element {
   const { ingredients } = useSelector((store) => store.ingredients);
 
   const items = item.ingredients
@@ -32,6 +35,16 @@ export default function Order({ item }: TOrderProps): JSX.Element {
       </div>
 
       <p className="text text_type_main-medium mb-2">{item.name}</p>
+
+      {showStatus && (
+        <div className={`${item.status === "done" && styles.done} mb-6`}>
+          {item.status === "done"
+            ? "Выполнен"
+            : "pending"
+            ? "Готовится"
+            : "Отменен"}
+        </div>
+      )}
 
       <div className={styles.info}>
         <ul className={styles.order_preview}>

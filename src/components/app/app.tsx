@@ -3,7 +3,7 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-Ingredients";
-import Profile from "../profile/profile";
+import Profile from "../profile/profile-form/profileForm";
 // pages
 import {
   ForgotPassword,
@@ -26,6 +26,7 @@ import IngredientDetails from "../burger-ingredients/ingredient-details/ingredie
 import { useEffect } from "react";
 import { getIngredients, getUserAction } from "../../services/actions";
 import { useDispatch, useSelector } from "../../services/hooks";
+import ProfileOrders from "../profile/profile-orders/profile-orders";
 
 function App() {
   const dispatch = useDispatch();

@@ -70,3 +70,7 @@
   align-items: center;
   gap: 8px;
 }
+
+.done {
+  color: #00cccc;
+}

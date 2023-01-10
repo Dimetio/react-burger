@@ -1,8 +1,8 @@
 import { FormEvent } from "react";
-import { useDispatch, useSelector } from "../../services/hooks";
+import { useDispatch, useSelector } from "../../../services/hooks";
 import { useEffect, useState } from "react";
 //styles
-import styles from "./profile.module.css";
+import styles from "./profileForm.module.css";
 // ui components
 import {
   Input,
@@ -11,11 +11,11 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 //actions
-import { updateUserAction } from "../../services/actions/auth";
+import { updateUserAction } from "../../../services/actions/auth";
 // hooks
-import useForm from "../../hook/useForm";
+import useForm from "../../../hook/useForm";
 // interfaces
-import { IForm } from "../../utils/interfaces";
+import { IForm } from "../../../utils/interfaces";
 
 export default function Profile(): JSX.Element {
   const dispatch = useDispatch();
