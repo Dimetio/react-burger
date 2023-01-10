@@ -3,7 +3,7 @@ import styles from "./ingredients-list.module.css";
 import IngredientCard from "./ingredient-card/ingredient-card";
 import { Link, useLocation } from "react-router-dom";
 
-import { TIngredientListProps, TIngredient } from "../../utils/types";
+import { TIngredientListProps, TIngredient } from "../../services/types/data";
 
 const IngredientsList = React.forwardRef<HTMLDivElement, TIngredientListProps>(
   ({ title, ingredients }, ref) => {

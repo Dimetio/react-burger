@@ -1,11 +1,11 @@
-import getOrder from './order'
+import { getOrder } from "./order";
 
-import getIngredients from './ingredients'
+import { getIngredients } from "./ingredients";
 
 import {
   getTargetIngredient,
-  deleteTargetIngredient
-} from './targetIngredient'
+  deleteTargetIngredient,
+} from "./targetIngredient";
 
 import {
   addIngredientConstructor,
@@ -13,15 +13,15 @@ import {
   updateIngredientConstructor,
   clearIngredientConstructor,
   addBunsConstructor,
-} from './constructor'
+} from "./constructor";
 
 import {
   registerAction,
   loginAction,
   logoutAction,
   getUserAction,
-  updateUserAction
-} from './auth'
+  updateUserAction,
+} from "./auth";
 
 export {
   getOrder,
@@ -37,5 +37,5 @@ export {
   loginAction,
   logoutAction,
   getUserAction,
-  updateUserAction
-}
+  updateUserAction,
+};

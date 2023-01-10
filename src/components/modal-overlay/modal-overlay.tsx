@@ -1,6 +1,6 @@
 import styles from "./modal-overlay.module.css";
 // types
-import { TModalOverlayProps } from "../../utils/types";
+import { TModalOverlayProps } from "../../services/types/data";
 
 export default function ModalOverlay({
   closeModal,

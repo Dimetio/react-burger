@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./link.module.css";
 // types
-import { TLink } from "../../../utils/types";
+import { TLink } from "../../../services/types/data";
 
 export const CustomLink = ({ text, url, linkText }: TLink) => {
   return (

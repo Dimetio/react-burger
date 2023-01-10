@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { deleteIngredientConstructor } from "../../../services/actions";
 import { useDrag, useDrop } from "react-dnd";
 
-import { TConstructorIngredient } from "../../../utils/types";
+import { TConstructorIngredient } from "../../../services/types/data";
 
 type TItemsProps = {
   item: TConstructorIngredient;
