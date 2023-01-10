@@ -91,9 +91,7 @@ function App() {
                 <ProfilePage />
               </ProtectedRoute>
             }
-          >
-            <Route index element={<Profile />} />
-          </Route>
+          />
 
           <Route path="/feed" element={<Feed />} />
 

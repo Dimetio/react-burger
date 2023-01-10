@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "../../services/hooks";
-import { Outlet } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import styles from "./profile.module.css";
 import { WebsocketStatus } from "../../services/types/ws";
 import {
@@ -12,6 +12,7 @@ import { getCookie } from "../../utils/cookie";
 import ProfileMenu from "../../components/profile/profile-menu/profile-menu";
 import ProfileOrders from "../../components/profile/profile-orders/profile-orders";
 import Preloader from "../../components/preloader/preloader";
+import Profile from "../../components/profile/profile-form/profileForm";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
@@ -30,13 +31,15 @@ export default function ProfilePage() {
       <div className={styles.column}>
         <ProfileMenu />
       </div>
+      <div className={styles.column}>
+        <Routes>
+          <Route index element={<Profile />} />
 
-      {orders && (
-        <div className={styles.column}>
-          <ProfileOrders orders={orders} />
-        </div>
-      )}
-      <Outlet />
+          {orders && (
+            <Route path="orders" element={<ProfileOrders orders={orders} />} />
+          )}
+        </Routes>
+      </div>
     </section>
   );
 }
