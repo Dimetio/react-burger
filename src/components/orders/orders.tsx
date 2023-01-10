@@ -1,8 +1,9 @@
-import Order from "../../order/order";
-import styles from "./profile-orders.module.css";
-import { TProfileOrders } from "../../../services/types/data";
+import styles from "./orders.module.css";
+import Order from "../order/order";
+import { useSelector } from "../../services/hooks";
 
-export default function ProfileOrders({ orders }: TProfileOrders): JSX.Element {
+export default function Orders() {
+  const { orders } = useSelector((store) => store.wsProfile);
   return (
     <ul className={`${styles.ul}`}>
       {orders?.reverse().map((item) => (
