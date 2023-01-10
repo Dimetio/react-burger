@@ -1,5 +1,5 @@
-import IngredientDetails from "../components/burger-ingredients/ingredient-details/ingredient-details";
-import styles from "./page.module.css";
+import IngredientDetails from "../../components/burger-ingredients/ingredient-details/ingredient-details";
+import styles from "../page.module.css";
 
 export default function TargetIngredient() {
   return (

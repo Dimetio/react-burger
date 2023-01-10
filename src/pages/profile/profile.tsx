@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "../../services/hooks";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import styles from "./profile.module.css";
 import { WebsocketStatus } from "../../services/types/ws";
 import {
@@ -32,12 +32,9 @@ export default function ProfilePage() {
       </div>
 
       {orders && (
-        <Routes>
-          <Route
-            path="/profile/orders"
-            element={<ProfileOrders orders={orders} />}
-          />
-        </Routes>
+        <div className={styles.column}>
+          <ProfileOrders orders={orders} />
+        </div>
       )}
       <Outlet />
     </section>

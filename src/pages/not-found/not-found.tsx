@@ -1,4 +1,4 @@
-import styles from './page.module.css'
+import styles from './not-found.module.css'
 import { Link } from 'react-router-dom'
 
 export default function NotFound404() {

@@ -1,9 +1,9 @@
 import { FormEvent } from "react";
-import Form from "../components/form/form";
-import { CustomLink } from "../components/form/link/link";
-import styles from "./page.module.css";
-import { forgotPassword } from "../utils/api";
-import useForm from "../hook/useForm";
+import Form from "../../components/form/form";
+import { CustomLink } from "../../components/form/link/link";
+import styles from "./forgot-password.module.css";
+import { forgotPassword } from "../../utils/api";
+import useForm from "../../hook/useForm";
 import { useNavigate } from "react-router-dom";
 
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";

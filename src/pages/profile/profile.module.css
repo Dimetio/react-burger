@@ -2,14 +2,14 @@
   display: flex;
   margin-top: 120px;
   padding: 0 90px;
+  gap: 48px;
 }
 
 .column {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  box-sizing: border-box;
-  flex: 1 1 844px;
-  max-width: 844px;
+  flex: 1 1 auto;
+  max-width: 856px;
   box-sizing: border-box;
 }

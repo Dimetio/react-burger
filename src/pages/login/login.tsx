@@ -1,10 +1,10 @@
 import { FormEvent, useState } from "react";
-import Form from "../components/form/form";
-import { CustomLink } from "../components/form/link/link";
-import styles from "./page.module.css";
-import useForm from "../hook/useForm";
-import { loginAction } from "../services/actions/auth";
-import { useDispatch } from "../services/hooks";
+import Form from "../../components/form/form";
+import { CustomLink } from "../../components/form/link/link";
+import styles from "../page.module.css";
+import useForm from "../../hook/useForm";
+import { loginAction } from "../../services/actions/auth";
+import { useDispatch } from "../../services/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
