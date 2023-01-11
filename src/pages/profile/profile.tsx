@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "../../services/hooks";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import styles from "./profile.module.css";
 import { WebsocketStatus } from "../../services/types/ws";
 import {
@@ -10,13 +10,13 @@ import { useEffect } from "react";
 import { wsAuthUrl } from "../../utils/api";
 import { getCookie } from "../../utils/cookie";
 import ProfileMenu from "../../components/profile/profile-menu/profile-menu";
-import ProfileOrders from "../../components/profile/profile-orders/profile-orders";
 import Preloader from "../../components/preloader/preloader";
 import Profile from "../../components/profile/profile-form/profileForm";
+import Orders from "../../components/orders/orders";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
-  const { CONNECTING, ONLINE } = WebsocketStatus;
+  const { ONLINE, CONNECTING } = WebsocketStatus;
   const { status, orders } = useSelector((store) => store.wsProfile);
 
   useEffect(() => {
@@ -35,9 +35,18 @@ export default function ProfilePage() {
         <Routes>
           <Route index element={<Profile />} />
 
-          {orders && (
-            <Route path="orders" element={<ProfileOrders orders={orders} />} />
-          )}
+          <Route
+            path="orders"
+            element={
+              status === ONLINE ? (
+                orders &&
+                orders !== undefined &&
+                orders.length !== 0 && <Orders orders={orders} />
+              ) : (
+                <Preloader />
+              )
+            }
+          />
         </Routes>
       </div>
     </section>

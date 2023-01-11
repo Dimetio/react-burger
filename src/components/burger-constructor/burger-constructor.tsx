@@ -23,7 +23,7 @@ import {
   addIngredientConstructor,
   clearIngredientConstructor,
   addBunsConstructor,
-  getOrder,
+  getNumberOrder,
 } from "../../services/actions";
 
 export default function BurgerConstructor() {
@@ -66,7 +66,7 @@ export default function BurgerConstructor() {
     }
 
     setIsVisible(true);
-    dispatch(getOrder(burgerId));
+    dispatch(getNumberOrder(burgerId));
   }
 
   // закрывашка

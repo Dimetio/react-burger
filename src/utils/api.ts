@@ -4,10 +4,11 @@ import {
   TUserResponse,
   TRefreshTokenResponse,
   TResetPasswordRequest,
-  TGetOrder,
+  TGetNumberOrder,
   TGetBurgers,
   TUserUpdate,
   TUserLogout,
+  TOrder,
 } from "../services/types/data";
 
 const BASE_URL = "https://norma.nomoreparties.space/api";
@@ -70,7 +71,7 @@ export const getBurgers = (): Promise<TGetBurgers> => {
   return request(`${BASE_URL}/ingredients`);
 };
 
-export const getOrder = (ingredientsId: string[]): Promise<TGetOrder> => {
+export const getOrder = (ingredientsId: string[]): Promise<TGetNumberOrder> => {
   return request(`${BASE_URL}/orders`, {
     method: "POST",
     headers: {
@@ -80,6 +81,15 @@ export const getOrder = (ingredientsId: string[]): Promise<TGetOrder> => {
     body: JSON.stringify({
       ingredients: ingredientsId,
     }),
+  });
+};
+
+export const getOrderItem = (number: string): Promise<{ orders: TOrder[] }> => {
+  return request(`${BASE_URL}/orders/${number}`, {
+    method: "GET",
+    headers: {
+      ...headers,
+    },
   });
 };
 

@@ -92,9 +92,9 @@ export type TResetPasswordRequest = {
 };
 
 // get oreder
-export type TGetOrder = {
+export type TGetNumberOrder = {
   order: {
-    number: string;
+    number: number;
   };
 };
 
@@ -104,34 +104,34 @@ export type TGetBurgers = {
   data: TIngredient[];
 };
 
-export type TWSOrder = {
+export type TOrder = {
   _id: string;
   ingredients: string[];
   name: string;
-  number: string;
+  number: number;
   status: string;
   createdAt: string;
   updateAt: string;
 };
 
+export type TOrders = {
+  orders: TOrder[];
+};
+
 export type TWSOrders = {
   success: boolean;
-  orders: TWSOrder[];
+  orders: TOrder[];
   total: number | null;
   totalToday: number | null;
 };
 
 export type TOrderProps = {
-  item: TWSOrder;
+  item: TOrder;
   showStatus?: boolean;
 };
 
 export type TOrdersTablo = {
-  orders: TWSOrder[];
+  orders: TOrder[];
   total: number | null;
   totalToday: number | null;
-};
-
-export type TProfileOrders = {
-  orders: TWSOrder[];
 };

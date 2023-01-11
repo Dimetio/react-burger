@@ -1,13 +1,13 @@
 import {
-  GET_ORDER_REQUEST,
-  GET_ORDER_SUCCESS,
-  GET_ORDER_ERROR,
-} from "../constants/order";
+  GET_NUMBER_ORDER_REQUEST,
+  GET_NUMBER_ORDER_SUCCESS,
+  GET_NUMBER_ORDER_ERROR,
+} from "../constants/number-order";
 
-import { TOrderActions } from "../actions/order";
+import { TNumberOrderActions } from "../actions/number-order";
 
 type TInitialState = {
-  order: null | string;
+  order: null | number;
   isLoading: boolean;
   hasError: boolean;
 };
@@ -18,23 +18,23 @@ const initialState: TInitialState = {
   hasError: false,
 };
 
-export default function orderReducer(
+export default function numberOrderReducer(
   state = initialState,
-  action: TOrderActions
+  action: TNumberOrderActions
 ): TInitialState {
   switch (action.type) {
-    case GET_ORDER_REQUEST:
+    case GET_NUMBER_ORDER_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case GET_ORDER_SUCCESS:
+    case GET_NUMBER_ORDER_SUCCESS:
       return {
         ...state,
         order: action.order,
         isLoading: false,
       };
-    case GET_ORDER_ERROR:
+    case GET_NUMBER_ORDER_ERROR:
       return {
         order: null,
         hasError: true,

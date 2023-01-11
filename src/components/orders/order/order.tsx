@@ -1,7 +1,10 @@
 import styles from "./order.module.css";
-import { TOrderProps } from "../../services/types/data";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "../../services/hooks";
+import { TOrderProps } from "../../../services/types/data";
+import {
+  CurrencyIcon,
+  FormattedDate,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector } from "../../../services/hooks";
 import { useMemo } from "react";
 
 export default function Order({
@@ -30,14 +33,18 @@ export default function Order({
       <div className={`${styles.info} mb-6`}>
         <span className="text text_type_digits-default">#{item.number}</span>
         <span className="text text_type_main-default text_color_inactive">
-          {item.createdAt}
+          <FormattedDate date={new Date(item.createdAt)} />
         </span>
       </div>
 
       <p className="text text_type_main-medium mb-2">{item.name}</p>
 
       {showStatus && (
-        <div className={`${item.status === "done" && styles.done} mb-6`}>
+        <div
+          className={`${
+            item.status === "done" && styles.done
+          } text text_type_main-default mb-6`}
+        >
           {item.status === "done"
             ? "Выполнен"
             : "pending"

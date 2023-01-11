@@ -1,7 +1,7 @@
-import { TWSOrder } from "./data";
+import { TOrder } from "./data";
 
 export type TOrders = {
-  orders: Array<TWSOrder>;
+  orders: Array<TOrder>;
   total: number;
   totalToday: number;
 };
@@ -14,7 +14,7 @@ export enum WebsocketStatus {
 
 export type TWSState = {
   status: WebsocketStatus;
-  orders: Array<TWSOrder> | null;
+  orders: Array<TOrder> | null;
   total: number | null;
   totalToday: number | null;
   error: string;

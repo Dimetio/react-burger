@@ -3,7 +3,6 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-Ingredients";
-import Profile from "../profile/profile-form/profileForm";
 // pages
 import {
   ForgotPassword,
@@ -26,7 +25,7 @@ import IngredientDetails from "../burger-ingredients/ingredient-details/ingredie
 import { useEffect } from "react";
 import { getIngredients, getUserAction } from "../../services/actions";
 import { useDispatch, useSelector } from "../../services/hooks";
-import ProfileOrders from "../profile/profile-orders/profile-orders";
+import OrderItemDetails from "../orders/order/order-item-details/order-item-details";
 
 function App() {
   const dispatch = useDispatch();
@@ -96,7 +95,18 @@ function App() {
           <Route path="/feed" element={<Feed />} />
 
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
-          <Route path="*" element={<NotFound404 />} />
+
+          <Route path="/feed/:number" element={<OrderItemDetails />} />
+
+          <Route
+            path="/profile/orders/:number"
+            element={
+              <ProtectedRoute>
+                <OrderItemDetails />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/"
             element={
@@ -106,12 +116,14 @@ function App() {
               </DndProvider>
             }
           />
+
+          <Route path="*" element={<NotFound404 />} />
         </Routes>
 
         {background && (
           <Routes>
             <Route
-              path="ingredients/:id"
+              path="/ingredients/:id"
               element={
                 <Modal
                   title={"Детали ингредиента"}
@@ -119,6 +131,24 @@ function App() {
                   isOpened={true}
                 >
                   <IngredientDetails />
+                </Modal>
+              }
+            />
+
+            <Route
+              path="/feed/:number"
+              element={
+                <Modal closeModal={onDismiss} isOpened={true}>
+                  <OrderItemDetails />
+                </Modal>
+              }
+            />
+
+            <Route
+              path="/profile/orders/:number"
+              element={
+                <Modal closeModal={onDismiss} isOpened={true}>
+                  <OrderItemDetails />
                 </Modal>
               }
             />

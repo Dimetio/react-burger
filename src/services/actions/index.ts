@@ -1,4 +1,4 @@
-import { getOrder } from "./order";
+import { getNumberOrder } from "./number-order";
 
 import { getIngredients } from "./ingredients";
 
@@ -24,7 +24,7 @@ import {
 } from "./auth";
 
 export {
-  getOrder,
+  getNumberOrder,
   getIngredients,
   getTargetIngredient,
   deleteTargetIngredient,

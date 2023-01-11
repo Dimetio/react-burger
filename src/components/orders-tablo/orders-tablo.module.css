@@ -1,12 +1,11 @@
 .status {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
 }
 
 .status_column {
-  flex-basis: 272px;
+  flex: 1 1 auto;
 }
 
 .status_column_inner {

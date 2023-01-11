@@ -1,12 +1,13 @@
 import { ThunkAction } from "redux-thunk";
 import { TConstructorActions } from "../actions/constructor";
 import { TTargetIngredientActions } from "../actions/targetIngredient";
-import { TOrderActions } from "../actions/order";
+import { TNumberOrderActions } from "../actions/number-order";
 import { TIngredientsActons } from "../actions/ingredients";
 import { TAuthActions } from "../actions/auth";
 import { TWSCommonActions } from "../actions/ws-common";
 import { rootReducer } from "../reducers";
 import { TWSProfileActions } from "../actions/ws-profile";
+import { TOrderItemActions } from "../actions/order-item";
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -14,11 +15,12 @@ export type RootState = ReturnType<typeof rootReducer>;
 export type AppActions =
   | TConstructorActions
   | TTargetIngredientActions
-  | TOrderActions
+  | TNumberOrderActions
   | TIngredientsActons
   | TAuthActions
   | TWSCommonActions
-  | TWSProfileActions;
+  | TWSProfileActions
+  | TOrderItemActions;
 
 // Типизация thunk'ов в нашем приложении
 export type AppThunk<TReturn = void> = ThunkAction<
