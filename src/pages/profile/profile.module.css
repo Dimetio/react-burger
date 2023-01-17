@@ -1,0 +1,15 @@
+.section_profile {
+  display: flex;
+  margin-top: 120px;
+  padding: 0 90px;
+  gap: 48px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1 1 auto;
+  max-width: 856px;
+  box-sizing: border-box;
+}

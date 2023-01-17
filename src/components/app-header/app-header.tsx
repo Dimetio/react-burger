@@ -25,7 +25,7 @@ export default function AppHeader() {
             <p className="text text_type_main-default ml-2">Конструктор</p>
           </NavLink>
           <NavLink
-            to="/orders"
+            to="/feed"
             className={({ isActive }) =>
               `${styles.item} p-5` + (isActive ? ` ${activeClassName}` : "")
             }

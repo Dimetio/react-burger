@@ -3,10 +3,17 @@ import {
   TUser,
   TUserResponse,
   TRefreshTokenResponse,
-  resetPasswordRequest,
-} from "./types";
+  TResetPasswordRequest,
+  TGetNumberOrder,
+  TGetBurgers,
+  TUserUpdate,
+  TUserLogout,
+  TOrder,
+} from "../services/types/data";
 
 const BASE_URL = "https://norma.nomoreparties.space/api";
+export const wsUrl = "wss://norma.nomoreparties.space/orders/all";
+export const wsAuthUrl = "wss://norma.nomoreparties.space/orders";
 
 function checkResponse<T>(res: Response): Promise<T> {
   if (res.ok) {
@@ -60,11 +67,11 @@ function fetchWithRefresh<T>(url: string, options: RequestInit): Promise<T> {
   });
 }
 
-export const getBurgers = () => {
+export const getBurgers = (): Promise<TGetBurgers> => {
   return request(`${BASE_URL}/ingredients`);
 };
 
-export const getOrder = (ingredientsId: number[]) => {
+export const getOrder = (ingredientsId: string[]): Promise<TGetNumberOrder> => {
   return request(`${BASE_URL}/orders`, {
     method: "POST",
     headers: {
@@ -77,9 +84,18 @@ export const getOrder = (ingredientsId: number[]) => {
   });
 };
 
+export const getOrderItem = (number: string): Promise<{ orders: TOrder[] }> => {
+  return request(`${BASE_URL}/orders/${number}`, {
+    method: "GET",
+    headers: {
+      ...headers,
+    },
+  });
+};
+
 export const forgotPassword = (
   email: string
-): Promise<resetPasswordRequest> => {
+): Promise<TResetPasswordRequest> => {
   return request(`${BASE_URL}/password-reset`, {
     method: "POST",
     headers: {
@@ -94,7 +110,7 @@ export const forgotPassword = (
 export const resetPassword = (
   password: string,
   code: string
-): Promise<resetPasswordRequest> => {
+): Promise<TResetPasswordRequest> => {
   return request(`${BASE_URL}/password-reset/reset`, {
     method: "POST",
     headers: {
@@ -136,7 +152,7 @@ export const signin = (
   });
 };
 
-export const logout = () => {
+export const logout = (): Promise<TUserLogout> => {
   return request(`${BASE_URL}/auth/logout`, {
     method: "POST",
     headers: {
@@ -158,7 +174,7 @@ export const getUser = (): Promise<TUserResponse> => {
   });
 };
 
-export const updateUser = (data: TUser) => {
+export const updateUser = (data: TUser): Promise<TUserUpdate> => {
   return fetchWithRefresh(`${BASE_URL}/auth/user`, {
     method: "PATCH",
     headers: {

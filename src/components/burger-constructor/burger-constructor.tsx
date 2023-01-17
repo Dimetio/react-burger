@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useNavigate } from "react-router-dom";
 import { useDrop } from "react-dnd";
 // styles
@@ -15,28 +15,31 @@ import {
 import OrderDetails from "./order-details/order-details";
 import Modal from "../modal/modal";
 // types
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../services/types/data";
+import { v1 as uuid } from "uuid";
 
 // actions
 import {
   addIngredientConstructor,
   clearIngredientConstructor,
   addBunsConstructor,
-  getOrder,
+  getNumberOrder,
 } from "../../services/actions";
 
 export default function BurgerConstructor() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // TODO fix any type
   const { ingredients, bun } = useSelector(
-    (store: any) => store.constructorIngredients
+    (store) => store.constructorIngredients
   );
-  const user = useSelector((store: any) => store.auth.user);
+  const user = useSelector((store) => store.auth.user);
 
-  const burgerId: Array<string> = useMemo(() => {
+  const burgerId: string[] = useMemo(() => {
+    if (bun === null || ingredients.length === null) {
+      return [];
+    }
     const ingredientsId = ingredients.map((i: TIngredient) => i._id);
-    const bunsId: string = bun?._id;
+    const bunsId: string = bun._id;
 
     return [bunsId, ...ingredientsId];
   }, [ingredients, bun]);
@@ -63,7 +66,7 @@ export default function BurgerConstructor() {
     }
 
     setIsVisible(true);
-    dispatch<any>(getOrder(burgerId));
+    dispatch(getNumberOrder(burgerId));
   }
 
   // закрывашка
@@ -74,10 +77,10 @@ export default function BurgerConstructor() {
 
   const [, dropTargetRef] = useDrop({
     accept: "ingredient",
-    drop(data: { type: string }) {
+    drop(data: TIngredient) {
       data.type === "bun"
         ? dispatch(addBunsConstructor(data))
-        : dispatch(addIngredientConstructor(data));
+        : dispatch(addIngredientConstructor({ ...data, _dndid: uuid() }));
     },
   });
 

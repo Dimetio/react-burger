@@ -1,0 +1,23 @@
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.status_column {
+  flex: 1 1 auto;
+}
+
+.status_column_inner {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 330px;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+.number {
+  color: #00cccc;
+}

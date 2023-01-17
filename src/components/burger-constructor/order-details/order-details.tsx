@@ -1,12 +1,11 @@
 import styles from "./order-details.module.css";
 import image from "../../../images/done.svg";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/hooks";
 import Preloader from "../../preloader/preloader";
 
 export default function OrderDetails() {
-  // TODO fix any type
-  const { order } = useSelector((store: any) => store.order);
-  const { isLoading } = useSelector((store: any) => store.order);
+  const { order } = useSelector((store) => store.numberOrder);
+  const { isLoading } = useSelector((store) => store.numberOrder);
 
   return (
     <article className={`${styles.wrap} mt-30 mb-30 ml-25 mr-25`}>

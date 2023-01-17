@@ -4,3 +4,22 @@
   max-height: 912px;
   overflow: hidden;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  position: absolute;
+  background: #2f2f37;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 1px solid #8585ad;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8585ad;
+}

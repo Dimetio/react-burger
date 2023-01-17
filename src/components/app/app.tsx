@@ -3,8 +3,6 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-Ingredients";
-import Orders from "../orders/orders";
-import Profile from "../profile/profile";
 // pages
 import {
   ForgotPassword,
@@ -14,6 +12,7 @@ import {
   Register,
   ResetPassword,
   TargetIngredient,
+  Feed,
 } from "../../pages/index";
 // styles
 import styles from "./app.module.css";
@@ -25,23 +24,24 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
 import { useEffect } from "react";
 import { getIngredients, getUserAction } from "../../services/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
+import OrderItemDetails from "../orders/order/order-item-details/order-item-details";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state && location.state.background;
-  const user = useSelector((store: any) => store.auth.user);
+  const user = useSelector((store) => store.auth.user);
 
   function onDismiss() {
     navigate(-1);
   }
 
   useEffect(() => {
-    dispatch<any>(getIngredients());
+    dispatch(getIngredients());
     if (user) {
-      dispatch<any>(getUserAction());
+      dispatch(getUserAction());
     }
   }, []);
 
@@ -90,13 +90,23 @@ function App() {
                 <ProfilePage />
               </ProtectedRoute>
             }
-          >
-            <Route index element={<Profile />} />
-            <Route path="orders" element={<Orders />} />
-          </Route>
+          />
+
+          <Route path="/feed" element={<Feed />} />
 
           <Route path={`/ingredients/:id`} element={<TargetIngredient />} />
-          <Route path="*" element={<NotFound404 />} />
+
+          <Route path="/feed/:number" element={<OrderItemDetails />} />
+
+          <Route
+            path="/profile/orders/:number"
+            element={
+              <ProtectedRoute>
+                <OrderItemDetails />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/"
             element={
@@ -106,12 +116,14 @@ function App() {
               </DndProvider>
             }
           />
+
+          <Route path="*" element={<NotFound404 />} />
         </Routes>
 
         {background && (
           <Routes>
             <Route
-              path="ingredients/:id"
+              path="/ingredients/:id"
               element={
                 <Modal
                   title={"Детали ингредиента"}
@@ -119,6 +131,24 @@ function App() {
                   isOpened={true}
                 >
                   <IngredientDetails />
+                </Modal>
+              }
+            />
+
+            <Route
+              path="/feed/:number"
+              element={
+                <Modal closeModal={onDismiss} isOpened={true}>
+                  <OrderItemDetails />
+                </Modal>
+              }
+            />
+
+            <Route
+              path="/profile/orders/:number"
+              element={
+                <Modal closeModal={onDismiss} isOpened={true}>
+                  <OrderItemDetails />
                 </Modal>
               }
             />
