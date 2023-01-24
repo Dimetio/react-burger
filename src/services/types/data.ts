@@ -111,7 +111,7 @@ export type TOrder = {
   number: number;
   status: string;
   createdAt: string;
-  updateAt: string;
+  updatedAt: string;
 };
 
 export type TOrders = {
