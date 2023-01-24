@@ -14,7 +14,7 @@ type TInitialState = {
   hasError: boolean;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   ingredients: [],
   isLoading: false,
   hasError: false,
