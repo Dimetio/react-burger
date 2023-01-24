@@ -1,5 +1,5 @@
 describe("app work", function () {
-  before(() => {
+  beforeEach(() => {
     cy.visit("http://localhost:3000");
   });
 
@@ -12,5 +12,13 @@ describe("app work", function () {
 
     cy.get('[data-cy="close-modal"]').click();
     cy.url().should("not.include", "/ingredients");
+  });
+
+  it("should working dnd", () => {
+    const dataTransfer = new DataTransfer();
+
+    cy.get('[data-cy="Булки"]').find("ul li:first").first().as("bun");
+    cy.get("@bun").trigger("dragstart", { dataTransfer });
+    cy.get('[data-cy="drop"]').trigger("drop", { dataTransfer });
   });
 });
