@@ -10,7 +10,6 @@ import { TIngredient } from "../../services/types/data";
 
 export default function BurgerIngredients() {
   const { ingredients } = useSelector((store) => store.ingredients);
-
   const buns = useMemo(
     () => ingredients?.filter((item: TIngredient) => item.type === "bun"),
     [ingredients]
@@ -65,7 +64,12 @@ export default function BurgerIngredients() {
     <section className={`${styles.section} mr-10 pt-10 pb-10`}>
       {ingredients && (
         <>
-          <p className="text text_type_main-large pb-5">Соберите бургер</p>
+          <p
+            className="text text_type_main-large pb-5"
+            data-cy="ingredients-title"
+          >
+            Соберите бургер
+          </p>
 
           <div className={`${styles.tabs} pb-10`}>
             <div onClick={() => handleClickTab(categoryBuns)}>
@@ -101,6 +105,7 @@ export default function BurgerIngredients() {
             ref={listRef}
             className={styles.ingredients}
             onScroll={handleScroll}
+            data-cy="list"
           >
             <IngredientsList
               title="Булки"

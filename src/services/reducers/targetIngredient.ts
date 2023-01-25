@@ -11,7 +11,7 @@ type TInitialState = {
   readonly ingredient: null | TIngredient;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   ingredient: null,
 };
 

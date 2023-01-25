@@ -10,7 +10,7 @@ import {
 
 const { CONNECTING, ONLINE, OFFLINE } = WebsocketStatus;
 
-const initialState: TWSState = {
+export const initialState: TWSState = {
   status: OFFLINE,
   orders: null,
   total: null,

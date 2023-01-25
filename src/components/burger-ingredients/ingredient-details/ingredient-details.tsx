@@ -17,7 +17,7 @@ export default function IngredientDetails() {
       <div className={`${styles.image} mb-4`}>
         <img src={ingredient?.image_large} alt={ingredient?.name} />
       </div>
-      <p className="text text_type_main-medium mb-8">{ingredient?.name}</p>
+      <p className="text text_type_main-medium mb-8" data-cy="ingredient-name">{ingredient?.name}</p>
       <ul className={`${styles.list} text text_color_inactive`}>
         <li className={styles.list_item}>
           <span className="text_type_main-default">Калории,ккал</span>

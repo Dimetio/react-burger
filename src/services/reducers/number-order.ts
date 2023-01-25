@@ -12,7 +12,7 @@ type TInitialState = {
   hasError: boolean;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   order: null,
   isLoading: false,
   hasError: false,

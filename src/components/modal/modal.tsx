@@ -47,6 +47,7 @@ export default function Modal({
           type="button"
           className={styles.button_close}
           onClick={closeModal}
+          data-cy="close-modal"
         >
           <CloseIcon type="primary" />
         </button>

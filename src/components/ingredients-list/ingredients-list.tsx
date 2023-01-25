@@ -9,7 +9,7 @@ const IngredientsList = React.forwardRef<HTMLDivElement, TIngredientListProps>(
   ({ title, ingredients }, ref) => {
     const location = useLocation();
     return (
-      <div ref={ref}>
+      <div ref={ref} data-cy={title}>
         <h2 className="text text_type_main-medium">{title}</h2>
         <ul className={`${styles.ingredients_list} pt-6 pl-4 pr-4 pb-10`}>
           {ingredients.map((item: TIngredient) => (

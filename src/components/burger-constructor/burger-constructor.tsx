@@ -88,6 +88,7 @@ export default function BurgerConstructor() {
     <section
       ref={dropTargetRef}
       className={`${styles.section} pt-25 pl-4 pr-4 pb-10`}
+      data-cy="drop"
     >
       {bun ? (
         <>

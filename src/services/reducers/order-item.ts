@@ -10,7 +10,7 @@ type TInitialState = {
   order: null | TOrder;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   order: null,
 };
 

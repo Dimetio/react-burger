@@ -20,7 +20,7 @@ type TInitialState = {
   hasError: boolean;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   user: null,
   isAuth: false,
   isLoading: false,
