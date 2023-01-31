@@ -1,7 +1,7 @@
 .section_profile {
   display: flex;
   margin-top: 120px;
-  padding: 0 90px;
+  padding: 0 90px 60px;
   gap: 48px;
 }
 
