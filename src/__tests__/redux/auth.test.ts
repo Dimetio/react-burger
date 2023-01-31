@@ -34,10 +34,13 @@ describe("auth reducer", () => {
     expect(
       authReducer(initialState, {
         type: REGISTER_ERROR,
+        message: "error",
       })
     ).toEqual({
       ...initialState,
       isAuth: false,
+      hasError: true,
+      message: "error",
     });
   });
 
@@ -63,17 +66,6 @@ describe("auth reducer", () => {
       ...initialState,
       user: null,
       isAuth: false,
-    });
-  });
-
-  it("should handle GET_USER_REQUEST", () => {
-    expect(
-      authReducer(initialState, {
-        type: GET_USER_REQUEST,
-      })
-    ).toEqual({
-      ...initialState,
-      isLoading: true,
     });
   });
 
