@@ -11,6 +11,7 @@ export default function BurgerIngredientsList(): JSX.Element {
     (dragIndex: number, hoverIndex: number) => {
       dispatch(updateIngredientConstructor(dragIndex, hoverIndex));
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [ingredients, dispatch]
   );
 

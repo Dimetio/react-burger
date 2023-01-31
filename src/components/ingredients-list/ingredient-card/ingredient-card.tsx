@@ -25,6 +25,7 @@ const IngredientCard = ({ ingredient }: TIngredientCardProps): JSX.Element => {
       : bun?._id === ingredient._id
       ? 2
       : 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ingredients, bun]);
 
   return (

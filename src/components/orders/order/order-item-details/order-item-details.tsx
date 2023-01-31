@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "../../../../services/hooks";
 import styles from "./order-item-details.module.css";
@@ -41,6 +41,7 @@ export default function OrderItemDetails(): JSX.Element {
     if (number) {
       dispatch(getOrderItem(number));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [number]);
 
   return (

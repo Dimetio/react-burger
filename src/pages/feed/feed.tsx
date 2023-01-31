@@ -22,6 +22,7 @@ export default function Feed(): JSX.Element {
     dispatch(commonConnect(wsUrl));
 
     return () => dispatch(commonDisconnect());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
