@@ -1,10 +1,14 @@
 import {
+  REGISTER_REQUEST,
   REGISTER_SUCCESS,
   REGISTER_ERROR,
+  LOGIN_REQUSET,
   LOGIN_SUCCESS,
+  LOGIN_ERROR,
   LOGOUT,
+  UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
-  GET_USER_REQUEST,
+  UPDATE_USER_ERROR,
   GET_USER_SUCCESS,
   GET_USER_ERROR,
   AUTH_CHECKED,
@@ -18,6 +22,7 @@ type TInitialState = {
   isAuth: boolean;
   isLoading: boolean;
   hasError: boolean;
+  message: string | null;
 };
 
 export const initialState: TInitialState = {
@@ -25,6 +30,7 @@ export const initialState: TInitialState = {
   isAuth: false,
   isLoading: false,
   hasError: false,
+  message: null,
 };
 
 export default function authReducer(
@@ -32,17 +38,35 @@ export default function authReducer(
   action: TAuthActions
 ): TInitialState {
   switch (action.type) {
+    case REGISTER_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
     case REGISTER_SUCCESS: {
       return {
         ...state,
         user: action.user,
         isAuth: true,
+        hasError: false,
+        message: null,
+        isLoading: false,
       };
     }
     case REGISTER_ERROR: {
       return {
         ...state,
+        message: action.message,
         isAuth: false,
+        hasError: true,
+        isLoading: false,
+      };
+    }
+    case LOGIN_REQUSET: {
+      return {
+        ...state,
+        isLoading: true,
       };
     }
     case LOGIN_SUCCESS: {
@@ -50,6 +74,17 @@ export default function authReducer(
         ...state,
         user: action.user,
         isAuth: true,
+        hasError: false,
+        message: null,
+        isLoading: false,
+      };
+    }
+    case LOGIN_ERROR: {
+      return {
+        ...state,
+        message: action.message,
+        hasError: true,
+        isLoading: false,
       };
     }
     case LOGOUT: {
@@ -57,12 +92,8 @@ export default function authReducer(
         ...state,
         user: null,
         isAuth: false,
-      };
-    }
-    case GET_USER_REQUEST: {
-      return {
-        ...state,
-        isLoading: true,
+        isLoading: false,
+        message: null,
       };
     }
     case GET_USER_SUCCESS: {
@@ -70,13 +101,6 @@ export default function authReducer(
         ...state,
         user: action.user,
         isLoading: false,
-        hasError: false,
-      };
-    }
-    case UPDATE_USER_SUCCESS: {
-      return {
-        ...state,
-        user: action.user,
       };
     }
     case GET_USER_ERROR: {
@@ -84,6 +108,29 @@ export default function authReducer(
         ...state,
         isLoading: false,
         hasError: true,
+      };
+    }
+    case UPDATE_USER_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+        user: action.user,
+        hasError: false,
+        message: null,
+        isLoading: false,
+      };
+    }
+    case UPDATE_USER_ERROR: {
+      return {
+        ...state,
+        hasError: true,
+        message: action.message,
+        isLoading: false,
       };
     }
     case AUTH_CHECKED: {

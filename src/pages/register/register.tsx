@@ -1,14 +1,17 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Form from "../../components/form/form";
 import { CustomLink } from "../../components/form/link/link";
 import styles from "../page.module.css";
 import useForm from "../../hook/useForm";
 import { registerAction } from "../../services/actions/auth";
-import { useDispatch } from "../../services/hooks";
+import { useDispatch, useSelector } from "../../services/hooks";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export default function Register() {
+  const { hasError, message } = useSelector((store) => store.auth);
   const { values, handleChange } = useForm();
   const [showPassord, setShowPassword] = useState(false);
   const dispatch = useDispatch();
@@ -24,10 +27,21 @@ export default function Register() {
         values as { name: string; email: string; password: string }
       )
     );
+
+    if (hasError) {
+      toast.error(message);
+    }
   }
+
+  useEffect(() => {
+    if (hasError) {
+      toast.error(message);
+    }
+  }, [hasError, message]);
 
   return (
     <section className={styles.section}>
+      <ToastContainer />
       <Form
         title={"Регистрация"}
         buttonText={"Зарегистрироваться"}

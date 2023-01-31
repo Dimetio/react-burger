@@ -1,11 +1,13 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Form from "../../components/form/form";
 import { CustomLink } from "../../components/form/link/link";
 import styles from "../page.module.css";
 import useForm from "../../hook/useForm";
 import { loginAction } from "../../services/actions/auth";
-import { useDispatch } from "../../services/hooks";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -16,6 +18,8 @@ export default function Login() {
   const [showPassord, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
+  const { hasError, message } = useSelector((store) => store.auth);
+
   function onIconClick() {
     setShowPassword(!showPassord);
   }
@@ -23,12 +27,25 @@ export default function Login() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     dispatch(loginAction(values as { email: string; password: string }));
-    navigate(location.state?.from || "/");
-    console.log("добавить тост на успех авторизации");
+
+    if (hasError) {
+      toast.error(message);
+    }
+
+    if (!hasError) {
+      navigate(location.state?.from || "/");
+    }
   }
+
+  useEffect(() => {
+    if (hasError) {
+      toast.error(message);
+    }
+  }, [hasError, message]);
 
   return (
     <section className={styles.section}>
+      <ToastContainer />
       <Form title={"Вход"} buttonText={"Войти"} handleSubmit={handleSubmit}>
         <div className="mb-6">
           <Input

@@ -6,10 +6,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useSelector } from "../../services/hooks";
 
 export default function AppHeader() {
   const { pathname } = useLocation();
   const activeClassName = styles.item_active;
+  const { user } = useSelector((store) => store.auth);
   return (
     <header>
       <nav className={`${styles.nav} px-4`}>
@@ -48,7 +50,11 @@ export default function AppHeader() {
           <ProfileIcon
             type={pathname === "/profile" ? "primary" : "secondary"}
           />
-          <p className="text text_type_main-default ml-2">Личный кабинет</p>
+          {user ? (
+            <p className="text text_type_main-default ml-2">{user.name}</p>
+          ) : (
+            <p className="text text_type_main-default ml-2">Личный кабинет</p>
+          )}
         </NavLink>
       </nav>
     </header>

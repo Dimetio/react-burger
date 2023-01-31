@@ -34,6 +34,7 @@ type TRegisterSuccessAction = {
 
 type TRegisterErrorAction = {
   readonly type: typeof REGISTER_ERROR;
+  message: string | null;
 };
 
 type TLoginRequestAction = {
@@ -47,6 +48,7 @@ type TLoginSuccesAction = {
 
 type TLoginErrorAction = {
   readonly type: typeof LOGIN_ERROR;
+  message: string | null;
 };
 
 type TLogoutAction = {
@@ -77,6 +79,7 @@ type TUpdateUserSuccessAction = {
 
 type TUpdateUserErrorAction = {
   readonly type: typeof UPDATE_USER_ERROR;
+  message: string | null;
 };
 
 type TAuthCheckedAction = {
@@ -119,9 +122,9 @@ export const registerAction = (state: TUser): AppThunk => {
         }
       })
       .catch((err) => {
-        console.log(err.message);
         dispatch({
           type: REGISTER_ERROR,
+          message: err.message,
         });
       });
   };
@@ -148,9 +151,9 @@ export const loginAction = (
         }
       })
       .catch((err) => {
-        console.log(err.message);
         dispatch({
           type: LOGIN_ERROR,
+          message: err.message,
         });
       });
   };
@@ -212,13 +215,12 @@ export const updateUserAction = (state: TUser): AppThunk => {
             type: UPDATE_USER_SUCCESS,
             user: res.user,
           });
-          console.log("обновил");
         }
       })
       .catch((err) => {
-        console.log(err.message);
         dispatch({
           type: UPDATE_USER_ERROR,
+          message: err.message,
         });
       });
   };

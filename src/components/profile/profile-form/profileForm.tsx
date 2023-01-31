@@ -1,6 +1,8 @@
 import { FormEvent } from "react";
 import { useDispatch, useSelector } from "../../../services/hooks";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 //styles
 import styles from "./profileForm.module.css";
 // ui components
@@ -18,6 +20,7 @@ import useForm from "../../../hook/useForm";
 import { IForm } from "../../../utils/interfaces";
 
 export default function Profile(): JSX.Element {
+  const { hasError, message } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const { values, handleChange, setValues } = useForm();
   const [defaultValues, setDefaultValues] = useState<IForm>({
@@ -41,9 +44,19 @@ export default function Profile(): JSX.Element {
         )
       );
     } else {
-      console.log("данные не изменили, сделай тут тост по человечески");
+      toast.error("Data has not changed");
+    }
+
+    if (hasError) {
+      toast.error(message);
     }
   }
+
+  useEffect(() => {
+    if (hasError) {
+      toast.error(message);
+    }
+  }, [hasError, message]);
 
   useEffect(() => {
     if (user) {
@@ -54,6 +67,7 @@ export default function Profile(): JSX.Element {
 
   return (
     <section className={styles.section}>
+      <ToastContainer />
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={"mb-6"}>
           <Input
