@@ -37,6 +37,7 @@ export default function ResetPassword() {
     if (!forgotRequest) {
       navigate("/forgot-password");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

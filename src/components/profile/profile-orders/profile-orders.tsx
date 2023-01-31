@@ -1,4 +1,3 @@
-import styles from "./profile-orders.module.css";
 import { WebsocketStatus } from "../../../services/types/ws";
 import {
   profileConnect,
@@ -21,6 +20,7 @@ export default function ProfileOrders(): JSX.Element {
     dispatch(profileConnect(`${wsAuthUrl}?token=${token}`));
 
     return () => dispatch(profileDisconnect());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

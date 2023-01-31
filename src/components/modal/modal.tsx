@@ -28,6 +28,7 @@ export default function Modal({
         document.removeEventListener("keydown", handleEscClose);
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpened]);
 
   return ReactDOM.createPortal(
